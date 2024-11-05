@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microinvest1cData.Data;
+using System;
 using System.Collections.Generic;
 using System.Data.SQLite;
 using System.IO;
@@ -35,6 +36,25 @@ namespace Microinvest1cData
         private void Close()
         {
             sqliteConnection.Close();
+        }
+
+        public void SetGoods(Goods goods)
+        {
+            Open();
+            var command = new SQLiteCommand
+            {
+                CommandText = "INSERT INTO Goods (mid,uuid,Code,name,Name2,Groupid,type,mark) VALUES(@id,@uuid,@code,@name,@name2,@groupid,@type,@mark)"
+            };
+            command.Parameters.AddWithValue("@id", goods.ID);
+            command.Parameters.AddWithValue("@uuid", goods.UUid);
+            command.Parameters.AddWithValue("@code", goods.Code);
+            command.Parameters.AddWithValue("@name", goods.Name);
+            command.Parameters.AddWithValue("@name2", goods.Name2);
+            command.Parameters.AddWithValue("@groupid", goods.Groupid);
+            command.Parameters.AddWithValue("@type", goods.Type);
+            command.Parameters.AddWithValue("@mark", goods.Mark);
+            SqlNotQuery(command);
+            Close();
         }
 
         private void SqlNotQuery(SQLiteCommand command)
