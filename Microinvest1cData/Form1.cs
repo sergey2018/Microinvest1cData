@@ -48,5 +48,18 @@ namespace Microinvest1cData
             };
             controller = new DaoController(settings);
         }
+
+        private void настройкиToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = new FormSettings(settings);
+            form.ShowDialog();
+            InitSettings();
+        }
+
+        private void buttonGoods_Click(object sender, EventArgs e)
+        {
+            controller.GetGoods();
+            MessageBox.Show("Загрузка завершена");
+        }
     }
 }

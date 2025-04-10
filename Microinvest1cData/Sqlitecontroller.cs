@@ -21,6 +21,7 @@ namespace Microinvest1cData
                 SQLiteConnection.CreateFile(@"microinvest.db");
                 sqliteConnection = new SQLiteConnection("Data Source=microinvest.db;Version=3;");
                 //flag = true;
+                CreateTable();
             }
             else
             {
@@ -57,6 +58,21 @@ namespace Microinvest1cData
             Close();
         }
 
+        public void SetObjects(Objects objects)
+        {
+            Open();
+            var command = new SQLiteCommand
+            {
+                CommandText = "INSERT INTO Objects(mid,name,uuid,typePrice) VALUES(@id,@name,@uuid,@typePrice)"
+            };
+            command.Parameters.AddWithValue("@id", objects.ID);
+            command.Parameters.AddWithValue("@name", objects.Name);
+            command.Parameters.AddWithValue("@uuid", objects.UUID);
+            command.Parameters.AddWithValue("@typePrice", objects.TypePrice);
+            SqlNotQuery(command);
+            Close();
+        }
+
         private void SqlNotQuery(SQLiteCommand command)
         {
             command.Connection = sqliteConnection;
@@ -71,7 +87,28 @@ namespace Microinvest1cData
         private void CreateTable()
         {
             Open();
-            SqlNotQuery(new SQLiteCommand { CommandText = "" });
+            SqlNotQuery(new SQLiteCommand
+            {
+                CommandText = "CREATE  TABLE  IF NOT EXISTS 'Goods' ('id'	INTEGER,'mid'	INTEGER,'uuid'	TEXT,'Code'	TEXT,'Name'	TEXT,'Name2' TEXT," +
+                "'Groupid'	INTEGER,'type'	INTEGER,'mark'	INTEGER,PRIMARY KEY('id' AUTOINCREMENT))"
+            });
+            SqlNotQuery(new SQLiteCommand
+            {
+                CommandText = "CREATE TABLE IF NOT EXISTS 'Partnerts' ('id'	INTEGER,'uuid'	TEXT,'mid'	INTEGER,'Company'	TEXT,'inn'	TEXT,'Kpp'	" +
+                "TEXT,'type'	INTEGER,'CardNuber'	TEXT,PRIMARY KEY('id' AUTOINCREMENT))"
+            });
+            SqlNotQuery(new SQLiteCommand
+            {
+                CommandText = "CREATE TABLE IF NOT EXISTS 'Objects' ('id'	INTEGER,'mid'	INTEGER,'Name'	TEXT,'uuid'	TEXT,'TypePrice'	INTEGER,PRIMARY KEY('id' AUTOINCREMENT))"
+            });
+            SqlNotQuery(new SQLiteCommand
+            {
+                CommandText= "CREATE TABLE IF NOT EXISTS 'GoodsGroups' ('id'	INTEGER,'mid'	INTEGER,'name'	TEXT,'uuid'	TEXT,'ruuid'	TEXT,PRIMARY KEY('id' AUTOINCREMENT))"
+            });
+            SqlNotQuery(new SQLiteCommand
+            {
+                CommandText= "CREATE TABLE IF NOT EXISTS  'Barcodes' ('id'	INTEGER,'mid'	INTEGER,'Barocdes'	TEXT,'Measure'	INTEGER,PRIMARY KEY('id' AUTOINCREMENT))"
+            });
             Close();
         }
 
