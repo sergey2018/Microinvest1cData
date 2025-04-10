@@ -18,15 +18,19 @@ namespace Microinvest1cData
         {
             if (!File.Exists(@"microinvest.db")) // если базы данных нету, то...
             {
-                SQLiteConnection.CreateFile(@"microinvest.db");
-                sqliteConnection = new SQLiteConnection("Data Source=microinvest.db;Version=3;");
-                //flag = true;
-                CreateTable();
+                CreateBase();
             }
             else
             {
                 sqliteConnection = new SQLiteConnection("Data Source=microinvest.db;Version=3;");
             }
+        }
+        private void CreateBase()
+        {
+            SQLiteConnection.CreateFile(@"microinvest.db");
+            sqliteConnection = new SQLiteConnection("Data Source=microinvest.db;Version=3;");
+            //flag = true;
+            CreateTable();
         }
         private void Open()
         {
@@ -110,6 +114,12 @@ namespace Microinvest1cData
                 CommandText= "CREATE TABLE IF NOT EXISTS  'Barcodes' ('id'	INTEGER,'mid'	INTEGER,'Barocdes'	TEXT,'Measure'	INTEGER,PRIMARY KEY('id' AUTOINCREMENT))"
             });
             Close();
+        }
+        public void UpdateBase()
+        {
+            File.Delete(@"microinvest.db");
+            CreateBase();
+
         }
 
     }
