@@ -62,6 +62,21 @@ namespace Microinvest1cData
             Close();
         }
 
+        public bool isBarcode(String Barcode)
+        {
+            var command = new SQLiteCommand { CommandText = "Select Barcode from Barcodes where Barcode=@bar" };
+            command.Parameters.AddWithValue("@bar", Barcode);
+            using(var reader = DataReader(command))
+            {
+                return reader.HasRows;
+            }
+        }
+        public void SetBarcode(int id,String BarCode,int measure)
+        {
+            Open();
+
+            Close();
+        }
         public void SetObjects(Objects objects)
         {
             Open();
@@ -111,7 +126,7 @@ namespace Microinvest1cData
             });
             SqlNotQuery(new SQLiteCommand
             {
-                CommandText= "CREATE TABLE IF NOT EXISTS  'Barcodes' ('id'	INTEGER,'mid'	INTEGER,'Barocdes'	TEXT,'Measure'	INTEGER,PRIMARY KEY('id' AUTOINCREMENT))"
+                CommandText= "CREATE TABLE IF NOT EXISTS  'Barcodes' ('id'	INTEGER,'mid'	INTEGER,'Barocde'	TEXT,'Measure'	INTEGER,PRIMARY KEY('id' AUTOINCREMENT))"
             });
             Close();
         }
