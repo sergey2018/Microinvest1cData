@@ -52,12 +52,32 @@ namespace Microinvest1cData.MSSQL
                         goods.Mark = 1;
                     }
                     sqlitecontroller.SetGoods(goods);
+                    var barcode1 = reader["BarCode1"].ToString();
+                    if(barcode1 !=""){
+                        sqlitecontroller.SetBarcode(goods.ID, barcode1, 0);
+                    }
+                    var barcode2 = reader["BarCode2"].ToString();
+                    if (barcode2 != "")
+                    {
+                        sqlitecontroller.SetBarcode(goods.ID, barcode2, 0);
+                    }
+
                 }
             }
             server.Disconnect();
            
         }
+        public void GetFirsGrups()
+        {
+            
+            server.Connect();
+            var command = new SqlCommand { CommandText = "Select * From GoodsGroups where len(code)=3" };
+            using(var reader = server.DataReader(command))
+            {
 
+            }
+            server.Disconnect();
+        }
         public void GetObjects()
         {
             server.Connect();

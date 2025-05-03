@@ -74,9 +74,28 @@ namespace Microinvest1cData
         public void SetBarcode(int id,String BarCode,int measure)
         {
             Open();
-
+            if (!isBarcode(BarCode))
+            {
+                var command = new SQLiteCommand{ CommandText= "Insert INTO Barcodes (mId,Barcode,measure) VALUES(@id,@barcode,@measure)" };
+                command.Parameters.AddWithValue("@id", id);
+                command.Parameters.AddWithValue("@barcode", BarCode);
+                command.Parameters.AddWithValue("@measure", measure);
+                SqlNotQuery(command);
+            }
             Close();
         }
+            
+        public void insertGorups(Groups groups)
+        {
+            var command = new SQLiteCommand { CommandText = "INSERT INTO GoodsGroups(mID,Name,code,uuid,ruuid) VALUES(@id,@name,@code,@uuid,@ruuid)" };
+            command.Parameters.AddWithValue("@id", groups.MId);
+            command.Parameters.AddWithValue("@name", groups.Name);
+            command.Parameters.AddWithValue("@code", groups.Code);
+            command.Parameters.AddWithValue("@uuid", groups.UUid);
+            command.Parameters.AddWithValue("@ruuid", groups.PaerntUUid);
+            SqlNotQuery(command);
+        }
+
         public void SetObjects(Objects objects)
         {
             Open();
@@ -122,11 +141,11 @@ namespace Microinvest1cData
             });
             SqlNotQuery(new SQLiteCommand
             {
-                CommandText= "CREATE TABLE IF NOT EXISTS 'GoodsGroups' ('id'	INTEGER,'mid'	INTEGER,'name'	TEXT,'uuid'	TEXT,'ruuid'	TEXT,PRIMARY KEY('id' AUTOINCREMENT))"
+                CommandText= "CREATE TABLE IF NOT EXISTS 'GoodsGroups' ('id'	INTEGER,'mid'	INTEGER,'name'	TEXT,'code' TEXT,'uuid'	TEXT,'ruuid'	TEXT,PRIMARY KEY('id' AUTOINCREMENT))"
             });
             SqlNotQuery(new SQLiteCommand
             {
-                CommandText= "CREATE TABLE IF NOT EXISTS  'Barcodes' ('id'	INTEGER,'mid'	INTEGER,'Barocde'	TEXT,'Measure'	INTEGER,PRIMARY KEY('id' AUTOINCREMENT))"
+                CommandText= "CREATE TABLE IF NOT EXISTS  'Barcodes' ('id'	INTEGER,'mid'	INTEGER,'Barcode'	TEXT,'Measure'	INTEGER,PRIMARY KEY('id' AUTOINCREMENT))"
             });
             Close();
         }
