@@ -74,11 +74,90 @@ namespace Microinvest1cData.MSSQL
             var command = new SqlCommand { CommandText = "Select * From GoodsGroups where len(code)=3" };
             using(var reader = server.DataReader(command))
             {
-
+                while (reader.Read())
+                {
+                    var groups = new Groups
+                    {
+                        Name = reader["Name"].ToString(),
+                        Code = reader["code"].ToString(),
+                        UUid = Guid.NewGuid().ToString(),
+                        MId = int.Parse(reader["id"].ToString()),
+                        PaerntUUid = ""
+                    };
+                    sqlitecontroller.insertGorups(groups);
+                }
             }
             server.Disconnect();
         }
-        public void GetObjects()
+
+        public void SetGroups()
+        {
+            var leht = LenCount();
+            GetFirsGrups();
+            var i = 3;
+            while (i < leht)
+            {
+               
+                var list = sqlitecontroller.GetGroupsCode(i);
+                foreach(String str in list)
+                {
+                   var group =  getSearchCode(str, i+3);
+                    if(group != null)
+                    {
+                        group.PaerntUUid = sqlitecontroller.GetUUID(str);
+                        sqlitecontroller.insertGorups(group);
+                    }
+                }
+                i = i + 3;
+            }
+        }
+        public Groups getSearchCode(String code, int count)
+        {
+            server.Connect();
+            var command = new SqlCommand { CommandText = "Select * from GoodsGroups where code like @Code and len(code)=@count" };
+            command.Parameters.AddWithValue("@Code", code + "%");
+            command.Parameters.AddWithValue("@count", count);
+            using (var reader = server.DataReader(command)) {
+                if (!reader.HasRows)
+                {
+                    return null;
+                }
+                else
+                {
+                    reader.Read();
+                    var groups = new Groups
+                    {
+                        Name = reader["Name"].ToString(),
+                        Code = reader["code"].ToString(),
+                        UUid = Guid.NewGuid().ToString(),
+                        MId = int.Parse(reader["id"].ToString()),
+                        PaerntUUid=""
+                    };
+                    return groups;
+
+                }
+            }
+           server.Disconnect();
+
+        }
+
+        public int LenCount()
+        {
+            var count = 0;
+            server.Connect();
+            var command = new SqlCommand { CommandText = "Select max(len(code))as 'count' From GoodsGroups" };
+
+
+            using (var reader = server.DataReader(command))
+            {
+                reader.Read();
+                count = int.Parse(reader["count"].ToString());
+
+            }
+            server.Disconnect();
+            return count;
+        }
+            public void GetObjects()
         {
             server.Connect();
             var commend = new SqlCommand

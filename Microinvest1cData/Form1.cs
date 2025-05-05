@@ -58,7 +58,9 @@ namespace Microinvest1cData
 
         private void buttonGoods_Click(object sender, EventArgs e)
         {
+            controller.SetGroups();
             controller.GetGoods();
+            
             MessageBox.Show("Загрузка завершена");
         }
     }

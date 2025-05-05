@@ -71,6 +71,42 @@ namespace Microinvest1cData
                 return reader.HasRows;
             }
         }
+        public List<String> GetGroupsCode(int lenthCode)
+        {
+            Open();
+            var list = new List<String>();
+            var command = new SQLiteCommand { CommandText = "Select code from GoodsGroups where length(code)=@code" };
+            command.Parameters.AddWithValue("@code", lenthCode);
+            using (var reader = DataReader(command))
+            {
+                while (reader.Read())
+                {
+                    var str = reader["code"].ToString();
+                    list.Add(str);
+                }
+            }
+            Close();
+            return list;
+        }
+
+        public String GetUUID(String code)
+        {
+            Open();
+            var uuid = "";
+            var command = new SQLiteCommand { CommandText = "Select uuid from GoodsGroups where code=@code" };
+            command.Parameters.AddWithValue("@code", code);
+            using (var reader = DataReader(command))
+            {
+                while (reader.Read())
+                {
+                    uuid = reader["uuid"].ToString();
+                    
+                }
+            }
+            Close();
+            return uuid;
+        }
+
         public void SetBarcode(int id,String BarCode,int measure)
         {
             Open();
@@ -87,6 +123,7 @@ namespace Microinvest1cData
             
         public void insertGorups(Groups groups)
         {
+            Open();
             var command = new SQLiteCommand { CommandText = "INSERT INTO GoodsGroups(mID,Name,code,uuid,ruuid) VALUES(@id,@name,@code,@uuid,@ruuid)" };
             command.Parameters.AddWithValue("@id", groups.MId);
             command.Parameters.AddWithValue("@name", groups.Name);
@@ -94,6 +131,7 @@ namespace Microinvest1cData
             command.Parameters.AddWithValue("@uuid", groups.UUid);
             command.Parameters.AddWithValue("@ruuid", groups.PaerntUUid);
             SqlNotQuery(command);
+            Close();
         }
 
         public void SetObjects(Objects objects)
@@ -110,6 +148,7 @@ namespace Microinvest1cData
             SqlNotQuery(command);
             Close();
         }
+
 
         private void SqlNotQuery(SQLiteCommand command)
         {
