@@ -53,14 +53,28 @@ namespace Microinvest1cData.MSSQL
                     }
                     sqlitecontroller.SetGoods(goods);
                     var barcode1 = reader["BarCode1"].ToString();
-                    if(barcode1 !=""){
+                 /*   if(barcode1 !=""){
                         sqlitecontroller.SetBarcode(goods.ID, barcode1, 0);
                     }
                     var barcode2 = reader["BarCode2"].ToString();
                     if (barcode2 != "")
                     {
                         sqlitecontroller.SetBarcode(goods.ID, barcode2, 0);
+                    }*/
+                  var price = new Price();
+                    price.Type = 0;
+                    price.MId = int.Parse(reader["ID"].ToString());
+                    price.Total = double.Parse(reader["PriceIn"].ToString());
+                    sqlitecontroller.setPrice(price);
+                    for (int i = 1; i < 11; i++)
+                    {
+                        var price1 = new Price();
+                        price1.Type = i;
+                        price1.MId = int.Parse(reader["ID"].ToString());
+                        price1.Total = double.Parse(reader["PriceOut"+i].ToString());
+                        sqlitecontroller.setPrice(price1);
                     }
+                    
 
                 }
             }
@@ -101,43 +115,53 @@ namespace Microinvest1cData.MSSQL
                 var list = sqlitecontroller.GetGroupsCode(i);
                 foreach(String str in list)
                 {
-                   var group =  getSearchCode(str, i+3);
-                    if(group != null)
+                   var groups =  getSearchCode(str, i+3);
+                    if(groups != null)
                     {
-                        group.PaerntUUid = sqlitecontroller.GetUUID(str);
-                        sqlitecontroller.insertGorups(group);
+                        foreach(Groups group in groups)
+                        {
+                            group.PaerntUUid = sqlitecontroller.GetUUID(str);
+                            sqlitecontroller.insertGorups(group);
+                        }
                     }
                 }
                 i = i + 3;
             }
         }
-        public Groups getSearchCode(String code, int count)
+        public List<Groups> getSearchCode(String code, int count)
         {
             server.Connect();
+            var groups = new List<Groups>();
             var command = new SqlCommand { CommandText = "Select * from GoodsGroups where code like @Code and len(code)=@count" };
             command.Parameters.AddWithValue("@Code", code + "%");
             command.Parameters.AddWithValue("@count", count);
             using (var reader = server.DataReader(command)) {
                 if (!reader.HasRows)
                 {
+                    server.Disconnect();
                     return null;
                 }
                 else
                 {
-                    reader.Read();
-                    var groups = new Groups
+                    while (reader.Read())
                     {
-                        Name = reader["Name"].ToString(),
-                        Code = reader["code"].ToString(),
-                        UUid = Guid.NewGuid().ToString(),
-                        MId = int.Parse(reader["id"].ToString()),
-                        PaerntUUid=""
-                    };
+                        var group = new Groups
+
+                        {
+                            Name = reader["Name"].ToString(),
+                            Code = reader["code"].ToString(),
+                            UUid = Guid.NewGuid().ToString(),
+                            MId = int.Parse(reader["id"].ToString()),
+                            PaerntUUid = ""
+                        };
+                        groups.Add(group);
+                    }
+                    server.Disconnect();
                     return groups;
 
                 }
             }
-           server.Disconnect();
+           
 
         }
 
@@ -178,6 +202,10 @@ namespace Microinvest1cData.MSSQL
                 }
             }
             server.Disconnect();
+        }
+        public void UpdateBase()
+        {
+            sqlitecontroller.UpdateBase();
         }
     
     }

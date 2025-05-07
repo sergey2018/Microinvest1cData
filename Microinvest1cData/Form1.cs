@@ -56,12 +56,25 @@ namespace Microinvest1cData
             InitSettings();
         }
 
-        private void buttonGoods_Click(object sender, EventArgs e)
+        private async void buttonGoods_Click(object sender, EventArgs e)
+        {
+            await Task.Run(() => LoadData());
+            
+            
+        }
+        private void LoadData()
         {
             controller.SetGroups();
             controller.GetGoods();
-            
-            MessageBox.Show("Загрузка завершена");
+            this.Invoke((MethodInvoker)delegate
+            {
+                MessageBox.Show("Загрузка завершена");
+            });
+        }
+
+        private void buttonUpdate_Click(object sender, EventArgs e)
+        {
+            controller.UpdateBase();
         }
     }
 }

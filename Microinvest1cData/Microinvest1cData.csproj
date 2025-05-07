@@ -69,6 +69,7 @@
     <Compile Include="Data\Goods.cs" />
     <Compile Include="Data\Groups.cs" />
     <Compile Include="Data\Objects.cs" />
+    <Compile Include="Data\Price.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>

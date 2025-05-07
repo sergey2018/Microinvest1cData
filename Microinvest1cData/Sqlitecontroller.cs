@@ -148,7 +148,19 @@ namespace Microinvest1cData
             SqlNotQuery(command);
             Close();
         }
-
+        public void setPrice(Price p)
+        {
+            Open();
+            var command = new SQLiteCommand
+            {
+                CommandText = "INSERT INTO Prices (mid,type,Price) VALUES(@id,@type,@price)"
+            };
+            command.Parameters.AddWithValue("@id", p.MId);
+            command.Parameters.AddWithValue("@type", p.Type);
+            command.Parameters.AddWithValue("@price", p.Total);
+            SqlNotQuery(command);
+            Close();
+        }
 
         private void SqlNotQuery(SQLiteCommand command)
         {
@@ -186,10 +198,15 @@ namespace Microinvest1cData
             {
                 CommandText= "CREATE TABLE IF NOT EXISTS  'Barcodes' ('id'	INTEGER,'mid'	INTEGER,'Barcode'	TEXT,'Measure'	INTEGER,PRIMARY KEY('id' AUTOINCREMENT))"
             });
+            SqlNotQuery(new SQLiteCommand
+            {
+                CommandText= "CREATE TABLE IF NOT EXISTS 'Prices' ('id'	INTEGER,'type'	INTEGER,'mId'	INTEGER,'Price'	REAL,PRIMARY KEY('id' AUTOINCREMENT))"
+            });
             Close();
         }
         public void UpdateBase()
         {
+            Close();
             File.Delete(@"microinvest.db");
             CreateBase();
 
