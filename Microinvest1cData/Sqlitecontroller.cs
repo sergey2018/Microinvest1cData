@@ -48,7 +48,7 @@ namespace Microinvest1cData
             Open();
             var command = new SQLiteCommand
             {
-                CommandText = "INSERT INTO Goods (mid,uuid,Code,name,Name2,Groupid,type,mark) VALUES(@id,@uuid,@code,@name,@name2,@groupid,@type,@mark)"
+                CommandText = "INSERT INTO Goods (mid,uuid,Code,name,Name2,Groupid,type,mark,Measure) VALUES(@id,@uuid,@code,@name,@name2,@groupid,@type,@mark,@measure)"
             };
             command.Parameters.AddWithValue("@id", goods.ID);
             command.Parameters.AddWithValue("@uuid", goods.UUid);
@@ -58,6 +58,7 @@ namespace Microinvest1cData
             command.Parameters.AddWithValue("@groupid", goods.Groupid);
             command.Parameters.AddWithValue("@type", goods.Type);
             command.Parameters.AddWithValue("@mark", goods.Mark);
+            command.Parameters.AddWithValue("@measure", goods.Measure);
             SqlNotQuery(command);
             Close();
         }
@@ -179,7 +180,7 @@ namespace Microinvest1cData
             SqlNotQuery(new SQLiteCommand
             {
                 CommandText = "CREATE  TABLE  IF NOT EXISTS 'Goods' ('id'	INTEGER,'mid'	INTEGER,'uuid'	TEXT,'Code'	TEXT,'Name'	TEXT,'Name2' TEXT," +
-                "'Groupid'	INTEGER,'type'	INTEGER,'mark'	INTEGER,PRIMARY KEY('id' AUTOINCREMENT))"
+                "'Groupid'	INTEGER,'type'	INTEGER,'mark'	INTEGER,'Measure' TEXT,PRIMARY KEY('id' AUTOINCREMENT))"
             });
             SqlNotQuery(new SQLiteCommand
             {

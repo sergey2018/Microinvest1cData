@@ -38,6 +38,7 @@ namespace Microinvest1cData.MSSQL
                     goods.ID = int.Parse(reader["ID"].ToString());
                     goods.Name = reader["name"].ToString();
                     goods.Name2 = reader["name2"].ToString();
+                    goods.Measure = reader["Measure1"].ToString();
                     goods.Type = int.Parse(reader["type"].ToString());
                     goods.Groupid = int.Parse(reader["Groupid"].ToString());
                     goods.Code = reader["code"].ToString();
@@ -53,14 +54,14 @@ namespace Microinvest1cData.MSSQL
                     }
                     sqlitecontroller.SetGoods(goods);
                     var barcode1 = reader["BarCode1"].ToString();
-                 /*   if(barcode1 !=""){
+                  if(barcode1 !=""){
                         sqlitecontroller.SetBarcode(goods.ID, barcode1, 0);
                     }
                     var barcode2 = reader["BarCode2"].ToString();
                     if (barcode2 != "")
                     {
                         sqlitecontroller.SetBarcode(goods.ID, barcode2, 0);
-                    }*/
+                    }
                   var price = new Price();
                     price.Type = 0;
                     price.MId = int.Parse(reader["ID"].ToString());

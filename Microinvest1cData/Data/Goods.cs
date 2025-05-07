@@ -48,6 +48,6 @@ namespace Microinvest1cData.Data
             get;
             set;
         }
-
+        public String Measure { get; set; }
     }
 }
