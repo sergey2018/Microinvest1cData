@@ -121,7 +121,19 @@ namespace Microinvest1cData
             }
             Close();
         }
-            
+        public void SetBarcode3(int id, String BarCode, int measure)
+        {
+            Open();
+
+                var command = new SQLiteCommand { CommandText = "Insert INTO Barcodes3 (mId,Barcode,measure) VALUES(@id,@barcode,@measure)" };
+                command.Parameters.AddWithValue("@id", id);
+                command.Parameters.AddWithValue("@barcode", BarCode);
+                command.Parameters.AddWithValue("@measure", measure);
+                SqlNotQuery(command);
+   
+            Close();
+        }
+
         public void insertGorups(Groups groups)
         {
             Open();
@@ -190,6 +202,10 @@ namespace Microinvest1cData
             SqlNotQuery(new SQLiteCommand
             {
                 CommandText = "CREATE TABLE IF NOT EXISTS 'Objects' ('id'	INTEGER,'mid'	INTEGER,'Name'	TEXT,'uuid'	TEXT,'TypePrice'	INTEGER,PRIMARY KEY('id' AUTOINCREMENT))"
+            });
+            SqlNotQuery(new SQLiteCommand
+            {
+                CommandText= "CREATE TABLE IF NOT EXISTS  'Barcodes3' ('id'	INTEGER,'mid'	INTEGER,'Barcode'	TEXT,'Measure'	INTEGER,PRIMARY KEY('id' AUTOINCREMENT))"
             });
             SqlNotQuery(new SQLiteCommand
             {

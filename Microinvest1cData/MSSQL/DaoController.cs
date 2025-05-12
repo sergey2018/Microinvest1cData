@@ -54,15 +54,20 @@ namespace Microinvest1cData.MSSQL
                     }
                     sqlitecontroller.SetGoods(goods);
                     var barcode1 = reader["BarCode1"].ToString();
-                  if(barcode1 !=""){
+                  if(barcode1.Trim() !=""){
                         sqlitecontroller.SetBarcode(goods.ID, barcode1, 0);
                     }
                     var barcode2 = reader["BarCode2"].ToString();
-                    if (barcode2 != "")
+                    if (barcode2.Trim() != "")
                     {
                         sqlitecontroller.SetBarcode(goods.ID, barcode2, 0);
                     }
-                  var price = new Price();
+                    var barcode3 = reader["BarCode3"].ToString();
+                    if (barcode3.Trim() != "")
+                    {
+                        sqlitecontroller.SetBarcode3(goods.ID, barcode3, 0);
+                    }
+                    var price = new Price();
                     price.Type = 0;
                     price.MId = int.Parse(reader["ID"].ToString());
                     price.Total = double.Parse(reader["PriceIn"].ToString());
@@ -200,6 +205,7 @@ namespace Microinvest1cData.MSSQL
                         UUID = Guid.NewGuid().ToString(),
                         TypePrice = int.Parse(reader["PriceGroup"].ToString())
                     };
+                    sqlitecontroller.SetObjects(obj);
                 }
             }
             server.Disconnect();
