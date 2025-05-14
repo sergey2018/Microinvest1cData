@@ -7,6 +7,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Linq;
@@ -20,6 +21,7 @@ namespace Microinvest1cData
         public Form1()
         {
             InitializeComponent();
+            labelUpdate.Text = "";
             if (File.Exists("settings.xml"))
             {
                 InitSettings();
@@ -56,10 +58,29 @@ namespace Microinvest1cData
             InitSettings();
         }
 
-        private async void buttonGoods_Click(object sender, EventArgs e)
+        private void buttonGoods_Click(object sender, EventArgs e)
         {
-            await Task.Run(() => LoadData());
-            
+
+            controller.GetLengthZCountG();
+            var thread1 = new Thread(LoadData);
+            var thread2 = new Thread(UpdateLabel);
+            thread1.Start();
+            thread2.Start();
+
+        }
+        private void UpdateLabel()
+        {
+            var lengt = controller.GetLength();
+            while (controller.GetUpdateFlag())
+            {
+               
+                var count = controller.GetCount();
+                this.Invoke((MethodInvoker)delegate
+                {
+                    labelUpdate.Text = "Загружено " + count + " данных из "+lengt;
+                });
+               // System.Threading.Thread.Sleep(5000);
+            }
             
         }
         private void LoadData()
@@ -75,6 +96,30 @@ namespace Microinvest1cData
         private void buttonUpdate_Click(object sender, EventArgs e)
         {
             controller.UpdateBase();
+        }
+
+        private void LoadStore()
+        {
+            
+            controller.SetStore();
+            this.Invoke((MethodInvoker)delegate
+            {
+                MessageBox.Show("Загрузка завершена");
+            });
+        }
+
+        private  void button1_Click(object sender, EventArgs e)
+        {
+            controller.GetLengthZCount();
+            var thread1 = new Thread(LoadStore);
+            var thread2 = new Thread(UpdateLabel);
+            thread1.Start();
+            thread2.Start();
+        }
+
+        private void labelUpdate_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

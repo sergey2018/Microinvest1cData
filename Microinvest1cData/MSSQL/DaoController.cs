@@ -14,17 +14,22 @@ namespace Microinvest1cData.MSSQL
     {
         private DAOServer server;
         private Sqlitecontroller sqlitecontroller;
-        private int Id = 0;
+       // private int Id = 0;
+        private int Count = 0;
+        private int Langth = 0;
+        private bool UpdateFlag = true;
 
         public DaoController(Settings settings)
         {
             server = new DAOServer(settings);
             sqlitecontroller = new Sqlitecontroller();
         }
-
-
+        public int GetCount() => Count;
+        public int GetLength() => Langth;
+        public bool GetUpdateFlag() => UpdateFlag;
         public void GetGoods()
         {
+            Count = 0;
             server.Connect();
             var command = new SqlCommand
             {
@@ -32,6 +37,7 @@ namespace Microinvest1cData.MSSQL
             };
             using (var reader = server.DataReader(command))
             {
+
                 while (reader.Read())
                 {
                     var goods = new Goods();
@@ -80,8 +86,8 @@ namespace Microinvest1cData.MSSQL
                         price1.Total = double.Parse(reader["PriceOut"+i].ToString());
                         sqlitecontroller.setPrice(price1);
                     }
-                    
 
+                    Count++;
                 }
             }
             server.Disconnect();
@@ -107,6 +113,57 @@ namespace Microinvest1cData.MSSQL
                     sqlitecontroller.insertGorups(groups);
                 }
             }
+            server.Disconnect();
+        }
+        public void GetLengthZCount()
+        {
+
+            server.Connect();
+            var command = new SqlCommand { CommandText = "Select Count(*) as 'Count' From Store where goodid in (Select id from Goods where catalog2='' and deleted=0 and id>1)" };
+            using (var reader = server.DataReader(command))
+            {
+
+                reader.Read();
+                Langth = int.Parse(reader["Count"].ToString());
+                
+            }
+            server.Disconnect();
+        }
+        public void GetLengthZCountG()
+        {
+
+            server.Connect();
+            var command = new SqlCommand { CommandText = "Select Count(*) as 'Count' from Goods where catalog2='' and deleted=0 and id>1" };
+            using (var reader = server.DataReader(command))
+            {
+
+                reader.Read();
+                Langth = int.Parse(reader["Count"].ToString());
+
+            }
+            server.Disconnect();
+        }
+        public void SetStore()
+        {
+            Count = 0;
+            server.Connect();
+            var command = new SqlCommand { CommandText = "Select * From Store where goodid in (Select id from Goods where catalog2='' and deleted=0 and id>1)" };
+            using(var reader = server.DataReader(command))
+            {
+                while (reader.Read())
+                {
+                    var store = new Store
+                    {
+                        mId = int.Parse(reader["goodid"].ToString()),
+                        mObjId = int.Parse(reader["Objectid"].ToString()),
+                        Qtty = Double.Parse(reader["qtty"].ToString())
+                    };
+                    sqlitecontroller.SetStore(store);
+                    Count = Count + 1;
+                }
+                
+            }
+            UpdateFlag = false;
             server.Disconnect();
         }
 
@@ -192,7 +249,7 @@ namespace Microinvest1cData.MSSQL
             server.Connect();
             var commend = new SqlCommand
             {
-                CommandText = "Select * from Objects where id>1 and delete=0"
+                CommandText = "Select * from Objects where id>1 and deleted=0"
             };
             using(var reader = server.DataReader(commend))
             {

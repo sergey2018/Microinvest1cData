@@ -11,7 +11,7 @@ namespace Microinvest1cData
 {
    public  class Sqlitecontroller
     {
-        private String ConnectionString = "";
+        //private String ConnectionString = "";
         private SQLiteConnection sqliteConnection;
         //private bool flag;
         public Sqlitecontroller()
@@ -23,6 +23,7 @@ namespace Microinvest1cData
             else
             {
                 sqliteConnection = new SQLiteConnection("Data Source=microinvest.db;Version=3;");
+                CreateTable();
             }
         }
         private void CreateBase()
@@ -106,6 +107,19 @@ namespace Microinvest1cData
             }
             Close();
             return uuid;
+        }
+        public void SetStore(Store store)
+        {
+            Open();
+            var command = new SQLiteCommand
+            {
+                CommandText= "Insert Into Store(mId,objid,qtty) VALUES(@id,@objid,@qtty)"
+            };
+            command.Parameters.AddWithValue("@id", store.mId);
+            command.Parameters.AddWithValue("@objid", store.mObjId);
+            command.Parameters.AddWithValue("@qtty", store.Qtty);
+            SqlNotQuery(command);
+            Close();
         }
 
         public void SetBarcode(int id,String BarCode,int measure)
@@ -218,6 +232,10 @@ namespace Microinvest1cData
             SqlNotQuery(new SQLiteCommand
             {
                 CommandText= "CREATE TABLE IF NOT EXISTS 'Prices' ('id'	INTEGER,'type'	INTEGER,'mId'	INTEGER,'Price'	REAL,PRIMARY KEY('id' AUTOINCREMENT))"
+            });
+            SqlNotQuery(new SQLiteCommand
+            {
+                CommandText= "CREATE TABLE IF NOT EXISTS 'Store' ('id'	INTEGER,'mId'	INTEGER,'objid'	INTEGER,'qtty'	REAL,PRIMARY KEY('id' AUTOINCREMENT))"
             });
             Close();
         }
