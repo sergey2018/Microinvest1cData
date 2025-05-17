@@ -160,7 +160,54 @@ namespace Microinvest1cData
             SqlNotQuery(command);
             Close();
         }
+        public List<Barcodes3> GetBarcodes()
+        {
+            Open();
+            var list = new List<Barcodes3>();
+            var command = new SQLiteCommand
+            {
+                CommandText = "Select * from Barcodes3"
+            };
+            using(var reader = DataReader(command))
+            {
+                while (reader.Read())
+                {
+                    var barcode = new Barcodes3
+                    {
+                        ID = int.Parse(reader["ID"].ToString()),
+                        MID = int.Parse(reader["mID"].ToString()),
+                        Barcode = reader["Barcode"].ToString()
+                    };
+                    list.Add(barcode);
+                }
+            }
 
+            Close();
+            return list;
+        }
+        public void DeleteBarcodes(int id)
+        {
+            Open();
+            var command = new SQLiteCommand
+            {
+                CommandText = "Delete From Barcodes3 where id=@id"
+            };
+            command.Parameters.AddWithValue("@id", id);
+            SqlNotQuery(command);
+            Close();
+        }
+        public void UIpdateBarcodes(Barcodes3 bar)
+        {
+            Open();
+            var command = new SQLiteCommand
+            {
+                CommandText = "Update Barcodes3 set Barcode=@barcode where id=@id"
+            };
+            command.Parameters.AddWithValue("@id", bar.ID);
+            command.Parameters.AddWithValue("@barcode", bar.Barcode);
+            SqlNotQuery(command);
+            Close();
+        }
         public void SetObjects(Objects objects)
         {
             Open();

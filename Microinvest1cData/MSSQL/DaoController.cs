@@ -27,6 +27,7 @@ namespace Microinvest1cData.MSSQL
         public int GetCount() => Count;
         public int GetLength() => Langth;
         public bool GetUpdateFlag() => UpdateFlag;
+        public Sqlitecontroller GetSqlitecontroller() => sqlitecontroller;
         public void GetGoods()
         {
             Count = 0;
@@ -90,6 +91,7 @@ namespace Microinvest1cData.MSSQL
                     Count++;
                 }
             }
+            UpdateFlag = false;
             server.Disconnect();
            
         }

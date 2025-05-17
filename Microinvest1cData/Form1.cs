@@ -1,4 +1,5 @@
-﻿using Microinvest1cData.MSSQL;
+﻿using Microinvest1cData.Forms;
+using Microinvest1cData.MSSQL;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -100,7 +101,7 @@ namespace Microinvest1cData
 
         private void LoadStore()
         {
-            
+            controller.GetObjects();
             controller.SetStore();
             this.Invoke((MethodInvoker)delegate
             {
@@ -120,6 +121,12 @@ namespace Microinvest1cData
         private void labelUpdate_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void пробШтрихкодыToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var forms = new FormBadBarcodes(controller.GetSqlitecontroller());
+            forms.ShowDialog();
         }
     }
 }

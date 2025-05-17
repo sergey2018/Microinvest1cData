@@ -66,6 +66,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Data\Barcodes3.cs" />
     <Compile Include="Data\Goods.cs" />
     <Compile Include="Data\Groups.cs" />
     <Compile Include="Data\Objects.cs" />
@@ -83,6 +84,24 @@
     <Compile Include="FormSettings.designer.cs">
       <DependentUpon>FormSettings.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\FormBadBarcodes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormBadBarcodes.Designer.cs">
+      <DependentUpon>FormBadBarcodes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormGoods.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormGoods.Designer.cs">
+      <DependentUpon>FormGoods.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormUpdateBarocdes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormUpdateBarocdes.Designer.cs">
+      <DependentUpon>FormUpdateBarocdes.cs</DependentUpon>
+    </Compile>
     <Compile Include="MSSQL\DaoController.cs" />
     <Compile Include="MSSQL\DAOServer.cs" />
     <Compile Include="MSSQL\Settings.cs" />
@@ -94,6 +113,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormSettings.resx">
       <DependentUpon>FormSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormBadBarcodes.resx">
+      <DependentUpon>FormBadBarcodes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormGoods.resx">
+      <DependentUpon>FormGoods.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormUpdateBarocdes.resx">
+      <DependentUpon>FormUpdateBarocdes.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
