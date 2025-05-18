@@ -42,7 +42,7 @@ namespace Microinvest1cData.MSSQL
                 while (reader.Read())
                 {
                     var goods = new Goods();
-                    goods.ID = int.Parse(reader["ID"].ToString());
+                    goods.MID = int.Parse(reader["ID"].ToString());
                     goods.Name = reader["name"].ToString();
                     goods.Name2 = reader["name2"].ToString();
                     goods.Measure = reader["Measure1"].ToString();
@@ -62,17 +62,17 @@ namespace Microinvest1cData.MSSQL
                     sqlitecontroller.SetGoods(goods);
                     var barcode1 = reader["BarCode1"].ToString();
                   if(barcode1.Trim() !=""){
-                        sqlitecontroller.SetBarcode(goods.ID, barcode1, 0);
+                        sqlitecontroller.SetBarcode(goods.MID, barcode1, 0);
                     }
                     var barcode2 = reader["BarCode2"].ToString();
                     if (barcode2.Trim() != "")
                     {
-                        sqlitecontroller.SetBarcode(goods.ID, barcode2, 0);
+                        sqlitecontroller.SetBarcode(goods.MID, barcode2, 0);
                     }
                     var barcode3 = reader["BarCode3"].ToString();
                     if (barcode3.Trim() != "")
                     {
-                        sqlitecontroller.SetBarcode3(goods.ID, barcode3, 0);
+                        sqlitecontroller.SetBarcode3(goods.MID, barcode3, 0);
                     }
                     var price = new Price();
                     price.Type = 0;
@@ -112,7 +112,7 @@ namespace Microinvest1cData.MSSQL
                         MId = int.Parse(reader["id"].ToString()),
                         PaerntUUid = ""
                     };
-                    sqlitecontroller.insertGorups(groups);
+                    sqlitecontroller.InsertGorups(groups);
                 }
             }
             server.Disconnect();
@@ -186,7 +186,7 @@ namespace Microinvest1cData.MSSQL
                         foreach(Groups group in groups)
                         {
                             group.PaerntUUid = sqlitecontroller.GetUUID(str);
-                            sqlitecontroller.insertGorups(group);
+                            sqlitecontroller.InsertGorups(group);
                         }
                     }
                 }

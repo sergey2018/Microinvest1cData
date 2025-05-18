@@ -8,7 +8,7 @@ namespace Microinvest1cData.Data
 {
     public class Goods
     {
-        public int ID
+        public int MID
         {
             get;
             set;
@@ -27,7 +27,7 @@ namespace Microinvest1cData.Data
         {
             get;
             set;
-        } 
+        }
         public String UUid
         {
             get;
@@ -49,5 +49,7 @@ namespace Microinvest1cData.Data
             set;
         }
         public String Measure { get; set; }
+
+        public int ID { get; set; }
     }
 }

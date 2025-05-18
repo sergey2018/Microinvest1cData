@@ -51,7 +51,7 @@ namespace Microinvest1cData
             {
                 CommandText = "INSERT INTO Goods (mid,uuid,Code,name,Name2,Groupid,type,mark,Measure) VALUES(@id,@uuid,@code,@name,@name2,@groupid,@type,@mark,@measure)"
             };
-            command.Parameters.AddWithValue("@id", goods.ID);
+            command.Parameters.AddWithValue("@id", goods.MID);
             command.Parameters.AddWithValue("@uuid", goods.UUid);
             command.Parameters.AddWithValue("@code", goods.Code);
             command.Parameters.AddWithValue("@name", goods.Name);
@@ -148,7 +148,7 @@ namespace Microinvest1cData
             Close();
         }
 
-        public void insertGorups(Groups groups)
+        public void InsertGorups(Groups groups)
         {
             Open();
             var command = new SQLiteCommand { CommandText = "INSERT INTO GoodsGroups(mID,Name,code,uuid,ruuid) VALUES(@id,@name,@code,@uuid,@ruuid)" };
@@ -159,6 +159,39 @@ namespace Microinvest1cData
             command.Parameters.AddWithValue("@ruuid", groups.PaerntUUid);
             SqlNotQuery(command);
             Close();
+        }
+
+        public List<Goods> GetGoods()
+        {
+            var list = new List<Goods>();
+            Open();
+            var command = new SQLiteCommand
+            {
+                CommandText = "Select * from Goods"
+            };
+            using(var reader = DataReader(command))
+            {
+                while (reader.Read())
+                {
+                    var good = new Goods
+                    {
+                        ID = int.Parse(reader["ID"].ToString()),
+                        MID = int.Parse(reader["MID"].ToString()),
+                        Mark = int.Parse(reader["mark"].ToString()),
+                        Groupid = int.Parse(reader["Groupid"].ToString()),
+                        Type  = int.Parse(reader["type"].ToString()),
+                        Name = reader["name"].ToString(),
+                        Name2 = reader["name2"].ToString(),
+                        Code = reader["code"].ToString(),
+                        UUid = reader["uuid"].ToString(),
+                        Measure = reader["Measure"].ToString()
+                    };
+                    list.Add(good);
+                }
+            }
+
+            Close();
+            return list;
         }
         public List<Barcodes3> GetBarcodes()
         {

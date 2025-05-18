@@ -31,12 +31,13 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.menuStrip2 = new System.Windows.Forms.MenuStrip();
             this.настройкиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.справочникиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.пробШтрихкодыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.buttonGoods = new System.Windows.Forms.Button();
             this.buttonUpdate = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.labelUpdate = new System.Windows.Forms.Label();
-            this.справочникиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.пробШтрихкодыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.товарыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip2.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -65,6 +66,22 @@
             this.настройкиToolStripMenuItem.Size = new System.Drawing.Size(79, 20);
             this.настройкиToolStripMenuItem.Text = "Настройки";
             this.настройкиToolStripMenuItem.Click += new System.EventHandler(this.настройкиToolStripMenuItem_Click);
+            // 
+            // справочникиToolStripMenuItem
+            // 
+            this.справочникиToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.пробШтрихкодыToolStripMenuItem,
+            this.товарыToolStripMenuItem});
+            this.справочникиToolStripMenuItem.Name = "справочникиToolStripMenuItem";
+            this.справочникиToolStripMenuItem.Size = new System.Drawing.Size(94, 20);
+            this.справочникиToolStripMenuItem.Text = "Справочники";
+            // 
+            // пробШтрихкодыToolStripMenuItem
+            // 
+            this.пробШтрихкодыToolStripMenuItem.Name = "пробШтрихкодыToolStripMenuItem";
+            this.пробШтрихкодыToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.пробШтрихкодыToolStripMenuItem.Text = "Проб.Штрихкоды";
+            this.пробШтрихкодыToolStripMenuItem.Click += new System.EventHandler(this.пробШтрихкодыToolStripMenuItem_Click);
             // 
             // buttonGoods
             // 
@@ -106,20 +123,12 @@
             this.labelUpdate.Text = "labelUpdate";
             this.labelUpdate.Click += new System.EventHandler(this.labelUpdate_Click);
             // 
-            // справочникиToolStripMenuItem
+            // товарыToolStripMenuItem
             // 
-            this.справочникиToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.пробШтрихкодыToolStripMenuItem});
-            this.справочникиToolStripMenuItem.Name = "справочникиToolStripMenuItem";
-            this.справочникиToolStripMenuItem.Size = new System.Drawing.Size(94, 20);
-            this.справочникиToolStripMenuItem.Text = "Справочники";
-            // 
-            // пробШтрихкодыToolStripMenuItem
-            // 
-            this.пробШтрихкодыToolStripMenuItem.Name = "пробШтрихкодыToolStripMenuItem";
-            this.пробШтрихкодыToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.пробШтрихкодыToolStripMenuItem.Text = "Проб.Штрихкоды";
-            this.пробШтрихкодыToolStripMenuItem.Click += new System.EventHandler(this.пробШтрихкодыToolStripMenuItem_Click);
+            this.товарыToolStripMenuItem.Name = "товарыToolStripMenuItem";
+            this.товарыToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.товарыToolStripMenuItem.Text = "Товары";
+            this.товарыToolStripMenuItem.Click += new System.EventHandler(this.товарыToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -154,6 +163,7 @@
         private System.Windows.Forms.Label labelUpdate;
         private System.Windows.Forms.ToolStripMenuItem справочникиToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem пробШтрихкодыToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem товарыToolStripMenuItem;
     }
 }
 

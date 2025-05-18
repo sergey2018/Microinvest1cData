@@ -128,5 +128,11 @@ namespace Microinvest1cData
             var forms = new FormBadBarcodes(controller.GetSqlitecontroller());
             forms.ShowDialog();
         }
+
+        private void товарыToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var forms = new FormGoods(controller.GetSqlitecontroller());
+            forms.ShowDialog();
+        }
     }
 }
