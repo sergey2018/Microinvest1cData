@@ -148,6 +148,18 @@ namespace Microinvest1cData
             Close();
         }
 
+        public List<Groups> GetGroups()
+        {
+            Open();
+            var list = new List<Groups>();
+            var command = new SQLiteCommand
+            {
+                CommandText = ""
+            };
+            Close();
+            return list;
+        }
+
         public void InsertGorups(Groups groups)
         {
             Open();
