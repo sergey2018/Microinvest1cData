@@ -111,11 +111,14 @@ namespace Microinvest1cData
 
         private  void button1_Click(object sender, EventArgs e)
         {
-            controller.GetLengthZCount();
-            var thread1 = new Thread(LoadStore);
-            var thread2 = new Thread(UpdateLabel);
-            thread1.Start();
-            thread2.Start();
+            /* controller.GetLengthZCount();
+             var thread1 = new Thread(LoadStore);
+             var thread2 = new Thread(UpdateLabel);
+             thread1.Start();
+             thread2.Start();*/
+            var XmlWrite = new XMLWrite(controller.GetSqlitecontroller());
+            XmlWrite.CreateDocument("goods.xml");
+
         }
 
         private void labelUpdate_Click(object sender, EventArgs e)

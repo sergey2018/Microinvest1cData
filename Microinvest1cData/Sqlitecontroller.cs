@@ -154,8 +154,23 @@ namespace Microinvest1cData
             var list = new List<Groups>();
             var command = new SQLiteCommand
             {
-                CommandText = ""
+                CommandText = "Select * from Goodsgroups"
             };
+            using(var reader = DataReader(command))
+            {
+                while (reader.Read())
+                {
+                    var group = new Groups
+                    {
+                        UUid = reader["uuid"].ToString(),
+                        Name = reader["name"].ToString(),
+                        MId = int.Parse(reader["mid"].ToString()),
+                        PaerntUUid = reader["ruuid"].ToString(),
+                        Code = reader["code"].ToString()
+                    };
+                    list.Add(group);
+                }
+            }
             Close();
             return list;
         }
