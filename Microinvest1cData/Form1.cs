@@ -88,10 +88,13 @@ namespace Microinvest1cData
         {
             controller.SetGroups();
             controller.GetGoods();
+            controller.GetObjects();
+
             this.Invoke((MethodInvoker)delegate
             {
                 MessageBox.Show("Загрузка завершена");
             });
+            controller.SetFlag();
         }
 
         private void buttonUpdate_Click(object sender, EventArgs e)
@@ -101,23 +104,24 @@ namespace Microinvest1cData
 
         private void LoadStore()
         {
-            controller.GetObjects();
+            controller.DeleteOldDate();
+            controller.GetPrice();
             controller.SetStore();
             this.Invoke((MethodInvoker)delegate
             {
                 MessageBox.Show("Загрузка завершена");
             });
+            controller.SetFlag();
         }
 
         private  void button1_Click(object sender, EventArgs e)
         {
-            /* controller.GetLengthZCount();
+            controller.GetLengthZCount();
              var thread1 = new Thread(LoadStore);
              var thread2 = new Thread(UpdateLabel);
              thread1.Start();
-             thread2.Start();*/
-            var XmlWrite = new XMLWrite(controller.GetSqlitecontroller());
-            XmlWrite.CreateDocument("goods.xml");
+             thread2.Start();
+            
 
         }
 
@@ -136,6 +140,12 @@ namespace Microinvest1cData
         {
             var forms = new FormGoods(controller.GetSqlitecontroller());
             forms.ShowDialog();
+        }
+
+        private void buttonUpload_Click(object sender, EventArgs e)
+        {
+            var XmlWrite = new XMLWrite(controller.GetSqlitecontroller());
+            XmlWrite.CreateDocument("goods.xml");
         }
     }
 }

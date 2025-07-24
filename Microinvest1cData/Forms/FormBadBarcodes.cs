@@ -27,7 +27,7 @@ namespace Microinvest1cData.Forms
 
         private void UpdateBarcodes()
         {
-            barcodes3s = controller.GetBarcodes();
+            barcodes3s = controller.GetBarcodes3();
             dataGridViewBarocdes.Rows.Clear();
             foreach(Barcodes3 bar in barcodes3s)
             {
@@ -52,7 +52,8 @@ namespace Microinvest1cData.Forms
             {
                 if (bar.Barcode.Length <= 13)
                 {
-                    controller.SetBarcode(bar.MID, bar.Barcode, 0);
+                    var uuid = controller.GoodsUUid(bar.MID);
+                    controller.SetBarcode(bar.MID, bar.Barcode, 0,uuid);
                     controller.DeleteBarcodes(bar.ID);
                 }
             }
@@ -73,7 +74,8 @@ namespace Microinvest1cData.Forms
             String[] barcod = barcodes3s[rows].Barcode.Split(',');
             foreach(String str in barcod)
             {
-                controller.SetBarcode(barcodes3s[rows].MID, str.Trim(), 0);
+                var uuid = controller.GoodsUUid(barcodes3s[rows].MID);
+                controller.SetBarcode(barcodes3s[rows].MID, str.Trim(), 0,uuid);
             }
             controller.DeleteBarcodes(barcodes3s[rows].ID);
             UpdateBarcodes();

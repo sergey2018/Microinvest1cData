@@ -33,11 +33,12 @@
             this.настройкиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.справочникиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.пробШтрихкодыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.товарыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.buttonGoods = new System.Windows.Forms.Button();
             this.buttonUpdate = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.labelUpdate = new System.Windows.Forms.Label();
-            this.товарыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.buttonUpload = new System.Windows.Forms.Button();
             this.menuStrip2.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -79,17 +80,24 @@
             // пробШтрихкодыToolStripMenuItem
             // 
             this.пробШтрихкодыToolStripMenuItem.Name = "пробШтрихкодыToolStripMenuItem";
-            this.пробШтрихкодыToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.пробШтрихкодыToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
             this.пробШтрихкодыToolStripMenuItem.Text = "Проб.Штрихкоды";
             this.пробШтрихкодыToolStripMenuItem.Click += new System.EventHandler(this.пробШтрихкодыToolStripMenuItem_Click);
             // 
+            // товарыToolStripMenuItem
+            // 
+            this.товарыToolStripMenuItem.Name = "товарыToolStripMenuItem";
+            this.товарыToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
+            this.товарыToolStripMenuItem.Text = "Товары";
+            this.товарыToolStripMenuItem.Click += new System.EventHandler(this.товарыToolStripMenuItem_Click);
+            // 
             // buttonGoods
             // 
-            this.buttonGoods.Location = new System.Drawing.Point(162, 84);
+            this.buttonGoods.Location = new System.Drawing.Point(163, 102);
             this.buttonGoods.Name = "buttonGoods";
-            this.buttonGoods.Size = new System.Drawing.Size(75, 23);
+            this.buttonGoods.Size = new System.Drawing.Size(94, 45);
             this.buttonGoods.TabIndex = 2;
-            this.buttonGoods.Text = "Загрузить";
+            this.buttonGoods.Text = "Загрузить Справочники";
             this.buttonGoods.UseVisualStyleBackColor = true;
             this.buttonGoods.Click += new System.EventHandler(this.buttonGoods_Click);
             // 
@@ -105,11 +113,11 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(162, 187);
+            this.button1.Location = new System.Drawing.Point(151, 165);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.Size = new System.Drawing.Size(125, 46);
             this.button1.TabIndex = 4;
-            this.button1.Text = "Остатки";
+            this.button1.Text = "Загрузить Цены и Остатки";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -123,18 +131,22 @@
             this.labelUpdate.Text = "labelUpdate";
             this.labelUpdate.Click += new System.EventHandler(this.labelUpdate_Click);
             // 
-            // товарыToolStripMenuItem
+            // buttonUpload
             // 
-            this.товарыToolStripMenuItem.Name = "товарыToolStripMenuItem";
-            this.товарыToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.товарыToolStripMenuItem.Text = "Товары";
-            this.товарыToolStripMenuItem.Click += new System.EventHandler(this.товарыToolStripMenuItem_Click);
+            this.buttonUpload.Location = new System.Drawing.Point(431, 156);
+            this.buttonUpload.Name = "buttonUpload";
+            this.buttonUpload.Size = new System.Drawing.Size(75, 46);
+            this.buttonUpload.TabIndex = 6;
+            this.buttonUpload.Text = "Выгрузить в файл";
+            this.buttonUpload.UseVisualStyleBackColor = true;
+            this.buttonUpload.Click += new System.EventHandler(this.buttonUpload_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(555, 340);
+            this.Controls.Add(this.buttonUpload);
             this.Controls.Add(this.labelUpdate);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.buttonUpdate);
@@ -164,6 +176,7 @@
         private System.Windows.Forms.ToolStripMenuItem справочникиToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem пробШтрихкодыToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem товарыToolStripMenuItem;
+        private System.Windows.Forms.Button buttonUpload;
     }
 }
 

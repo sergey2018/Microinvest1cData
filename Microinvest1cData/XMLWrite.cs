@@ -21,6 +21,8 @@ namespace Microinvest1cData
             var document = new XDocument();
             var root = new XElement("Документ");
             root.Add(GetGroups());
+            root.Add(GetGoods());
+            root.Add(GetBarcode());
             document.Add(root);
             document.Save(path);
         }
@@ -44,8 +46,39 @@ namespace Microinvest1cData
         }
         private XElement GetGoods()
         {
-            var element = new XElement("Название");
+            var element = new XElement("Товары");
+            var list = controller.GetGoods();
+            foreach (Goods g in list)
+            {
+                var good = new XElement("Товар");
+                var name = new XElement("Название", g.Name);
+                var name2 = new XElement("ПолноеНазвание", g.Name2);
+                var type = new XElement("Тип", g.Type);
+                var uuid = new XElement("Cсылка", g.UUid);
+                var code = new XElement("Код", g.Code);
+                var measure = new XElement("ЕдИзм", g.Measure.Replace(".",""));
+                var grouUUId = new XElement("ГруппаССылка",controller.getGroupUUID(g.Groupid));
+                good.Add(name, name2, type, uuid, code, measure, grouUUId);
+                element.Add(good);
+            }
+
             return element;
+        }
+
+        private XElement GetBarcode()
+        {
+            var element = new XElement("Штрихкоды");
+            var list = controller.GetBarcodes();
+            foreach (Barcodes3 bar in list)
+            {
+                var barcod = new XElement("Штрихкод");
+                var good = new XElement("ТоварССылка", bar.UUId);
+                var val = new XElement("Штрих", bar.Barcode);
+                barcod.Add(good, val);
+                element.Add(barcod);
+            }
+            return element;
+            
         }
 
 

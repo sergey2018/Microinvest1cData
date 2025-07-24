@@ -62,19 +62,19 @@ namespace Microinvest1cData.MSSQL
                     sqlitecontroller.SetGoods(goods);
                     var barcode1 = reader["BarCode1"].ToString();
                   if(barcode1.Trim() !=""){
-                        sqlitecontroller.SetBarcode(goods.MID, barcode1, 0);
+                        sqlitecontroller.SetBarcode(goods.MID, barcode1, 0,goods.UUid);
                     }
                     var barcode2 = reader["BarCode2"].ToString();
                     if (barcode2.Trim() != "")
                     {
-                        sqlitecontroller.SetBarcode(goods.MID, barcode2, 0);
+                        sqlitecontroller.SetBarcode(goods.MID, barcode2, 0, goods.UUid);
                     }
                     var barcode3 = reader["BarCode3"].ToString();
                     if (barcode3.Trim() != "")
                     {
                         sqlitecontroller.SetBarcode3(goods.MID, barcode3, 0);
                     }
-                    var price = new Price();
+                   /* var price = new Price();
                     price.Type = 0;
                     price.MId = int.Parse(reader["ID"].ToString());
                     price.Total = double.Parse(reader["PriceIn"].ToString());
@@ -86,7 +86,7 @@ namespace Microinvest1cData.MSSQL
                         price1.MId = int.Parse(reader["ID"].ToString());
                         price1.Total = double.Parse(reader["PriceOut"+i].ToString());
                         sqlitecontroller.setPrice(price1);
-                    }
+                    }*/
 
                     Count++;
                 }
@@ -95,6 +95,42 @@ namespace Microinvest1cData.MSSQL
             server.Disconnect();
            
         }
+        public void GetPrice()
+        {
+            Count = 0;
+            server.Connect();
+            var command = new SqlCommand
+            {
+                CommandText = "Select * from Goods where catalog2='' and deleted=0 and id>1"
+            };
+            using (var reader = server.DataReader(command))
+            {
+
+                while (reader.Read())
+                {
+                  
+                    var price = new Price();
+                    price.Type = 0;
+                    price.MId = int.Parse(reader["ID"].ToString());
+                    price.Total = double.Parse(reader["PriceIn"].ToString());
+                    sqlitecontroller.setPrice(price);
+                    for (int i = 1; i < 11; i++)
+                    {
+                        var price1 = new Price();
+                        price1.Type = i;
+                        price1.MId = int.Parse(reader["ID"].ToString());
+                        price1.Total = double.Parse(reader["PriceOut" + i].ToString());
+                        sqlitecontroller.setPrice(price1);
+                    }
+
+                    Count++;
+                }
+            }
+            UpdateFlag = false;
+            server.Disconnect();
+
+        }
+
         public void GetFirsGrups()
         {
             
@@ -268,6 +304,14 @@ namespace Microinvest1cData.MSSQL
                 }
             }
             server.Disconnect();
+        }
+        public void SetFlag()
+        {
+            UpdateFlag = false;
+        }
+        public void DeleteOldDate()
+        {
+            sqlitecontroller.Delete();
         }
         public void UpdateBase()
         {

@@ -11,5 +11,6 @@ namespace Microinvest1cData.Data
         public int ID { get; set; }
         public int MID { get; set; }
         public String Barcode { get; set; }
+        public String UUId { get; set; }
     }
 }

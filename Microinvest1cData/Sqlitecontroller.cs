@@ -122,15 +122,16 @@ namespace Microinvest1cData
             Close();
         }
 
-        public void SetBarcode(int id,String BarCode,int measure)
+        public void SetBarcode(int id,String BarCode,int measure,String uuid)
         {
             Open();
             if (!isBarcode(BarCode))
             {
-                var command = new SQLiteCommand{ CommandText= "Insert INTO Barcodes (mId,Barcode,measure) VALUES(@id,@barcode,@measure)" };
+                var command = new SQLiteCommand{ CommandText= "Insert INTO Barcodes (mId,Barcode,measure,UUId) VALUES(@id,@barcode,@measure,@UUID)" };
                 command.Parameters.AddWithValue("@id", id);
                 command.Parameters.AddWithValue("@barcode", BarCode);
                 command.Parameters.AddWithValue("@measure", measure);
+                command.Parameters.AddWithValue("@UUID", uuid);
                 SqlNotQuery(command);
             }
             Close();
@@ -187,6 +188,20 @@ namespace Microinvest1cData
             SqlNotQuery(command);
             Close();
         }
+        public string getGroupUUID(int id)
+        {
+            Open();
+            var uuid = "";
+            var command = new SQLiteCommand { CommandText = "Select uuid from GoodsGroups where mid=@id" };
+            command.Parameters.AddWithValue("@id", id);
+            using(var reader = DataReader(command))
+            {
+                reader.Read();
+                uuid = reader["uuid"].ToString();
+            }
+            Close();
+            return uuid;
+        }
 
         public List<Goods> GetGoods()
         {
@@ -220,7 +235,7 @@ namespace Microinvest1cData
             Close();
             return list;
         }
-        public List<Barcodes3> GetBarcodes()
+        public List<Barcodes3> GetBarcodes3()
         {
             Open();
             var list = new List<Barcodes3>();
@@ -237,6 +252,7 @@ namespace Microinvest1cData
                         ID = int.Parse(reader["ID"].ToString()),
                         MID = int.Parse(reader["mID"].ToString()),
                         Barcode = reader["Barcode"].ToString()
+                        
                     };
                     list.Add(barcode);
                 }
@@ -244,6 +260,55 @@ namespace Microinvest1cData
 
             Close();
             return list;
+        }
+        public List<Barcodes3> GetBarcodes()
+        {
+            Open();
+            var list = new List<Barcodes3>();
+            var command = new SQLiteCommand
+            {
+                CommandText = "Select * from Barcodes"
+            };
+         //   command.Parameters.AddWithValue("@id", id);
+            using (var reader = DataReader(command))
+            {
+                while (reader.Read())
+                {
+                    var barcode = new Barcodes3
+                    {
+                        ID = int.Parse(reader["ID"].ToString()),
+                        MID = int.Parse(reader["mID"].ToString()),
+                        Barcode = reader["Barcode"].ToString(),
+                        UUId = reader["uuid"].ToString()
+                    };
+                    list.Add(barcode);
+                }
+            }
+
+            Close();
+            return list;
+        }
+
+        public void Delete()
+        {
+            Open();
+            SqlNotQuery(new SQLiteCommand { CommandText = "Delete From Store" });
+            SqlNotQuery(new SQLiteCommand { CommandText = "Delete From Prices" });
+            Close();
+        }
+        public String GoodsUUid(int id)
+        {
+            Open();
+            var uuid = "";
+            var command = new SQLiteCommand { CommandText = "Select uuid from Goods where mid=@id" };
+            command.Parameters.AddWithValue("@id", id);
+            using (var reader = DataReader(command))
+            {
+                reader.Read();
+                uuid = reader["uuid"].ToString();
+            }
+            Close();
+            return uuid;
         }
         public void DeleteBarcodes(int id)
         {
@@ -334,7 +399,7 @@ namespace Microinvest1cData
             });
             SqlNotQuery(new SQLiteCommand
             {
-                CommandText= "CREATE TABLE IF NOT EXISTS  'Barcodes' ('id'	INTEGER,'mid'	INTEGER,'Barcode'	TEXT,'Measure'	INTEGER,PRIMARY KEY('id' AUTOINCREMENT))"
+                CommandText= "CREATE TABLE IF NOT EXISTS  'Barcodes' ('id'	INTEGER,'mid'	INTEGER,'Barcode'	TEXT,'Measure'	INTEGER,'uuid' TEXT,PRIMARY KEY('id' AUTOINCREMENT))"
             });
             SqlNotQuery(new SQLiteCommand
             {
