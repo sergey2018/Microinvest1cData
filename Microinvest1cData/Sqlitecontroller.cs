@@ -235,6 +235,32 @@ namespace Microinvest1cData
             Close();
             return list;
         }
+        public List<ExelNSI>GetExelNSIs(String Groups)
+        {
+            var list = new List<ExelNSI>();
+            Open();
+            var command = new SQLiteCommand
+            {
+                CommandText= "Select * from ExelNSI where Groups=@group"
+            };
+            command.Parameters.AddWithValue("@group", Groups);
+            using(var reader = DataReader(command))
+            {
+                while (reader.Read())
+                {
+                    var exel = new ExelNSI();
+                    exel.Name = reader["Name"].ToString();
+                    exel.Code = reader["code"].ToString();
+                    exel.Group = reader["Groups"].ToString();
+                    exel.Measure = reader["Measure"].ToString();
+                    exel.Barcode = reader["Barcode"].ToString();
+                    list.Add(exel);
+                }
+            }
+            Close();
+            return list;
+        }
+
         public List<Barcodes3> GetBarcodes3()
         {
             Open();
@@ -408,6 +434,10 @@ namespace Microinvest1cData
             SqlNotQuery(new SQLiteCommand
             {
                 CommandText= "CREATE TABLE IF NOT EXISTS 'Store' ('id'	INTEGER,'mId'	INTEGER,'objid'	INTEGER,'qtty'	REAL,PRIMARY KEY('id' AUTOINCREMENT))"
+            });
+            SqlNotQuery(new SQLiteCommand
+            {
+                CommandText = "CREATE VIEW IF NOT EXISTS ExelNSI as Select g.code,g.name,g.Name2,g.Measure,(SELECT gg.name from GoodsGroups gg where gg.mid=g.Groupid) as 'Groups',(Select b.Barcode from Barcodes b where b.mid=g.mid limit 1) as 'Barcode' from Goods g"
             });
             Close();
         }

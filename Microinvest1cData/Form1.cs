@@ -144,8 +144,11 @@ namespace Microinvest1cData
 
         private void buttonUpload_Click(object sender, EventArgs e)
         {
-            var XmlWrite = new XMLWrite(controller.GetSqlitecontroller());
-            XmlWrite.CreateDocument("goods.xml");
+            /*var XmlWrite = new XMLWrite(controller.GetSqlitecontroller());
+            XmlWrite.CreateDocument("goods.xml");*/
+            var exel = new ExelWriter(controller.GetSqlitecontroller());
+            exel.CreateFile();
+            MessageBox.Show("Выгружено");
         }
     }
 }
