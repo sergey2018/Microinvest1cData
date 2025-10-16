@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -44,8 +45,9 @@ namespace Microinvest1cData
                     app.Cells[i + 3, 6] = "Товар";
                     app.Cells[i + 3, 7] = Goods[i].Barcode;
                 }
-                //app.Visible = true;
-                app.ActiveWorkbook.SaveAs(g.Name+".xls");
+                // app.Visible = true;
+               var path =  Directory.GetCurrentDirectory();
+                app.ActiveWorkbook.SaveAs(path+"\\"+g.Name+".xls");
                 app.Workbooks.Close();
                 app.Quit();
                 app = null;
