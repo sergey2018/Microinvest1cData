@@ -148,6 +148,60 @@ namespace Microinvest1cData
    
             Close();
         }
+        public List<AktPrice> aktPrices()
+        {
+            Open();
+            var list = new List<AktPrice>();
+            var command = new SQLiteCommand
+            {
+                CommandText = "Select g.name,g.code,(Select p.Price from Prices p where p.mid=g.mid and p.type=2) as 'price' from Goods g where price>0 order by g.name"
+            };
+            using(var reader = DataReader(command))
+            {
+                while (reader.Read())
+                {
+                    var akt = new AktPrice
+                    {
+                        Name = reader["Name"].ToString(),
+                        Code = reader["Code"].ToString(),
+                        Price = double.Parse(reader["price"].ToString())
+                    };
+                    list.Add(akt);
+                }
+            }
+            Close();
+            return list;
+        }
+
+        public List<StoreExel> aktStore()
+        {
+            Open();
+            var list = new List<StoreExel>();
+            var command = new SQLiteCommand
+            {
+                CommandText = "Select g.name,g.code,(Select s.qtty from Store s where s.mid=g.mid and objid=2) as 'qtty',(select p.Price from Prices p where p.mid=g.mid and type=2)as 'priceOut',(select p.Price from Prices p where p.mid=g.mid and type=0)as 'pricein' from Goods g where qtty>0"
+            };
+            using (var reader = DataReader(command))
+            {
+                while (reader.Read())
+                {
+                    var Stex = new StoreExel
+                    {
+                        Name = reader["Name"].ToString(),
+                        Code = reader["Code"].ToString(),
+                        Qtty = double.Parse(reader["qtty"].ToString()),
+                        PriceIn= double.Parse(reader["pricein"].ToString()),
+                        PriceOut = double.Parse(reader["priceOut"].ToString()),
+                    };
+                    Stex.PriceInSum = Stex.Qtty * Stex.PriceIn;
+                    Stex.PriceOutSum = Stex.Qtty * Stex.PriceOut;
+                    list.Add(Stex);
+                }
+            }
+            Close();
+            return list;
+        }
+
 
         public List<Groups> GetGroups()
         {

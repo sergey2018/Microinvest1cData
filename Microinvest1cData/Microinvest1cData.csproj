@@ -70,6 +70,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Data\AktPrice.cs" />
     <Compile Include="Data\Barcodes3.cs" />
     <Compile Include="Data\ExelNSI.cs" />
     <Compile Include="Data\Goods.cs" />
@@ -77,6 +78,7 @@
     <Compile Include="Data\Objects.cs" />
     <Compile Include="Data\Price.cs" />
     <Compile Include="Data\Store.cs" />
+    <Compile Include="Data\StoreExel.cs" />
     <Compile Include="ExelWriter.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>

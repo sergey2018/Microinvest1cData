@@ -147,7 +147,8 @@ namespace Microinvest1cData
             /*var XmlWrite = new XMLWrite(controller.GetSqlitecontroller());
             XmlWrite.CreateDocument("goods.xml");*/
             var exel = new ExelWriter(controller.GetSqlitecontroller());
-            exel.CreateFile();
+            // exel.CreateFilePrice();
+            exel.CreateFileStore();
             MessageBox.Show("Выгружено");
         }
     }
