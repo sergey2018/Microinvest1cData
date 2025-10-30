@@ -63,6 +63,21 @@ namespace Microinvest1cData
             SqlNotQuery(command);
             Close();
         }
+        public long GetMaxCode()
+        {
+            long code = 0;
+            Open();
+            var command = new SQLiteCommand { CommandText = "Select Max(Cast(code as INTEGER))as 'code' from Goods" };
+            using (var reader = DataReader(command))
+            {
+                while (reader.Read())
+                {
+                    code = long.Parse(reader["code"].ToString());
+                }
+            }
+            Close();
+            return code;
+        }
 
         public bool isBarcode(String Barcode)
         {

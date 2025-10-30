@@ -31,14 +31,17 @@ namespace Microinvest1cData
         {
             var element = new XElement("Группы");
             var list = controller.GetGroups();
+            var cod = controller.GetMaxCode() + 1; 
             foreach(Groups g in list)
             {
                 var egroup = new XElement("Группа");
                 var eUUid = new XElement("Ссылка", g.UUid);
                 var name = new XElement("Наименование", g.Name);
+                var code = new XElement("Код", cod);
                 var eParent = new XElement("Родитель", g.PaerntUUid);
-                egroup.Add(eUUid, name, eParent);
+                egroup.Add(eUUid, name, eParent,code);
                 element.Add(egroup);
+                cod++;
             }
               
             return element;
