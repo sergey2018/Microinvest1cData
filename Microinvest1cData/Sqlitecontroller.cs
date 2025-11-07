@@ -405,6 +405,7 @@ namespace Microinvest1cData
             Close();
             return uuid;
         }
+       
         public void DeleteBarcodes(int id)
         {
             Open();
@@ -414,6 +415,21 @@ namespace Microinvest1cData
             };
             command.Parameters.AddWithValue("@id", id);
             SqlNotQuery(command);
+            Close();
+        }
+        public void SetPartner(Partners partners)
+        {
+            Open();
+            var command = new SQLiteCommand
+            {
+                CommandText= "INSERT INTO Partnerts(mid,uuid,Company,inn,kpp,CardNuber) VALUES(@id,@uuid,@company,@inn,@kpp,@card)"
+            };
+            command.Parameters.AddWithValue("@id", partners.mID);
+            command.Parameters.AddWithValue("@uuid", partners.UUID);
+            command.Parameters.AddWithValue("@company", partners.Company);
+            command.Parameters.AddWithValue("@inn", partners.INN);
+            command.Parameters.AddWithValue("@inn", partners.KPP);
+            command.Parameters.AddWithValue("@card", partners.cartNubper);
             Close();
         }
         public void UIpdateBarcodes(Barcodes3 bar)

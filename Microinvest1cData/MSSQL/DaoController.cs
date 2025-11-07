@@ -95,6 +95,20 @@ namespace Microinvest1cData.MSSQL
             server.Disconnect();
            
         }
+        public void SetPartners()
+        {
+            server.Connect();
+            var command = new SqlCommand
+            {
+                CommandText = "Select * from Partners where id in (Select id from Operations where opertype=1)"
+            };
+            using(var reader = server.DataReader(command))
+            {
+                var partners = new Partners();
+                
+            }
+            server.Disconnect();
+        }
         public void GetPrice()
         {
             Count = 0;

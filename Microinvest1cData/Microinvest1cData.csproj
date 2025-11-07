@@ -79,6 +79,7 @@
     <Compile Include="Data\Goods.cs" />
     <Compile Include="Data\Groups.cs" />
     <Compile Include="Data\Objects.cs" />
+    <Compile Include="Data\Partners.cs" />
     <Compile Include="Data\Price.cs" />
     <Compile Include="Data\Store.cs" />
     <Compile Include="Data\StoreExel.cs" />
