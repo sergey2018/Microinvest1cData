@@ -60,13 +60,15 @@ namespace Microinvest1cData
             Microsoft.Office.Interop.Excel.Application app = new Microsoft.Office.Interop.Excel.Application();
             app.Application.Workbooks.Add(System.Reflection.Missing.Value);
             app.Columns.ColumnWidth = 15;
-            app.Cells[1, 1] = "Наименование номенклатуры";
-            app.Cells[1, 2] = "Артикул";
+            app.Cells[1, 1] = "Код";
+            app.Cells[1, 2] = "Наименование номенклатуры";
+            //app.Cells[1, 3] = "Артикул";
             app.Cells[1, 3] = "Новая розничная цена";
             for(int i = 0; i<prices.Count; i++)
             {
-                app.Cells[i + 2, 1] = prices[i].Name;
-                app.Cells[i + 2, 2] = prices[i].Code;
+                app.Cells[i + 2, 1] = prices[i].Code;
+                app.Cells[i + 2, 2] = prices[i].Name;
+               // app.Cells[i + 2, 3] = prices[i];
                 app.Cells[i + 2, 3] = prices[i].Price;
             }
             var path = Directory.GetCurrentDirectory();
@@ -81,8 +83,9 @@ namespace Microinvest1cData
             Microsoft.Office.Interop.Excel.Application app = new Microsoft.Office.Interop.Excel.Application();
             app.Application.Workbooks.Add(System.Reflection.Missing.Value);
             app.Columns.ColumnWidth = 15;
-            app.Cells[1, 1] = "Наименование номенклатуры";
-            app.Cells[1, 2] = "Артикул";
+            app.Cells[1, 1] = "Код";
+            app.Cells[1, 2] = "Наименование номенклатуры";
+           
             app.Cells[1, 3] = "Количество";
             app.Cells[1, 4] = "Приходная цена";
             app.Cells[1, 5] = "Приходная сумма";
@@ -90,8 +93,9 @@ namespace Microinvest1cData
             app.Cells[1, 7] = "Розничная сумма";
             for (int i = 0; i < store.Count; i++)
             {
-                app.Cells[i + 2, 1] = store[i].Name;
-                app.Cells[i + 2, 2] = store[i].Code;
+                app.Cells[i + 2, 1] = store[i].Code;
+                app.Cells[i + 2, 2] = store[i].Name;
+               
                 app.Cells[i + 2, 3] = store[i].Qtty;
                 app.Cells[i + 2, 4] = store[i].PriceIn;
                 app.Cells[i + 2, 5] = store[i].PriceInSum;

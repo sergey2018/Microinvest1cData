@@ -51,5 +51,6 @@ namespace Microinvest1cData.Data
         public String Measure { get; set; }
 
         public int ID { get; set; }
+        public String Catalog { get; set; }
     }
 }

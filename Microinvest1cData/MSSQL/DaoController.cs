@@ -46,6 +46,7 @@ namespace Microinvest1cData.MSSQL
                     goods.Name = reader["name"].ToString();
                     goods.Name2 = reader["name2"].ToString();
                     goods.Measure = reader["Measure1"].ToString();
+                    goods.Catalog = reader["Catalog1"].ToString();
                     goods.Type = int.Parse(reader["type"].ToString());
                     goods.Groupid = int.Parse(reader["Groupid"].ToString());
                     goods.Code = reader["code"].ToString();

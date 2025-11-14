@@ -39,6 +39,7 @@
             this.button1 = new System.Windows.Forms.Button();
             this.labelUpdate = new System.Windows.Forms.Label();
             this.buttonUpload = new System.Windows.Forms.Button();
+            this.buttonExel = new System.Windows.Forms.Button();
             this.menuStrip2.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -141,11 +142,22 @@
             this.buttonUpload.UseVisualStyleBackColor = true;
             this.buttonUpload.Click += new System.EventHandler(this.buttonUpload_Click);
             // 
+            // buttonExel
+            // 
+            this.buttonExel.Location = new System.Drawing.Point(407, 250);
+            this.buttonExel.Name = "buttonExel";
+            this.buttonExel.Size = new System.Drawing.Size(75, 23);
+            this.buttonExel.TabIndex = 7;
+            this.buttonExel.Text = "Выгрузка exel";
+            this.buttonExel.UseVisualStyleBackColor = true;
+            this.buttonExel.Click += new System.EventHandler(this.buttonExel_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(555, 340);
+            this.Controls.Add(this.buttonExel);
             this.Controls.Add(this.buttonUpload);
             this.Controls.Add(this.labelUpdate);
             this.Controls.Add(this.button1);
@@ -177,6 +189,7 @@
         private System.Windows.Forms.ToolStripMenuItem пробШтрихкодыToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem товарыToolStripMenuItem;
         private System.Windows.Forms.Button buttonUpload;
+        private System.Windows.Forms.Button buttonExel;
     }
 }
 

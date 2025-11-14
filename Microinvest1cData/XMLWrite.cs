@@ -58,10 +58,11 @@ namespace Microinvest1cData
                 var name2 = new XElement("ПолноеНазвание", g.Name2);
                 var type = new XElement("Тип", g.Type);
                 var uuid = new XElement("Cсылка", g.UUid);
+                var art = new XElement("Артикул", g.Catalog);
                 var code = new XElement("Код", g.Code);
                 var measure = new XElement("ЕдИзм", g.Measure.Replace(".",""));
                 var grouUUId = new XElement("ГруппаССылка",controller.getGroupUUID(g.Groupid));
-                good.Add(name, name2, type, uuid, code, measure, grouUUId);
+                good.Add(name, name2, type, uuid, art,code, measure, grouUUId);
                 element.Add(good);
             }
 
