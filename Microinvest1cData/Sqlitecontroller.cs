@@ -137,6 +137,24 @@ namespace Microinvest1cData
             SqlNotQuery(command);
             Close();
         }
+        public void SetPartners(Partners p)
+        {
+            Open();
+            var command = new SQLiteCommand
+            {
+                CommandText= "INSERT INTO Partnerts(mid,uuid,company,inn,kpp,type,CardNuber,Groupid) VALUES(@id,@uuid,@company,@inn,@kpp,@type,@CardNuber,@Groupid)"
+            };
+            command.Parameters.AddWithValue("@id", p.mID);
+            command.Parameters.AddWithValue("@uuid", p.UUID);
+            command.Parameters.AddWithValue("@company", p.Company);
+            command.Parameters.AddWithValue("@inn", p.INN);
+            command.Parameters.AddWithValue("@kpp", p.KPP);
+            command.Parameters.AddWithValue("@type", p.type);
+            command.Parameters.AddWithValue("@CardNuber", p.cartNubper);
+            command.Parameters.AddWithValue("@Groupid", p.Groupid);
+            SqlNotQuery(command);
+            Close();
+        }
 
         public void SetBarcode(int id,String BarCode,int measure,String uuid)
         {
@@ -423,14 +441,16 @@ namespace Microinvest1cData
             Open();
             var command = new SQLiteCommand
             {
-                CommandText= "INSERT INTO Partnerts(mid,uuid,Company,inn,kpp,CardNuber) VALUES(@id,@uuid,@company,@inn,@kpp,@card)"
+                CommandText= "INSERT INTO Partnerts(mid,uuid,Company,type,inn,kpp,CardNuber) VALUES(@id,@uuid,@company,@type,@inn,@kpp,@card)"
             };
             command.Parameters.AddWithValue("@id", partners.mID);
             command.Parameters.AddWithValue("@uuid", partners.UUID);
             command.Parameters.AddWithValue("@company", partners.Company);
             command.Parameters.AddWithValue("@inn", partners.INN);
-            command.Parameters.AddWithValue("@inn", partners.KPP);
+            command.Parameters.AddWithValue("@type", partners.type);
+            command.Parameters.AddWithValue("@kpp", partners.KPP);
             command.Parameters.AddWithValue("@card", partners.cartNubper);
+            SqlNotQuery(command);
             Close();
         }
         public void UIpdateBarcodes(Barcodes3 bar)
@@ -495,7 +515,7 @@ namespace Microinvest1cData
             SqlNotQuery(new SQLiteCommand
             {
                 CommandText = "CREATE TABLE IF NOT EXISTS 'Partnerts' ('id'	INTEGER,'uuid'	TEXT,'mid'	INTEGER,'Company'	TEXT,'inn'	TEXT,'Kpp'	" +
-                "TEXT,'type'	INTEGER,'CardNuber'	TEXT,PRIMARY KEY('id' AUTOINCREMENT))"
+                "TEXT,'type'	INTEGER,'CardNuber'	TEXT,'Groupid' INTEGER ,PRIMARY KEY('id' AUTOINCREMENT))"
             });
             SqlNotQuery(new SQLiteCommand
             {

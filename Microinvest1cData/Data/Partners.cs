@@ -15,5 +15,6 @@ namespace Microinvest1cData.Data
         public String KPP { get; set; }
         public int type { get; set; }
         public String cartNubper { get; set; }
+        public int Groupid { get; set; }
     }
 }

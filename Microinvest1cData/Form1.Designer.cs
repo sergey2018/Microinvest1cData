@@ -94,7 +94,7 @@
             // 
             // buttonGoods
             // 
-            this.buttonGoods.Location = new System.Drawing.Point(79, 103);
+            this.buttonGoods.Location = new System.Drawing.Point(135, 98);
             this.buttonGoods.Name = "buttonGoods";
             this.buttonGoods.Size = new System.Drawing.Size(94, 45);
             this.buttonGoods.TabIndex = 2;
@@ -114,7 +114,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(79, 172);
+            this.button1.Location = new System.Drawing.Point(135, 170);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(125, 46);
             this.button1.TabIndex = 4;
@@ -125,7 +125,7 @@
             // labelUpdate
             // 
             this.labelUpdate.AutoSize = true;
-            this.labelUpdate.Location = new System.Drawing.Point(109, 263);
+            this.labelUpdate.Location = new System.Drawing.Point(155, 260);
             this.labelUpdate.Name = "labelUpdate";
             this.labelUpdate.Size = new System.Drawing.Size(64, 13);
             this.labelUpdate.TabIndex = 5;

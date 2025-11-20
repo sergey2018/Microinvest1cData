@@ -101,12 +101,24 @@ namespace Microinvest1cData.MSSQL
             server.Connect();
             var command = new SqlCommand
             {
-                CommandText = "Select * from Partners where id in (Select id from Operations where opertype=1)"
+                CommandText = "Select * from Partners where id in (Select id from Operations)"
             };
             using(var reader = server.DataReader(command))
             {
-                var partners = new Partners();
-                
+                while (reader.Read())
+                {
+                    var partners = new Partners();
+                    partners.mID = int.Parse(reader["id"].ToString());
+                    partners.Company = reader["Company"].ToString();
+                    partners.INN = reader["Bulstat"].ToString();
+                    partners.KPP = reader["TaxNo"].ToString();
+                    partners.UUID = Guid.NewGuid().ToString();
+                    partners.type = int.Parse(reader["type"].ToString());
+                    partners.cartNubper = reader["CardNumber"].ToString();
+                    sqlitecontroller.SetPartner(partners);
+                }
+
+
             }
             server.Disconnect();
         }

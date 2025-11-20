@@ -89,6 +89,9 @@ namespace Microinvest1cData
             controller.SetGroups();
             controller.GetGoods();
             controller.GetObjects();
+            controller.SetPartners();
+            controller.GetPrice();
+            controller.SetStore();
 
             this.Invoke((MethodInvoker)delegate
             {
@@ -116,11 +119,11 @@ namespace Microinvest1cData
 
         private  void button1_Click(object sender, EventArgs e)
         {
-            controller.GetLengthZCount();
+            /*controller.GetLengthZCount();
              var thread1 = new Thread(LoadStore);
              var thread2 = new Thread(UpdateLabel);
              thread1.Start();
-             thread2.Start();
+             thread2.Start();*/
             
 
         }
