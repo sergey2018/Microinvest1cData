@@ -49,6 +49,8 @@ namespace Microinvest1cData
         }
         private XElement GetGoods()
         {
+            var cod = controller.GetMaxCode() + 1;
+            controller.UpdateCodeFirst(cod);
             var element = new XElement("Товары");
             var list = controller.GetGoods();
             foreach (Goods g in list)

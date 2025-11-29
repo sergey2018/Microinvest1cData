@@ -1,4 +1,5 @@
-﻿using Microinvest1cData.Forms;
+﻿using Microinvest1cData.Data;
+using Microinvest1cData.Forms;
 using Microinvest1cData.MSSQL;
 using System;
 using System.Collections.Generic;
@@ -102,7 +103,8 @@ namespace Microinvest1cData
 
         private void buttonUpdate_Click(object sender, EventArgs e)
         {
-            controller.UpdateBase();
+            var forms = new FormAnaliz(controller.GetSqlitecontroller());
+            forms.ShowDialog();
         }
 
         private void LoadStore()

@@ -94,7 +94,7 @@
             // 
             // buttonGoods
             // 
-            this.buttonGoods.Location = new System.Drawing.Point(135, 98);
+            this.buttonGoods.Location = new System.Drawing.Point(92, 62);
             this.buttonGoods.Name = "buttonGoods";
             this.buttonGoods.Size = new System.Drawing.Size(94, 45);
             this.buttonGoods.TabIndex = 2;
@@ -104,17 +104,17 @@
             // 
             // buttonUpdate
             // 
-            this.buttonUpdate.Location = new System.Drawing.Point(440, 84);
+            this.buttonUpdate.Location = new System.Drawing.Point(327, 73);
             this.buttonUpdate.Name = "buttonUpdate";
             this.buttonUpdate.Size = new System.Drawing.Size(75, 23);
             this.buttonUpdate.TabIndex = 3;
-            this.buttonUpdate.Text = "Обновление базы";
+            this.buttonUpdate.Text = "Проверка базы";
             this.buttonUpdate.UseVisualStyleBackColor = true;
             this.buttonUpdate.Click += new System.EventHandler(this.buttonUpdate_Click);
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(135, 170);
+            this.button1.Location = new System.Drawing.Point(81, 174);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(125, 46);
             this.button1.TabIndex = 4;
@@ -125,7 +125,7 @@
             // labelUpdate
             // 
             this.labelUpdate.AutoSize = true;
-            this.labelUpdate.Location = new System.Drawing.Point(155, 260);
+            this.labelUpdate.Location = new System.Drawing.Point(89, 250);
             this.labelUpdate.Name = "labelUpdate";
             this.labelUpdate.Size = new System.Drawing.Size(64, 13);
             this.labelUpdate.TabIndex = 5;
@@ -134,7 +134,7 @@
             // 
             // buttonUpload
             // 
-            this.buttonUpload.Location = new System.Drawing.Point(431, 156);
+            this.buttonUpload.Location = new System.Drawing.Point(468, 82);
             this.buttonUpload.Name = "buttonUpload";
             this.buttonUpload.Size = new System.Drawing.Size(75, 46);
             this.buttonUpload.TabIndex = 6;
@@ -144,7 +144,7 @@
             // 
             // buttonExel
             // 
-            this.buttonExel.Location = new System.Drawing.Point(407, 250);
+            this.buttonExel.Location = new System.Drawing.Point(327, 197);
             this.buttonExel.Name = "buttonExel";
             this.buttonExel.Size = new System.Drawing.Size(75, 23);
             this.buttonExel.TabIndex = 7;

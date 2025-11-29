@@ -80,6 +80,19 @@ namespace Microinvest1cData
             return code;
         }
 
+        public void UpdateCodeFirst(long code)
+        {
+            Open();
+            var command = new SQLiteCommand
+            {
+                CommandText="Update Goods set Code=@code where code='1'"
+            };
+            command.Parameters.AddWithValue("@code", code);
+            SqlNotQuery(command);
+            Close();
+
+        }
+
         public bool isBarcode(String Barcode)
         {
             var command = new SQLiteCommand { CommandText = "Select Barcode from Barcodes where Barcode=@bar" };
@@ -493,6 +506,75 @@ namespace Microinvest1cData
             Close();
         }
 
+        public int ReportsBigLengCode()
+        {
+            Open();
+            var count = 0;
+            var command = new SQLiteCommand
+            {
+                CommandText = "Select count(*) as 'count' from Goods where length(code)>7"
+            };
+           
+            using(var reader = DataReader(command))
+            {
+                reader.Read();
+                count = int.Parse(reader["count"].ToString());
+            }
+            Close();
+            return count;
+        }
+        public int CountIsnumerik()
+        {
+            Open();
+            var count = 0;
+            var command = new SQLiteCommand
+            {
+                CommandText = "Select count(*) as 'count' from IsNumerik where isInt = 0"
+            };
+
+            using (var reader = DataReader(command))
+            {
+                reader.Read();
+                count = int.Parse(reader["count"].ToString());
+            }
+            Close();
+            return count;
+        }
+        public int CountDoubleCode()
+        {
+            Open();
+            var count = 0;
+            var command = new SQLiteCommand
+            {
+                CommandText = "Select count(*) as 'count' from IsDoubleCode"
+            };
+
+            using (var reader = DataReader(command))
+            {
+                reader.Read();
+                count = int.Parse(reader["count"].ToString());
+            }
+            Close();
+            return count;
+        }
+
+        public int CounProblemBarkode()
+        {
+            Open();
+            var count = 0;
+            var command = new SQLiteCommand
+            {
+                CommandText = "Select count(*) as 'count' from barcodes3"
+            };
+
+            using (var reader = DataReader(command))
+            {
+                reader.Read();
+                count = int.Parse(reader["count"].ToString());
+            }
+            Close();
+            return count;
+        }
         private void SqlNotQuery(SQLiteCommand command)
         {
             command.Connection = sqliteConnection;
@@ -545,7 +627,17 @@ namespace Microinvest1cData
             {
                 CommandText = "CREATE VIEW IF NOT EXISTS ExelNSI as Select g.code,g.name,g.Name2,g.Measure,(SELECT gg.name from GoodsGroups gg where gg.mid=g.Groupid) as 'Groups',(Select b.Barcode from Barcodes b where b.mid=g.mid limit 1) as 'Barcode' from Goods g"
             });
+
+            SqlNotQuery(new SQLiteCommand
+            {
+                CommandText= "CREATE VIEW  IF NOT EXISTS IsNumerik as Select code,(cast(cast(code AS INTEGER) AS TEXT) = code)as isInt from Goods "
+            });
+            SqlNotQuery(new SQLiteCommand
+            {
+                CommandText = "Create view IF NOT EXISTS IsDoubleCode as SELECT * From Goods where code in (Select code From Goods where code<>'' GROUP by code HAVING count(code)>1)"
+            });
             Close();
+
         }
         public void UpdateBase()
         {

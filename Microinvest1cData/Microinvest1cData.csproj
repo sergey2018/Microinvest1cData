@@ -76,6 +76,12 @@
     <Compile Include="Data\AktPrice.cs" />
     <Compile Include="Data\Barcodes3.cs" />
     <Compile Include="Data\ExelNSI.cs" />
+    <Compile Include="Forms\FormAnaliz.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormAnaliz.Designer.cs">
+      <DependentUpon>FormAnaliz.cs</DependentUpon>
+    </Compile>
     <Compile Include="Data\Goods.cs" />
     <Compile Include="Data\Groups.cs" />
     <Compile Include="Data\Objects.cs" />
@@ -121,6 +127,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Sqlitecontroller.cs" />
     <Compile Include="XMLWrite.cs" />
+    <EmbeddedResource Include="Forms\FormAnaliz.resx">
+      <DependentUpon>FormAnaliz.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
