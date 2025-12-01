@@ -121,11 +121,11 @@ namespace Microinvest1cData
 
         private  void button1_Click(object sender, EventArgs e)
         {
-            /*controller.GetLengthZCount();
+            controller.GetLengthZCount();
              var thread1 = new Thread(LoadStore);
              var thread2 = new Thread(UpdateLabel);
              thread1.Start();
-             thread2.Start();*/
+             thread2.Start();
             
 
         }
@@ -159,7 +159,8 @@ namespace Microinvest1cData
         private void buttonExel_Click(object sender, EventArgs e)
         {
             var exel = new ExelWriter(controller.GetSqlitecontroller());
-           exel.CreateFileStore();
+            exel.CreateFilePrice();
+            exel.CreateFileStore();
             MessageBox.Show("Выгружено");
         }
     }
