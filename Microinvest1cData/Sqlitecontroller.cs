@@ -80,6 +80,33 @@ namespace Microinvest1cData
             return code;
         }
 
+        public List<Objects> GetObjects()
+        {
+            var list = new List<Objects>();
+            Open();
+            var command = new SQLiteCommand
+            {
+                CommandText = "Select * from Objects"
+            };
+            using(var reader = DataReader(command))
+            {
+                while (reader.Read())
+                {
+                    var Obj = new Objects
+                    {
+                        Name = reader["name"].ToString(),
+                        ID = int.Parse(reader["mid"].ToString()),
+                        TypePrice = int.Parse(reader["typePrice"].ToString()),
+                        UUID = reader["UUID"].ToString()
+                    };
+                    list.Add(Obj);
+                }
+            }
+            Close();
+
+            return list;
+        }
+
         public void UpdateCodeFirst(long code)
         {
             Open();
