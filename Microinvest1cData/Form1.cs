@@ -159,8 +159,8 @@ namespace Microinvest1cData
         private void buttonExel_Click(object sender, EventArgs e)
         {
             var exel = new ExelWriter(controller.GetSqlitecontroller());
-            exel.CreateFilePrice();
-            exel.CreateFileStore();
+            exel.CreateFilePriceObj();
+            exel.CreateFileStoreObj();
             MessageBox.Show("Выгружено");
         }
     }

@@ -222,14 +222,15 @@ namespace Microinvest1cData
    
             Close();
         }
-        public List<AktPrice> aktPrices()
+        public List<AktPrice> aktPrices(int type)
         {
             Open();
             var list = new List<AktPrice>();
             var command = new SQLiteCommand
             {
-                CommandText = "Select g.name,g.code,(Select p.Price from Prices p where p.mid=g.mid and p.type=2) as 'price' from Goods g where price>0 order by g.name"
+                CommandText = "Select g.name,g.code,(Select p.Price from Prices p where p.mid=g.mid and p.type=@typ) as 'price' from Goods g where price>0 order by g.name"
             };
+            command.Parameters.AddWithValue("@typ",type + 1);
             using(var reader = DataReader(command))
             {
                 while (reader.Read())
@@ -246,14 +247,16 @@ namespace Microinvest1cData
             Close();
             return list;
         }
-        public List<StoreExel> aktStore()
+        public List<StoreExel> aktStore(int id,int type)
         {
             Open();
             var list = new List<StoreExel>();
             var command = new SQLiteCommand
             {
-                CommandText = "Select g.name,g.code,(Select s.qtty from Store s where s.mid=g.mid and objid=2) as 'qtty',(select p.Price from Prices p where p.mid=g.mid and type=2)as 'priceOut',(select p.Price from Prices p where p.mid=g.mid and type=0)as 'pricein' from Goods g where qtty>0"
+                CommandText = "Select g.name,g.code,(Select s.qtty from Store s where s.mid=g.mid and objid=@obj) as 'qtty',(select p.Price from Prices p where p.mid=g.mid and type=@typ)as 'priceOut',(select p.Price from Prices p where p.mid=g.mid and type=0)as 'pricein' from Goods g where qtty>0"
             };
+            command.Parameters.AddWithValue("@obj", id);
+            command.Parameters.AddWithValue("@typ", type+1);
             using (var reader = DataReader(command))
             {
                 while (reader.Read())

@@ -12,12 +12,36 @@ namespace Microinvest1cData
     public class ExelWriter
     {
         private Sqlitecontroller Sqlitecontroller;
+        private String pathPrice;
+        private String pathStore;
         public ExelWriter(Sqlitecontroller sqlitecontroller)
         {
             Sqlitecontroller = sqlitecontroller;
+            InitDicrect();
         }
 
-
+        private void InitDicrect()
+        {
+            var path = Directory.GetCurrentDirectory();
+            if(Directory.Exists(path + "\\Цены"))
+            {
+                pathPrice = path + "\\Цены";
+            }
+            else
+            {
+                Directory.CreateDirectory(path + "\\Цены");
+                pathPrice = path + "\\Цены";
+            }
+            if (Directory.Exists(path + "\\Остатки"))
+            {
+                pathStore = path + "\\Остатки";
+            }
+            else
+            {
+                Directory.CreateDirectory(path + "\\Остатки");
+                pathStore = path + "\\Остатки";
+            }
+        }
         public void CreateFile()
         {
             var groups = Sqlitecontroller.GetGroups();
@@ -54,9 +78,9 @@ namespace Microinvest1cData
             }
 
         }
-        public void CreateFilePrice()
+        private void CreateFilePrice(String name,int type)
         {
-            var prices = Sqlitecontroller.aktPrices();
+            var prices = Sqlitecontroller.aktPrices(type);
             Microsoft.Office.Interop.Excel.Application app = new Microsoft.Office.Interop.Excel.Application();
             app.Application.Workbooks.Add(System.Reflection.Missing.Value);
             app.Columns.ColumnWidth = 15;
@@ -71,15 +95,31 @@ namespace Microinvest1cData
                // app.Cells[i + 2, 3] = prices[i];
                 app.Cells[i + 2, 3] = prices[i].Price;
             }
-            var path = Directory.GetCurrentDirectory();
-            app.ActiveWorkbook.SaveAs(path + "\\Цены.xlsx");
+            app.ActiveWorkbook.SaveAs(pathPrice + "\\Цены"+name+".xlsx");
             app.Workbooks.Close();
             app.Quit();
             app = null;
         }
-        public void CreateFileStore()
+
+        public void CreateFilePriceObj()
         {
-            var store = Sqlitecontroller.aktStore();
+            var list = Sqlitecontroller.GetObjects();
+            foreach(Objects ob in list)
+            {
+                CreateFilePrice(ob.Name,ob.TypePrice);
+            }
+        }
+        public void CreateFileStoreObj()
+        {
+            var list = Sqlitecontroller.GetObjects();
+            foreach (Objects ob in list)
+            {
+                CreateFileStore(ob.Name, ob.TypePrice,ob.ID);
+            }
+        }
+        public void CreateFileStore(String name,int type,int id)
+        {
+            var store = Sqlitecontroller.aktStore(id,type);
             Microsoft.Office.Interop.Excel.Application app = new Microsoft.Office.Interop.Excel.Application();
             app.Application.Workbooks.Add(System.Reflection.Missing.Value);
             app.Columns.ColumnWidth = 15;
@@ -102,8 +142,7 @@ namespace Microinvest1cData
                 app.Cells[i + 2, 6] = store[i].PriceOut;
                 app.Cells[i + 2, 7] = store[i].PriceOutSum;
             }
-            var path = Directory.GetCurrentDirectory();
-            app.ActiveWorkbook.SaveAs(path + "\\Остатки.xlsx");
+            app.ActiveWorkbook.SaveAs(pathStore + "\\Остатки"+name+".xlsx");
             app.Workbooks.Close();
             app.Quit();
             app = null;
