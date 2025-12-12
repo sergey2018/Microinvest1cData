@@ -366,6 +366,55 @@ namespace Microinvest1cData
             Close();
             return list;
         }
+        public List<Goods> GetDoubleCode()
+        {
+            var list = new List<Goods>();
+            Open();
+            var command = new SQLiteCommand
+            {
+                CommandText = "Select *  from IsDoubleCode order by code"
+            };
+            using (var reader = DataReader(command))
+            {
+                while (reader.Read())
+                {
+                    var good = new Goods
+                    {
+                        ID = int.Parse(reader["ID"].ToString()),
+                        MID = int.Parse(reader["MID"].ToString()),
+                        Mark = int.Parse(reader["mark"].ToString()),
+                        Groupid = int.Parse(reader["Groupid"].ToString()),
+                        Type = int.Parse(reader["type"].ToString()),
+                        Name = reader["name"].ToString(),
+                        Name2 = reader["name2"].ToString(),
+                        Code = reader["code"].ToString(),
+                        Catalog = reader["catalog"].ToString(),
+                        UUid = reader["uuid"].ToString(),
+                        Measure = reader["Measure"].ToString()
+                    };
+                    list.Add(good);
+                }
+            }
+
+            Close();
+            return list;
+        }
+        public void UpdateCode(String code,int id)
+        {
+            Open();
+            var command = new SQLiteCommand
+            {
+                CommandText = "Update Goods set catalog=code, code=@code where id=@id"
+            };
+            command.Parameters.AddWithValue("@code", code);
+            command.Parameters.AddWithValue("@id", id);
+            SqlNotQuery(command);
+
+            Close();
+
+        }
+
+
         public List<ExelNSI>GetExelNSIs(String Groups)
         {
             var list = new List<ExelNSI>();
@@ -570,6 +619,30 @@ namespace Microinvest1cData
             Close();
             return count;
         }
+        public List<int> GetIdIsNumerik()
+        {
+            Open();
+            var list = new List<int>();
+            var count = 0;
+            var command = new SQLiteCommand
+            {
+                CommandText = "Select id from IsNumerik where isInt = 0"
+            };
+
+            using (var reader = DataReader(command))
+            {
+                while (reader.Read())
+                {
+                    count = int.Parse(reader["id"].ToString());
+                    list.Add(count);
+                }
+            }
+            Close();
+            return list;
+        }
+
+
+
         public int CountDoubleCode()
         {
             Open();
@@ -660,7 +733,7 @@ namespace Microinvest1cData
 
             SqlNotQuery(new SQLiteCommand
             {
-                CommandText= "CREATE VIEW  IF NOT EXISTS IsNumerik as Select code,(cast(cast(code AS INTEGER) AS TEXT) = code)as isInt from Goods "
+                CommandText= "CREATE VIEW  IF NOT EXISTS IsNumerik as Select code,ID,(cast(cast(code AS INTEGER) AS TEXT) = code)as isInt from Goods "
             });
             SqlNotQuery(new SQLiteCommand
             {

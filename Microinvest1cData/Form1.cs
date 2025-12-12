@@ -163,5 +163,27 @@ namespace Microinvest1cData
             exel.CreateFileStoreObj();
             MessageBox.Show("Выгружено");
         }
+
+        private void дублирующиеКодыToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var forms = new FormDoubCode(controller.GetSqlitecontroller());
+            forms.ShowDialog();
+        }
+
+        private void нечисловыеКодыToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            
+            if(MessageBox.Show("Хотите исправить кода", "Внимание", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Information) == DialogResult.Yes)
+            {
+                var list = controller.GetSqlitecontroller().GetIdIsNumerik();
+                foreach (int i in list)
+                {
+                    var cod = controller.GetSqlitecontroller().GetMaxCode() + 1;
+                    controller.GetSqlitecontroller().UpdateCode(cod.ToString(), i);
+                }
+                MessageBox.Show("Исправлено");
+            }
+            
+        }
     }
 }

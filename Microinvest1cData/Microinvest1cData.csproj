@@ -108,6 +108,12 @@
     <Compile Include="Forms\FormBadBarcodes.Designer.cs">
       <DependentUpon>FormBadBarcodes.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\FormDoubCode.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormDoubCode.Designer.cs">
+      <DependentUpon>FormDoubCode.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\FormGoods.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -138,6 +144,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormBadBarcodes.resx">
       <DependentUpon>FormBadBarcodes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormDoubCode.resx">
+      <DependentUpon>FormDoubCode.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormGoods.resx">
       <DependentUpon>FormGoods.cs</DependentUpon>
