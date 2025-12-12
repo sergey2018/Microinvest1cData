@@ -253,7 +253,7 @@ namespace Microinvest1cData
             var list = new List<StoreExel>();
             var command = new SQLiteCommand
             {
-                CommandText = "Select g.name,g.code,(Select s.qtty from Store s where s.mid=g.mid and objid=@obj) as 'qtty',(select p.Price from Prices p where p.mid=g.mid and type=@typ)as 'priceOut',(select p.Price from Prices p where p.mid=g.mid and type=0)as 'pricein' from Goods g where qtty>0"
+                CommandText = "Select g.name,g.code,(Select s.qtty from Store s where s.mid=g.mid and objid=@obj) as 'qtty',(select p.Price from Prices p where p.mid=g.mid and type=@typ)as 'priceOut',(select p.Price from Prices p where p.mid=g.mid and type=0)as 'pricein' from Goods g where qtty<>0"
             };
             command.Parameters.AddWithValue("@obj", id);
             command.Parameters.AddWithValue("@typ", type+1);
