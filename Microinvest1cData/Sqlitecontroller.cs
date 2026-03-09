@@ -640,7 +640,16 @@ namespace Microinvest1cData
             Close();
             return list;
         }
-
+        public void DeleteweightBarcode()
+        {
+            Open();
+            var command = new SQLiteCommand
+            {
+                CommandText = "Delete From Barcodes where barcode like '%ww.wwwc%'"
+            };
+            SqlNotQuery(command);
+            Close();
+        }
 
 
         public int CountDoubleCode()
@@ -678,6 +687,27 @@ namespace Microinvest1cData
             Close();
             return count;
         }
+        public int CountWeightBarocde()
+        {
+            Open();
+            var count = 0;
+            var command = new SQLiteCommand
+            {
+                CommandText = "Select count(*) as 'count' From Barcodes where barcode like '%ww.wwwc%'"
+            };
+
+            using (var reader = DataReader(command))
+            {
+                reader.Read();
+                count = int.Parse(reader["count"].ToString());
+            }
+            Close();
+            return count;
+        }
+
+
+
+
         private void SqlNotQuery(SQLiteCommand command)
         {
             command.Connection = sqliteConnection;

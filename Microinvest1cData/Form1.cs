@@ -185,5 +185,14 @@ namespace Microinvest1cData
             }
             
         }
+
+        private void удалениеВесовыхШтрихкодовToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Хотите удалить весовые коды", "Внимание", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Information) == DialogResult.Yes)
+            {
+                controller.GetSqlitecontroller().DeleteweightBarcode();
+                MessageBox.Show("Выполнено");
+            }
+        }
     }
 }
