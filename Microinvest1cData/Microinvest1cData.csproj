@@ -76,6 +76,9 @@
     <Compile Include="Data\AktPrice.cs" />
     <Compile Include="Data\Barcodes3.cs" />
     <Compile Include="Data\ExelNSI.cs" />
+    <Compile Include="Egais\FormAB.cs" />
+    <Compile Include="Egais\Producer.cs" />
+    <Compile Include="Egais\Product.cs" />
     <Compile Include="Forms\FormAnaliz.cs">
       <SubType>Form</SubType>
     </Compile>

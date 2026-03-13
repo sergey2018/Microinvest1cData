@@ -769,8 +769,23 @@ namespace Microinvest1cData
             {
                 CommandText = "Create view IF NOT EXISTS IsDoubleCode as SELECT * From Goods where code in (Select code From Goods where code<>'' GROUP by code HAVING count(code)>1)"
             });
-            Close();
+           
+            SqlNotQuery(new SQLiteCommand { CommandText = "CREATE TABLE  IF NOT EXISTS 'Product' ('id'	INTEGER,'uuid' TEXT,'Name'	TEXT,'Capacity'	REAL,'UntiType'	TEXT,'AlcoCode'	TEXT,'AlcVolume'	REAL,'ProductVCode'	INTEGER,'ClientRegIdP'	TEXT,PRIMARY KEY('id' AUTOINCREMENT));" });
+            SqlNotQuery(new SQLiteCommand {
+                CommandText = "CREATE TABLE IF NOT EXISTS 'FormAB' ('id'INTEGER,'productid' INTEGER,'uuid' TEXT,'FormA' TEXT,'FormB' TEXT, PRIMARY KEY('id' AUTOINCREMENT))"
+            });
+            SqlNotQuery(new SQLiteCommand
+            {
+                CommandText = "CREATE TABLE  IF NOT EXISTS 'Producer' ('id'INTEGER,'FullName'	TEXT,'uuid' TEXT,'ShortName'	TEXT," +
+                "'INN' TEXT,'KPP'	TEXT,'ClientRegID'	TEXT,'Address'	TEXT,'Coutry'	INTEGER,PRIMARY KEY('id' AUTOINCREMENT))"
+            });
+            SqlNotQuery(new SQLiteCommand
+            {
+                CommandText= "CREATE TABLE  IF NOT EXISTS 'ConnGoodsProduct' ('puuid' TEXT, 'guuid' TEXT)"
+            });
 
+
+            Close();
         }
         public void UpdateBase()
         {
