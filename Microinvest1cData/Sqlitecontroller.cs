@@ -781,7 +781,7 @@ namespace Microinvest1cData
             });
             SqlNotQuery(new SQLiteCommand
             {
-                CommandText= "CREATE TABLE  IF NOT EXISTS 'ConnGoodsProduct' ('puuid' TEXT, 'guuid' TEXT)"
+                CommandText= "CREATE TABLE  IF NOT EXISTS 'LinkGoodsProduct' ('puuid' TEXT, 'guuid' TEXT)"
             });
 
 
