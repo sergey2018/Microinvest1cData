@@ -34,15 +34,16 @@
             this.справочникиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.пробШтрихкодыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.товарыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.дублирующиеКодыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.исправлениеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.нечисловыеКодыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.buttonGoods = new System.Windows.Forms.Button();
             this.buttonUpdate = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.labelUpdate = new System.Windows.Forms.Label();
             this.buttonUpload = new System.Windows.Forms.Button();
             this.buttonExel = new System.Windows.Forms.Button();
-            this.дублирующиеКодыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.исправлениеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.нечисловыеКодыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.удалениеВесовыхШтрихкодовToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip2.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -96,6 +97,29 @@
             this.товарыToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
             this.товарыToolStripMenuItem.Text = "Товары";
             this.товарыToolStripMenuItem.Click += new System.EventHandler(this.товарыToolStripMenuItem_Click);
+            // 
+            // дублирующиеКодыToolStripMenuItem
+            // 
+            this.дублирующиеКодыToolStripMenuItem.Name = "дублирующиеКодыToolStripMenuItem";
+            this.дублирующиеКодыToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
+            this.дублирующиеКодыToolStripMenuItem.Text = "Дублирующие коды";
+            this.дублирующиеКодыToolStripMenuItem.Click += new System.EventHandler(this.дублирующиеКодыToolStripMenuItem_Click);
+            // 
+            // исправлениеToolStripMenuItem
+            // 
+            this.исправлениеToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.нечисловыеКодыToolStripMenuItem,
+            this.удалениеВесовыхШтрихкодовToolStripMenuItem});
+            this.исправлениеToolStripMenuItem.Name = "исправлениеToolStripMenuItem";
+            this.исправлениеToolStripMenuItem.Size = new System.Drawing.Size(93, 20);
+            this.исправлениеToolStripMenuItem.Text = "Исправление";
+            // 
+            // нечисловыеКодыToolStripMenuItem
+            // 
+            this.нечисловыеКодыToolStripMenuItem.Name = "нечисловыеКодыToolStripMenuItem";
+            this.нечисловыеКодыToolStripMenuItem.Size = new System.Drawing.Size(244, 22);
+            this.нечисловыеКодыToolStripMenuItem.Text = "Нечисловые коды";
+            this.нечисловыеКодыToolStripMenuItem.Click += new System.EventHandler(this.нечисловыеКодыToolStripMenuItem_Click);
             // 
             // buttonGoods
             // 
@@ -157,27 +181,12 @@
             this.buttonExel.UseVisualStyleBackColor = true;
             this.buttonExel.Click += new System.EventHandler(this.buttonExel_Click);
             // 
-            // дублирующиеКодыToolStripMenuItem
+            // удалениеВесовыхШтрихкодовToolStripMenuItem
             // 
-            this.дублирующиеКодыToolStripMenuItem.Name = "дублирующиеКодыToolStripMenuItem";
-            this.дублирующиеКодыToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
-            this.дублирующиеКодыToolStripMenuItem.Text = "Дублирующие коды";
-            this.дублирующиеКодыToolStripMenuItem.Click += new System.EventHandler(this.дублирующиеКодыToolStripMenuItem_Click);
-            // 
-            // исправлениеToolStripMenuItem
-            // 
-            this.исправлениеToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.нечисловыеКодыToolStripMenuItem});
-            this.исправлениеToolStripMenuItem.Name = "исправлениеToolStripMenuItem";
-            this.исправлениеToolStripMenuItem.Size = new System.Drawing.Size(93, 20);
-            this.исправлениеToolStripMenuItem.Text = "Исправление";
-            // 
-            // нечисловыеКодыToolStripMenuItem
-            // 
-            this.нечисловыеКодыToolStripMenuItem.Name = "нечисловыеКодыToolStripMenuItem";
-            this.нечисловыеКодыToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.нечисловыеКодыToolStripMenuItem.Text = "Нечисловые коды";
-            this.нечисловыеКодыToolStripMenuItem.Click += new System.EventHandler(this.нечисловыеКодыToolStripMenuItem_Click);
+            this.удалениеВесовыхШтрихкодовToolStripMenuItem.Name = "удалениеВесовыхШтрихкодовToolStripMenuItem";
+            this.удалениеВесовыхШтрихкодовToolStripMenuItem.Size = new System.Drawing.Size(244, 22);
+            this.удалениеВесовыхШтрихкодовToolStripMenuItem.Text = "Удаление весовых штрихкодов";
+            this.удалениеВесовыхШтрихкодовToolStripMenuItem.Click += new System.EventHandler(this.удалениеВесовыхШтрихкодовToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -220,6 +229,7 @@
         private System.Windows.Forms.ToolStripMenuItem дублирующиеКодыToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem исправлениеToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem нечисловыеКодыToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem удалениеВесовыхШтрихкодовToolStripMenuItem;
     }
 }
 

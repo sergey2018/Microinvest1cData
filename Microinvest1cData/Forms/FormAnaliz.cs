@@ -26,6 +26,7 @@ namespace Microinvest1cData.Data
             listBoxReports.Items.Add("Количество нечисловых кодов: " + controller.CountIsnumerik() + " шт.");
             listBoxReports.Items.Add("Количество дублируюших  кодов: " + controller.CountDoubleCode() + " шт.");
             listBoxReports.Items.Add("Количество длинных кодов: " + controller.ReportsBigLengCode() + " шт.");
+            listBoxReports.Items.Add("Количество весовых штрихкодов: " + controller.CountWeightBarocde() + " шт.");
 
 
         }

@@ -640,7 +640,16 @@ namespace Microinvest1cData
             Close();
             return list;
         }
-
+        public void DeleteweightBarcode()
+        {
+            Open();
+            var command = new SQLiteCommand
+            {
+                CommandText = "Delete From Barcodes where barcode like '%ww.wwwc%'"
+            };
+            SqlNotQuery(command);
+            Close();
+        }
 
 
         public int CountDoubleCode()
@@ -678,6 +687,27 @@ namespace Microinvest1cData
             Close();
             return count;
         }
+        public int CountWeightBarocde()
+        {
+            Open();
+            var count = 0;
+            var command = new SQLiteCommand
+            {
+                CommandText = "Select count(*) as 'count' From Barcodes where barcode like '%ww.wwwc%'"
+            };
+
+            using (var reader = DataReader(command))
+            {
+                reader.Read();
+                count = int.Parse(reader["count"].ToString());
+            }
+            Close();
+            return count;
+        }
+
+
+
+
         private void SqlNotQuery(SQLiteCommand command)
         {
             command.Connection = sqliteConnection;
@@ -739,8 +769,23 @@ namespace Microinvest1cData
             {
                 CommandText = "Create view IF NOT EXISTS IsDoubleCode as SELECT * From Goods where code in (Select code From Goods where code<>'' GROUP by code HAVING count(code)>1)"
             });
-            Close();
+           
+            SqlNotQuery(new SQLiteCommand { CommandText = "CREATE TABLE  IF NOT EXISTS 'Product' ('id'	INTEGER,'uuid' TEXT,'Name'	TEXT,'Capacity'	REAL,'UntiType'	TEXT,'AlcoCode'	TEXT,'AlcVolume'	REAL,'ProductVCode'	INTEGER,'ClientRegIdP'	TEXT,PRIMARY KEY('id' AUTOINCREMENT));" });
+            SqlNotQuery(new SQLiteCommand {
+                CommandText = "CREATE TABLE IF NOT EXISTS 'FormAB' ('id'INTEGER,'productid' INTEGER,'uuid' TEXT,'FormA' TEXT,'FormB' TEXT, PRIMARY KEY('id' AUTOINCREMENT))"
+            });
+            SqlNotQuery(new SQLiteCommand
+            {
+                CommandText = "CREATE TABLE  IF NOT EXISTS 'Producer' ('id'INTEGER,'FullName'	TEXT,'uuid' TEXT,'ShortName'	TEXT," +
+                "'INN' TEXT,'KPP'	TEXT,'ClientRegID'	TEXT,'Address'	TEXT,'Coutry'	INTEGER,PRIMARY KEY('id' AUTOINCREMENT))"
+            });
+            SqlNotQuery(new SQLiteCommand
+            {
+                CommandText= "CREATE TABLE  IF NOT EXISTS 'LinkGoodsProduct' ('puuid' TEXT, 'guuid' TEXT)"
+            });
 
+
+            Close();
         }
         public void UpdateBase()
         {

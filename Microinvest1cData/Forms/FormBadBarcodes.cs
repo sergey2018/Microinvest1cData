@@ -28,12 +28,14 @@ namespace Microinvest1cData.Forms
         private void UpdateBarcodes()
         {
             barcodes3s = controller.GetBarcodes3();
-            dataGridViewBarocdes.Rows.Clear();
-            foreach(Barcodes3 bar in barcodes3s)
-            {
-                var rows = dataGridViewBarocdes.Rows.Add();
-                dataGridViewBarocdes.Rows[rows].Cells[0].Value = bar.Barcode;
-            }
+            UpdateBarcodes(barcodes3s);
+            /* dataGridViewBarocdes.Rows.Clear();
+             foreach(Barcodes3 bar in barcodes3s)
+             {
+                 var rows = dataGridViewBarocdes.Rows.Add();
+                 dataGridViewBarocdes.Rows[rows].Cells[0].Value = bar.Barcode;
+             }*/
+
         }
 
         private void buttonDelete_Click(object sender, EventArgs e)
@@ -70,7 +72,7 @@ namespace Microinvest1cData.Forms
 
         private void button1_Click(object sender, EventArgs e)
         {
-            var rows = dataGridViewBarocdes.CurrentCell.RowIndex;
+            /*var rows = dataGridViewBarocdes.CurrentCell.RowIndex;
             String[] barcod = barcodes3s[rows].Barcode.Split(',');
             foreach(String str in barcod)
             {
@@ -78,6 +80,21 @@ namespace Microinvest1cData.Forms
                 controller.SetBarcode(barcodes3s[rows].MID, str.Trim(), 0,uuid);
             }
             controller.DeleteBarcodes(barcodes3s[rows].ID);
+            UpdateBarcodes();*/
+            foreach (Barcodes3 bar in barcodes3s)
+            {
+                String[] barcod = bar.Barcode.Split(',');
+                foreach (String str in barcod)
+                {
+                    if (str.Length > 0)
+                    {
+                        var uuid = controller.GoodsUUid(bar.MID);
+                        controller.SetBarcode(bar.MID, str.Trim(), 0, uuid);
+                    }
+                }
+                controller.DeleteBarcodes(bar.ID);
+                
+            }
             UpdateBarcodes();
         }
 
@@ -98,18 +115,29 @@ namespace Microinvest1cData.Forms
             buttonUpdate_Click(sender, e);
         }
 
-        private void buttonSned_Click(object sender, EventArgs e)
+        private void buttonReplase_Click(object sender, EventArgs e)
         {
-            foreach (Barcodes3 bar in barcodes3s)
+            for(int i = 0; i<barcodes3s.Count; i++)
             {
-                if (bar.Barcode.Length == 14 && bar.Barcode[bar.Barcode.Length-1]==',')
-                {
-                    var uuid = controller.GoodsUUid(bar.MID);
-                    controller.SetBarcode(bar.MID, bar.Barcode, 0, uuid);
-                    controller.DeleteBarcodes(bar.ID);
-                }
+                var bar = barcodes3s[i].Barcode;
+                barcodes3s[i].Barcode = bar.Replace('.', ',');
+                barcodes3s[i].Barcode = bar.Replace(' ', ',');
+                //barcodes3s[i].Barcode = bar.Replace(Convert.ToChar(9), ',');
             }
-            UpdateBarcodes();
+           UpdateBarcodes(barcodes3s);
+        }
+
+
+
+        private void UpdateBarcodes(List<Barcodes3> list)
+        {
+           // barcodes3s = controller.GetBarcodes3();
+            dataGridViewBarocdes.Rows.Clear();
+            foreach (Barcodes3 bar in list)
+            {
+                var rows = dataGridViewBarocdes.Rows.Add();
+                dataGridViewBarocdes.Rows[rows].Cells[0].Value = bar.Barcode;
+            }
         }
     }
 }
