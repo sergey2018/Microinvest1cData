@@ -134,6 +134,7 @@
     <Compile Include="MSSQL\Settings.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReadXML.cs" />
     <Compile Include="Sqlitecontroller.cs" />
     <Compile Include="XMLWrite.cs" />
     <EmbeddedResource Include="Forms\FormAnaliz.resx">

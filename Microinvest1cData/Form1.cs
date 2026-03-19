@@ -103,8 +103,7 @@ namespace Microinvest1cData
 
         private void buttonUpdate_Click(object sender, EventArgs e)
         {
-            var forms = new FormAnaliz(controller.GetSqlitecontroller());
-            forms.ShowDialog();
+
         }
 
         private void LoadStore()
@@ -192,6 +191,23 @@ namespace Microinvest1cData
             {
                 controller.GetSqlitecontroller().DeleteweightBarcode();
                 MessageBox.Show("Выполнено");
+            }
+        }
+
+        private void проверкаToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var forms = new FormAnaliz(controller.GetSqlitecontroller());
+            forms.ShowDialog();
+        }
+
+        private void buttonEgais_Click(object sender, EventArgs e)
+        {
+            if (openFileXMl.ShowDialog() == DialogResult.OK)
+            {
+                var ReadXML = new ReadXML(controller.GetSqlitecontroller());
+                ReadXML.ReadXMLFile(openFileXMl.FileName);
+                MessageBox.Show("Загрузка завешина");
+
             }
         }
     }

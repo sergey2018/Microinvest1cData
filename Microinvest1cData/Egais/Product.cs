@@ -15,6 +15,9 @@ namespace Microinvest1cData.Egais
         public double AlcVolume { get; set; } = 0;
         public int ProductVCode { get; set; } = 0;
         public double Capacity { get; set; } = 0;
-       
+        public String ClientRegid { get; set; }
+        public String UUID { get; set; }
+
+
     }
 }

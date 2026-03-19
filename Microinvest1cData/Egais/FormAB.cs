@@ -8,6 +8,8 @@ namespace Microinvest1cData.Egais
 {
     public class FormAB
     {
+        public String UUID { get; set; }
+        public String AlkCode { get; set; }
         public String FormA { get; set; }
         public String FormB { get; set; }
 

@@ -1,4 +1,5 @@
 ﻿using Microinvest1cData.Data;
+using Microinvest1cData.Egais;
 using System;
 using System.Collections.Generic;
 using System.Data.SQLite;
@@ -584,7 +585,59 @@ namespace Microinvest1cData
             SqlNotQuery(command);
             Close();
         }
-
+        public void SetProduct(Product product)
+        {
+            Open();
+            var command = new SQLiteCommand
+            {
+                CommandText = "INSERT into Product(uuid,name,Capacity,UntiType,AlcoCode,AlcVolume,ProductVCode,ClientRegIdP) VALUES(@uuid,@name,@Capacity,@UntiType," +
+                "@AlcoCode,@AlcVolume," +
+                "@ProductVCode,@ClientRegIdP)"
+            };
+            command.Parameters.AddWithValue("@uuid", product.UUID);
+            command.Parameters.AddWithValue("@name", product.Name);
+            command.Parameters.AddWithValue("@Capacity", product.Capacity);
+            command.Parameters.AddWithValue("@UntiType", product.UnitType);
+            command.Parameters.AddWithValue("@AlcoCode", product.AlcCode);
+            command.Parameters.AddWithValue("@AlcVolume", product.AlcVolume);
+            command.Parameters.AddWithValue("@ProductVCode", product.ProductVCode);
+            command.Parameters.AddWithValue("@ClientRegIdP", product.ClientRegid);
+            SqlNotQuery(command);
+            Close();
+        }
+        public void SetProducer(Producer producer)
+        {
+            Open();
+            var command = new SQLiteCommand
+            {
+                CommandText = "INSERT Into Producer (FullName,uuid,ShortName,inn,Kpp,ClientRegID,Address,Coutry) VALUES(@FullName,@uuid,@ShortName," +
+                "@inn,@Kpp,@ClientRegID,@Address,@Coutry)"
+            };
+            command.Parameters.AddWithValue("@FullName", producer.FullName);
+            command.Parameters.AddWithValue("@uuid", producer.UUID);
+            command.Parameters.AddWithValue("@ShortName", producer.ShortName);
+            command.Parameters.AddWithValue("@inn", producer.Inn);
+            command.Parameters.AddWithValue("@Kpp", producer.Kpp);
+            command.Parameters.AddWithValue("@ClientRegID", producer.ClientRegid);
+            command.Parameters.AddWithValue("@Address", producer.Description);
+            command.Parameters.AddWithValue("@Coutry", producer.Country);
+            SqlNotQuery(command);
+            Close();
+        }
+        public void SetFormAB(FormAB formAB)
+        {
+            Open();
+            var command = new SQLiteCommand
+            {
+                CommandText = "INSERT INTO FormAB(AlcCode,uuid,FormA,FormB) VALUES(@AlcCode,@uuid,@FormA,@FormB)"
+            };
+            command.Parameters.AddWithValue("@AlcCode", formAB.AlkCode);
+            command.Parameters.AddWithValue("@uuid", formAB.UUID);
+            command.Parameters.AddWithValue("@FormA", formAB.FormA);
+            command.Parameters.AddWithValue("@FormB", formAB.FormB);
+            SqlNotQuery(command);
+            Close();
+        }
         public int ReportsBigLengCode()
         {
             Open();
@@ -772,7 +825,7 @@ namespace Microinvest1cData
            
             SqlNotQuery(new SQLiteCommand { CommandText = "CREATE TABLE  IF NOT EXISTS 'Product' ('id'	INTEGER,'uuid' TEXT,'Name'	TEXT,'Capacity'	REAL,'UntiType'	TEXT,'AlcoCode'	TEXT,'AlcVolume'	REAL,'ProductVCode'	INTEGER,'ClientRegIdP'	TEXT,PRIMARY KEY('id' AUTOINCREMENT));" });
             SqlNotQuery(new SQLiteCommand {
-                CommandText = "CREATE TABLE IF NOT EXISTS 'FormAB' ('id'INTEGER,'productid' INTEGER,'uuid' TEXT,'FormA' TEXT,'FormB' TEXT, PRIMARY KEY('id' AUTOINCREMENT))"
+                CommandText = "CREATE TABLE IF NOT EXISTS 'FormAB' ('id'INTEGER,'AlcCode' TEXT,'uuid' TEXT,'FormA' TEXT,'FormB' TEXT, PRIMARY KEY('id' AUTOINCREMENT))"
             });
             SqlNotQuery(new SQLiteCommand
             {

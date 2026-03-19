@@ -14,8 +14,9 @@ namespace Microinvest1cData.Egais
         private String inn=""; //инн
         private String kpp=""; //кпп
         private String country;
-        private String region;
+        private String region="";
         private String description;
+        public String UUID { get; set; }
 
         public string ClientRegid { get => clientRegid; set => clientRegid = value; }
         public string FullName { get => fullName; set => fullName = value; }

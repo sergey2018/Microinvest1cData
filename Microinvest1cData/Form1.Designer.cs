@@ -37,14 +37,24 @@
             this.дублирующиеКодыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.исправлениеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.нечисловыеКодыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.удалениеВесовыхШтрихкодовToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.проверкаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.buttonGoods = new System.Windows.Forms.Button();
-            this.buttonUpdate = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.labelUpdate = new System.Windows.Forms.Label();
             this.buttonUpload = new System.Windows.Forms.Button();
             this.buttonExel = new System.Windows.Forms.Button();
-            this.удалениеВесовыхШтрихкодовToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.buttonEgais = new System.Windows.Forms.Button();
+            this.openFileXMl = new System.Windows.Forms.OpenFileDialog();
             this.menuStrip2.SuspendLayout();
+            this.tabControl1.SuspendLayout();
+            this.tabPage1.SuspendLayout();
+            this.tabPage2.SuspendLayout();
+            this.tabPage3.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -60,7 +70,8 @@
             this.menuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.настройкиToolStripMenuItem,
             this.справочникиToolStripMenuItem,
-            this.исправлениеToolStripMenuItem});
+            this.исправлениеToolStripMenuItem,
+            this.проверкаToolStripMenuItem});
             this.menuStrip2.Location = new System.Drawing.Point(0, 0);
             this.menuStrip2.Name = "menuStrip2";
             this.menuStrip2.Size = new System.Drawing.Size(555, 24);
@@ -121,9 +132,23 @@
             this.нечисловыеКодыToolStripMenuItem.Text = "Нечисловые коды";
             this.нечисловыеКодыToolStripMenuItem.Click += new System.EventHandler(this.нечисловыеКодыToolStripMenuItem_Click);
             // 
+            // удалениеВесовыхШтрихкодовToolStripMenuItem
+            // 
+            this.удалениеВесовыхШтрихкодовToolStripMenuItem.Name = "удалениеВесовыхШтрихкодовToolStripMenuItem";
+            this.удалениеВесовыхШтрихкодовToolStripMenuItem.Size = new System.Drawing.Size(244, 22);
+            this.удалениеВесовыхШтрихкодовToolStripMenuItem.Text = "Удаление весовых штрихкодов";
+            this.удалениеВесовыхШтрихкодовToolStripMenuItem.Click += new System.EventHandler(this.удалениеВесовыхШтрихкодовToolStripMenuItem_Click);
+            // 
+            // проверкаToolStripMenuItem
+            // 
+            this.проверкаToolStripMenuItem.Name = "проверкаToolStripMenuItem";
+            this.проверкаToolStripMenuItem.Size = new System.Drawing.Size(73, 20);
+            this.проверкаToolStripMenuItem.Text = "Проверка";
+            this.проверкаToolStripMenuItem.Click += new System.EventHandler(this.проверкаToolStripMenuItem_Click);
+            // 
             // buttonGoods
             // 
-            this.buttonGoods.Location = new System.Drawing.Point(92, 62);
+            this.buttonGoods.Location = new System.Drawing.Point(214, 67);
             this.buttonGoods.Name = "buttonGoods";
             this.buttonGoods.Size = new System.Drawing.Size(94, 45);
             this.buttonGoods.TabIndex = 2;
@@ -131,30 +156,20 @@
             this.buttonGoods.UseVisualStyleBackColor = true;
             this.buttonGoods.Click += new System.EventHandler(this.buttonGoods_Click);
             // 
-            // buttonUpdate
-            // 
-            this.buttonUpdate.Location = new System.Drawing.Point(327, 73);
-            this.buttonUpdate.Name = "buttonUpdate";
-            this.buttonUpdate.Size = new System.Drawing.Size(75, 23);
-            this.buttonUpdate.TabIndex = 3;
-            this.buttonUpdate.Text = "Проверка базы";
-            this.buttonUpdate.UseVisualStyleBackColor = true;
-            this.buttonUpdate.Click += new System.EventHandler(this.buttonUpdate_Click);
-            // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(81, 174);
+            this.button1.Location = new System.Drawing.Point(198, 128);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(125, 46);
             this.button1.TabIndex = 4;
-            this.button1.Text = "Загрузить Цены и Остатки";
+            this.button1.Text = "Обновить цены и остатки";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // labelUpdate
             // 
             this.labelUpdate.AutoSize = true;
-            this.labelUpdate.Location = new System.Drawing.Point(89, 250);
+            this.labelUpdate.Location = new System.Drawing.Point(228, 206);
             this.labelUpdate.Name = "labelUpdate";
             this.labelUpdate.Size = new System.Drawing.Size(64, 13);
             this.labelUpdate.TabIndex = 5;
@@ -163,7 +178,7 @@
             // 
             // buttonUpload
             // 
-            this.buttonUpload.Location = new System.Drawing.Point(468, 82);
+            this.buttonUpload.Location = new System.Drawing.Point(185, 45);
             this.buttonUpload.Name = "buttonUpload";
             this.buttonUpload.Size = new System.Drawing.Size(75, 46);
             this.buttonUpload.TabIndex = 6;
@@ -173,32 +188,83 @@
             // 
             // buttonExel
             // 
-            this.buttonExel.Location = new System.Drawing.Point(327, 197);
+            this.buttonExel.Location = new System.Drawing.Point(185, 129);
             this.buttonExel.Name = "buttonExel";
-            this.buttonExel.Size = new System.Drawing.Size(75, 23);
+            this.buttonExel.Size = new System.Drawing.Size(96, 46);
             this.buttonExel.TabIndex = 7;
             this.buttonExel.Text = "Выгрузка exel";
             this.buttonExel.UseVisualStyleBackColor = true;
             this.buttonExel.Click += new System.EventHandler(this.buttonExel_Click);
             // 
-            // удалениеВесовыхШтрихкодовToolStripMenuItem
+            // tabControl1
             // 
-            this.удалениеВесовыхШтрихкодовToolStripMenuItem.Name = "удалениеВесовыхШтрихкодовToolStripMenuItem";
-            this.удалениеВесовыхШтрихкодовToolStripMenuItem.Size = new System.Drawing.Size(244, 22);
-            this.удалениеВесовыхШтрихкодовToolStripMenuItem.Text = "Удаление весовых штрихкодов";
-            this.удалениеВесовыхШтрихкодовToolStripMenuItem.Click += new System.EventHandler(this.удалениеВесовыхШтрихкодовToolStripMenuItem_Click);
+            this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Controls.Add(this.tabPage3);
+            this.tabControl1.Location = new System.Drawing.Point(6, 42);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(549, 297);
+            this.tabControl1.TabIndex = 8;
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.Controls.Add(this.button1);
+            this.tabPage1.Controls.Add(this.labelUpdate);
+            this.tabPage1.Controls.Add(this.buttonGoods);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(541, 271);
+            this.tabPage1.TabIndex = 0;
+            this.tabPage1.Text = "Начало";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Controls.Add(this.buttonEgais);
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(541, 271);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "Егаис";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // tabPage3
+            // 
+            this.tabPage3.Controls.Add(this.buttonUpload);
+            this.tabPage3.Controls.Add(this.buttonExel);
+            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Size = new System.Drawing.Size(541, 271);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "Выгрузка";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // buttonEgais
+            // 
+            this.buttonEgais.Location = new System.Drawing.Point(28, 39);
+            this.buttonEgais.Name = "buttonEgais";
+            this.buttonEgais.Size = new System.Drawing.Size(111, 40);
+            this.buttonEgais.TabIndex = 0;
+            this.buttonEgais.Text = "Загрузить Файл";
+            this.buttonEgais.UseVisualStyleBackColor = true;
+            this.buttonEgais.Click += new System.EventHandler(this.buttonEgais_Click);
+            // 
+            // openFileXMl
+            // 
+            this.openFileXMl.Filter = "XML файл|*.xml";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(555, 340);
-            this.Controls.Add(this.buttonExel);
-            this.Controls.Add(this.buttonUpload);
-            this.Controls.Add(this.labelUpdate);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.buttonUpdate);
-            this.Controls.Add(this.buttonGoods);
+            this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.menuStrip2);
             this.MainMenuStrip = this.menuStrip1;
@@ -207,6 +273,11 @@
             this.Text = "Form1";
             this.menuStrip2.ResumeLayout(false);
             this.menuStrip2.PerformLayout();
+            this.tabControl1.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
+            this.tabPage1.PerformLayout();
+            this.tabPage2.ResumeLayout(false);
+            this.tabPage3.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -218,7 +289,6 @@
         private System.Windows.Forms.MenuStrip menuStrip2;
         private System.Windows.Forms.ToolStripMenuItem настройкиToolStripMenuItem;
         private System.Windows.Forms.Button buttonGoods;
-        private System.Windows.Forms.Button buttonUpdate;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label labelUpdate;
         private System.Windows.Forms.ToolStripMenuItem справочникиToolStripMenuItem;
@@ -230,6 +300,13 @@
         private System.Windows.Forms.ToolStripMenuItem исправлениеToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem нечисловыеКодыToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem удалениеВесовыхШтрихкодовToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem проверкаToolStripMenuItem;
+        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.Button buttonEgais;
+        private System.Windows.Forms.OpenFileDialog openFileXMl;
     }
 }
 
