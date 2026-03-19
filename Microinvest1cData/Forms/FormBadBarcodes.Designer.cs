@@ -31,12 +31,13 @@
             this.components = new System.ComponentModel.Container();
             this.dataGridViewBarocdes = new System.Windows.Forms.DataGridView();
             this.ColBarcodes = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.разпознатьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.buttonDelete = new System.Windows.Forms.Button();
             this.buttonOutRКоде = new System.Windows.Forms.Button();
             this.buttonUpdate = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.разпознатьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.buttonSned = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewBarocdes)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -62,6 +63,20 @@
             // 
             this.ColBarcodes.HeaderText = "Штрихкоды";
             this.ColBarcodes.Name = "ColBarcodes";
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.разпознатьToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(136, 26);
+            // 
+            // разпознатьToolStripMenuItem
+            // 
+            this.разпознатьToolStripMenuItem.Name = "разпознатьToolStripMenuItem";
+            this.разпознатьToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
+            this.разпознатьToolStripMenuItem.Text = "Разпознать";
+            this.разпознатьToolStripMenuItem.Click += new System.EventHandler(this.разпознатьToolStripMenuItem_Click);
             // 
             // buttonDelete
             // 
@@ -107,25 +122,24 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // contextMenuStrip1
+            // buttonSned
             // 
-            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.разпознатьToolStripMenuItem});
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(136, 26);
-            // 
-            // разпознатьToolStripMenuItem
-            // 
-            this.разпознатьToolStripMenuItem.Name = "разпознатьToolStripMenuItem";
-            this.разпознатьToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.разпознатьToolStripMenuItem.Text = "Разпознать";
-            this.разпознатьToolStripMenuItem.Click += new System.EventHandler(this.разпознатьToolStripMenuItem_Click);
+            this.buttonSned.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonSned.Location = new System.Drawing.Point(353, 183);
+            this.buttonSned.Name = "buttonSned";
+            this.buttonSned.Size = new System.Drawing.Size(75, 69);
+            this.buttonSned.TabIndex = 5;
+            this.buttonSned.Text = "Обработать 3";
+            this.buttonSned.UseVisualStyleBackColor = true;
+            this.buttonSned.Click += new System.EventHandler(this.buttonSned_Click);
             // 
             // FormBadBarcodes
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(440, 264);
+            this.Controls.Add(this.buttonSned);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.buttonUpdate);
             this.Controls.Add(this.buttonOutRКоде);
@@ -151,5 +165,6 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem разпознатьToolStripMenuItem;
+        private System.Windows.Forms.Button buttonSned;
     }
 }

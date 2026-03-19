@@ -97,5 +97,19 @@ namespace Microinvest1cData.Forms
         {
             buttonUpdate_Click(sender, e);
         }
+
+        private void buttonSned_Click(object sender, EventArgs e)
+        {
+            foreach (Barcodes3 bar in barcodes3s)
+            {
+                if (bar.Barcode.Length == 14 && bar.Barcode[bar.Barcode.Length-1]==',')
+                {
+                    var uuid = controller.GoodsUUid(bar.MID);
+                    controller.SetBarcode(bar.MID, bar.Barcode, 0, uuid);
+                    controller.DeleteBarcodes(bar.ID);
+                }
+            }
+            UpdateBarcodes();
+        }
     }
 }
