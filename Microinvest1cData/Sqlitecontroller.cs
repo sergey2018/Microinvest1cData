@@ -414,8 +414,28 @@ namespace Microinvest1cData
             Close();
 
         }
+        public void SetLinks(String guuid,String puuid)
+        {
+            Open();
+            var command = new SQLiteCommand
+            {
+                CommandText = "Insert INTO LinkGoodsProduct(puuid,guuid) VALUES(@puuid, @guuid)"
+            };
+            command.Parameters.AddWithValue("@puuid", puuid);
+            command.Parameters.AddWithValue("@guuid", guuid);
+            SqlNotQuery(command);
+            Close();
+        }
+        public List<Product> GetProduct()
+        {
+            Open();
+            var command = new SQLiteCommand
+            {
 
-
+            };
+            Close();
+            return null;
+        }
         public List<ExelNSI>GetExelNSIs(String Groups)
         {
             var list = new List<ExelNSI>();

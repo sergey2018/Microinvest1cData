@@ -96,6 +96,67 @@ namespace Microinvest1cData.MSSQL
             server.Disconnect();
            
         }
+        public void GetGoods(String alko,String uuid)
+        {
+          
+            server.Connect();
+            var command = new SqlCommand
+            {
+                CommandText = "Select * from Goods where catalog2=@catalog and deleted=0 and id>1 and Barcode1<>''"
+            };
+            command.Parameters.AddWithValue("@catalog", alko);
+            using (var reader = server.DataReader(command))
+            {
+                if (!reader.HasRows)
+                {
+                    return;
+                }
+
+                while (reader.Read())
+                {
+                    var goods = new Goods();
+                    goods.MID = int.Parse(reader["ID"].ToString());
+                    goods.Name = reader["name"].ToString();
+                    goods.Name2 = reader["name2"].ToString();
+                    goods.Measure = reader["Measure1"].ToString();
+                    goods.Catalog = reader["Catalog1"].ToString();
+                    goods.Type = int.Parse(reader["type"].ToString());
+                    goods.Groupid = int.Parse(reader["Groupid"].ToString());
+                    goods.Code = reader["code"].ToString();
+                    goods.UUid = Guid.NewGuid().ToString();
+                    var catalog3 = reader["Catalog3"].ToString();
+                    if (catalog3.IndexOf(" 2 ") == -1)
+                    {
+                        goods.Mark = 0;
+                    }
+                    else
+                    {
+                        goods.Mark = 1;
+                    }
+                    sqlitecontroller.SetGoods(goods);
+                    var barcode1 = reader["BarCode1"].ToString();
+                    if (barcode1.Trim() != "")
+                    {
+                        sqlitecontroller.SetBarcode(goods.MID, barcode1, 0, goods.UUid);
+                    }
+                    var barcode2 = reader["BarCode2"].ToString();
+                    if (barcode2.Trim() != "")
+                    {
+                        sqlitecontroller.SetBarcode(goods.MID, barcode2, 0, goods.UUid);
+                    }
+                    var barcode3 = reader["BarCode3"].ToString();
+                    if (barcode3.Trim() != "")
+                    {
+                        sqlitecontroller.SetBarcode3(goods.MID, barcode3, 0);
+                    }
+                    sqlitecontroller.SetLinks(goods.UUid, uuid);
+                   
+                }
+            }
+            UpdateFlag = false;
+            server.Disconnect();
+
+        }
         public void SetPartners()
         {
             server.Connect();
