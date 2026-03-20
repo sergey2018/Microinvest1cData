@@ -367,6 +367,39 @@ namespace Microinvest1cData
             Close();
             return list;
         }
+        public List<Goods> GetGoodsAlko()
+        {
+            var list = new List<Goods>();
+            Open();
+            var command = new SQLiteCommand
+            {
+                CommandText = "Select * from Goods where uuid in (Select guuid from LinkGoodsProduct)"
+            };
+            using (var reader = DataReader(command))
+            {
+                while (reader.Read())
+                {
+                    var good = new Goods
+                    {
+                        ID = int.Parse(reader["ID"].ToString()),
+                        MID = int.Parse(reader["MID"].ToString()),
+                        Mark = int.Parse(reader["mark"].ToString()),
+                        Groupid = int.Parse(reader["Groupid"].ToString()),
+                        Type = int.Parse(reader["type"].ToString()),
+                        Name = reader["name"].ToString(),
+                        Name2 = reader["name2"].ToString(),
+                        Code = reader["code"].ToString(),
+                        Catalog = reader["catalog"].ToString(),
+                        UUid = reader["uuid"].ToString(),
+                        Measure = reader["Measure"].ToString()
+                    };
+                    list.Add(good);
+                }
+            }
+
+            Close();
+            return list;
+        }
         public List<Goods> GetDoubleCode()
         {
             var list = new List<Goods>();
@@ -431,10 +464,31 @@ namespace Microinvest1cData
             Open();
             var command = new SQLiteCommand
             {
-
+                CommandText = "Select * from Product"
             };
+            var list = new List<Product>();
+            using(var reader = DataReader(command))
+            {
+                while (reader.Read())
+                {
+                    var product = new Product
+                    {
+                        ID = int.Parse(reader["ID"].ToString()),
+                        UUID = reader["UUID"].ToString(),
+                        Name = reader["Name"].ToString(),
+                        AlcCode = reader["AlcoCode"].ToString(),
+                        Capacity = double.Parse(reader["Capacity"].ToString()),
+                        UnitType= reader["UntiType"].ToString(),
+                        AlcVolume = double.Parse(reader["AlcVolume"].ToString()),
+                        ProductVCode = int.Parse(reader["ProductVCode"].ToString()),
+                        ClientRegid = reader["ClientRegIdP"].ToString()
+
+                    };
+                    list.Add(product);
+                }
+            }
             Close();
-            return null;
+            return list;
         }
         public List<ExelNSI>GetExelNSIs(String Groups)
         {

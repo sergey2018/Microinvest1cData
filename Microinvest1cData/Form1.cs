@@ -1,4 +1,5 @@
 ﻿using Microinvest1cData.Data;
+using Microinvest1cData.Egais;
 using Microinvest1cData.Forms;
 using Microinvest1cData.MSSQL;
 using System;
@@ -109,8 +110,20 @@ namespace Microinvest1cData
         private void LoadStore()
         {
             controller.DeleteOldDate();
+
             controller.GetPrice();
             controller.SetStore();
+            var list = controller.GetSqlitecontroller().GetGoodsAlko();
+            for (int i = 0; i < list.Count; i++)
+            {
+                controller.GetPrice(list[i].MID);
+                controller.SetStore(list[i].MID);
+                this.Invoke((MethodInvoker)delegate
+                {
+                    labelUpdate.Text = "Загружено " + i + " данных из " + list.Count;
+                });
+            }
+
             this.Invoke((MethodInvoker)delegate
             {
                 MessageBox.Show("Загрузка завершена");
@@ -208,6 +221,15 @@ namespace Microinvest1cData
                 ReadXML.ReadXMLFile(openFileXMl.FileName);
                 MessageBox.Show("Загрузка завешина");
 
+            }
+        }
+
+        private void buttonLinksButton_Click(object sender, EventArgs e)
+        {
+            var list = controller.GetSqlitecontroller().GetProduct();
+            foreach(Product p in list)
+            {
+                controller.GetGoods(p.AlcCode, p.UUID);
             }
         }
     }

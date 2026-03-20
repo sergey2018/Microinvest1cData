@@ -47,9 +47,10 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
             this.buttonEgais = new System.Windows.Forms.Button();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
             this.openFileXMl = new System.Windows.Forms.OpenFileDialog();
+            this.buttonLinksButton = new System.Windows.Forms.Button();
             this.menuStrip2.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -225,6 +226,7 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.buttonLinksButton);
             this.tabPage2.Controls.Add(this.buttonEgais);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
@@ -233,6 +235,16 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Егаис";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // buttonEgais
+            // 
+            this.buttonEgais.Location = new System.Drawing.Point(162, 69);
+            this.buttonEgais.Name = "buttonEgais";
+            this.buttonEgais.Size = new System.Drawing.Size(111, 40);
+            this.buttonEgais.TabIndex = 0;
+            this.buttonEgais.Text = "Загрузить Файл";
+            this.buttonEgais.UseVisualStyleBackColor = true;
+            this.buttonEgais.Click += new System.EventHandler(this.buttonEgais_Click);
             // 
             // tabPage3
             // 
@@ -245,19 +257,19 @@
             this.tabPage3.Text = "Выгрузка";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
-            // buttonEgais
-            // 
-            this.buttonEgais.Location = new System.Drawing.Point(28, 39);
-            this.buttonEgais.Name = "buttonEgais";
-            this.buttonEgais.Size = new System.Drawing.Size(111, 40);
-            this.buttonEgais.TabIndex = 0;
-            this.buttonEgais.Text = "Загрузить Файл";
-            this.buttonEgais.UseVisualStyleBackColor = true;
-            this.buttonEgais.Click += new System.EventHandler(this.buttonEgais_Click);
-            // 
             // openFileXMl
             // 
             this.openFileXMl.Filter = "XML файл|*.xml";
+            // 
+            // buttonLinksButton
+            // 
+            this.buttonLinksButton.Location = new System.Drawing.Point(143, 115);
+            this.buttonLinksButton.Name = "buttonLinksButton";
+            this.buttonLinksButton.Size = new System.Drawing.Size(149, 58);
+            this.buttonLinksButton.TabIndex = 1;
+            this.buttonLinksButton.Text = "Выполнить первоначальное сопоставление";
+            this.buttonLinksButton.UseVisualStyleBackColor = true;
+            this.buttonLinksButton.Click += new System.EventHandler(this.buttonLinksButton_Click);
             // 
             // Form1
             // 
@@ -307,6 +319,7 @@
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.Button buttonEgais;
         private System.Windows.Forms.OpenFileDialog openFileXMl;
+        private System.Windows.Forms.Button buttonLinksButton;
     }
 }
 

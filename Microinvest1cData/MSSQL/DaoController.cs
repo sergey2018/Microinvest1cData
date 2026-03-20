@@ -150,7 +150,8 @@ namespace Microinvest1cData.MSSQL
                         sqlitecontroller.SetBarcode3(goods.MID, barcode3, 0);
                     }
                     sqlitecontroller.SetLinks(goods.UUid, uuid);
-                   
+                    GetPrice(goods.MID);
+                    SetStore(goods.MID);
                 }
             }
             UpdateFlag = false;
@@ -218,7 +219,40 @@ namespace Microinvest1cData.MSSQL
             server.Disconnect();
 
         }
+        public void GetPrice(int id)
+        {
+            server.Connect();
+            var command = new SqlCommand
+            {
+                CommandText = "Select * from Goods where id=@id"
+            };
+            command.Parameters.AddWithValue("@id", id);
+            using (var reader = server.DataReader(command))
+            {
 
+                while (reader.Read())
+                {
+
+                    var price = new Price();
+                    price.Type = 0;
+                    price.MId = int.Parse(reader["ID"].ToString());
+                    price.Total = double.Parse(reader["PriceIn"].ToString());
+                    sqlitecontroller.setPrice(price);
+                    for (int i = 1; i < 11; i++)
+                    {
+                        var price1 = new Price();
+                        price1.Type = i;
+                        price1.MId = int.Parse(reader["ID"].ToString());
+                        price1.Total = double.Parse(reader["PriceOut" + i].ToString());
+                        sqlitecontroller.setPrice(price1);
+                    }
+
+                }
+            }
+            UpdateFlag = false;
+            server.Disconnect();
+
+        }
         public void GetFirsGrups()
         {
             
@@ -288,6 +322,30 @@ namespace Microinvest1cData.MSSQL
                     Count = Count + 1;
                 }
                 
+            }
+            UpdateFlag = false;
+            server.Disconnect();
+        }
+        public void SetStore( int id)
+        {
+            Count = 0;
+            server.Connect();
+            var command = new SqlCommand { CommandText = "Select * From Store where goodid=@id" };
+            command.Parameters.AddWithValue("@id", id);
+            using (var reader = server.DataReader(command))
+            {
+                while (reader.Read())
+                {
+                    var store = new Store
+                    {
+                        mId = int.Parse(reader["goodid"].ToString()),
+                        mObjId = int.Parse(reader["Objectid"].ToString()),
+                        Qtty = Double.Parse(reader["qtty"].ToString())
+                    };
+                    sqlitecontroller.SetStore(store);
+                    Count = Count + 1;
+                }
+
             }
             UpdateFlag = false;
             server.Disconnect();
