@@ -111,9 +111,9 @@ namespace Microinvest1cData
         {
             controller.DeleteOldDate();
 
-            controller.GetPrice();
-            controller.SetStore();
-            var list = controller.GetSqlitecontroller().GetGoodsAlko();
+            /*controller.GetPrice();
+            controller.SetStore();*/
+            var list = controller.GetSqlitecontroller().GetGoods();
             for (int i = 0; i < list.Count; i++)
             {
                 controller.GetPrice(list[i].MID);
