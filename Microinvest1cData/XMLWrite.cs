@@ -1,4 +1,5 @@
 ﻿using Microinvest1cData.Data;
+using Microinvest1cData.Egais;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -42,10 +43,33 @@ namespace Microinvest1cData
                 egroup.Add(eUUid, name, eParent,code);
                 element.Add(egroup);
                 cod++;
-            }
-              
+            }  
             return element;
 
+        }
+        private XElement GetALkoProduct()
+        {
+            return null;
+        }
+        private XElement GetAlkoProducer()
+        {
+
+            var list = controller.GetProduct();
+            var element = new XElement("НоменклатураЕгаис");
+            foreach(Product p in list)
+            {
+                var product = new XElement("ТоварЕгаис");
+                var name = new XElement("Наименование", p.Name);
+                var code = new XElement("КодЕгаис", p.AlcCode);
+                var uuid = new XElement("ССылка", p.UUID);
+                var capasity = new XElement("Емкость", p.Capacity);
+                var alkVolemu = new XElement("Спирт", p.AlcVolume);
+                var ProductVCode = new XElement("КодПродукции", p.ProductVCode);
+                var Client = new XElement("Производитель", controller.GetUUidProducer(p.ClientRegid));
+                product.Add(uuid, name, code, capasity, alkVolemu, ProductVCode, Client);
+                element.Add(product);
+            }
+            return element;
         }
         private XElement GetGoods()
         {

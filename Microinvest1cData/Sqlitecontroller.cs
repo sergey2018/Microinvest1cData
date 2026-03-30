@@ -569,7 +569,23 @@ namespace Microinvest1cData
             Close();
             return list;
         }
-
+        public String GetUUidProducer(String clientregid)
+        {
+            Open();
+            var uuid = "";
+            var command = new SQLiteCommand
+            {
+                CommandText = "select uuid from Producer where ClientRegID=@client"
+            };
+            command.Parameters.AddWithValue("@client", clientregid);
+            using(var reader = DataReader(command))
+            {
+                reader.Read();
+                uuid = reader["uuid"].ToString();
+            }
+            Close();
+            return uuid;
+        }
         public void Delete()
         {
             Open();
