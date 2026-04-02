@@ -400,6 +400,36 @@ namespace Microinvest1cData
             Close();
             return list;
         }
+        public List<Producer> GetProducers()
+        {
+            var list = new List<Producer>();
+            Open();
+            var command = new SQLiteCommand
+            {
+                CommandText="Select * from Producer"
+            };
+            using(var reader = DataReader(command))
+            {
+                while (reader.Read())
+                {
+                    var producer = new Producer
+                    {
+                        ID = int.Parse(reader["ID"].ToString()),
+                        FullName = reader["FullName"].ToString(),
+                        ShortName = reader["ShortName"].ToString(),
+                        Inn = reader["INN"].ToString(),
+                        Kpp = reader["KPP"].ToString(),
+                        ClientRegid = reader["ClientRegID"].ToString(),
+                        Description = reader["Address"].ToString(),
+                        Country = reader["Coutry"].ToString(),
+                        UUID = reader["uuid"].ToString()
+                    };
+                }
+            }
+            Close();
+            return list;
+        }
+
         public List<Goods> GetDoubleCode()
         {
             var list = new List<Goods>();

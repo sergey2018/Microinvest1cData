@@ -8,6 +8,7 @@ namespace Microinvest1cData.Egais
 {
    public class Producer //Производители алкоголя
     {
+        private int Id;
         private String clientRegid; // fsrar
         private String fullName; // Полное имя
         private String shortName; //краткое имя
@@ -26,5 +27,6 @@ namespace Microinvest1cData.Egais
         public string Country { get => country; set => country = value; }
         public string Region { get => region; set => region = value; }
         public string Description { get => description; set => description = value; }
+        public int ID { get => Id; set => Id = value; }
     }
 }

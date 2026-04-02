@@ -21,6 +21,8 @@ namespace Microinvest1cData
         {
             var document = new XDocument();
             var root = new XElement("Документ");
+            root.Add(GetAlkoProducer());
+            root.Add(GetALkoProduct());
             root.Add(GetGroups());
             root.Add(GetGoods());
             root.Add(GetBarcode());
@@ -49,6 +51,15 @@ namespace Microinvest1cData
         }
         private XElement GetALkoProduct()
         {
+            var list = controller.GetProducers();
+            var element = new XElement("КонтрагентыЕгаис");
+            foreach(Producer pr in list)
+            {
+                var kont = new XElement("КонтрагентЕ");
+                kont.Add(new XElement("ПолноеНаименование", pr.FullName),new XElement("КраткоеНаименование",pr.ShortName),new XElement("ИНН",pr.Inn),
+                    new XElement("КПП",pr.Kpp),new XElement("ССылка",pr.UUID), new XElement("Адрес",pr.Description),new XElement("Страна",pr.Country));
+                element.Add(kont);
+            }
             return null;
         }
         private XElement GetAlkoProducer()

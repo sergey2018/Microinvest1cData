@@ -150,8 +150,7 @@ namespace Microinvest1cData.MSSQL
                         sqlitecontroller.SetBarcode3(goods.MID, barcode3, 0);
                     }
                     sqlitecontroller.SetLinks(goods.UUid, uuid);
-                    GetPrice(goods.MID);
-                    SetStore(goods.MID);
+
                 }
             }
             UpdateFlag = false;

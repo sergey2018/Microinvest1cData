@@ -111,9 +111,9 @@ namespace Microinvest1cData
         {
             controller.DeleteOldDate();
 
-            /*controller.GetPrice();
-            controller.SetStore();*/
-            var list = controller.GetSqlitecontroller().GetGoods();
+            controller.GetPrice();
+            controller.SetStore();
+            var list = controller.GetSqlitecontroller().GetGoodsAlko();
             for (int i = 0; i < list.Count; i++)
             {
                 controller.GetPrice(list[i].MID);
@@ -227,10 +227,18 @@ namespace Microinvest1cData
         private void buttonLinksButton_Click(object sender, EventArgs e)
         {
             var list = controller.GetSqlitecontroller().GetProduct();
-            foreach(Product p in list)
+            foreach (Product p in list)
             {
                 controller.GetGoods(p.AlcCode, p.UUID);
             }
+            var list1 = controller.GetSqlitecontroller().GetGoodsAlko();
+            for (int i = 0; i < list.Count; i++)
+            {
+                controller.GetPrice(list1[i].MID);
+                controller.SetStore(list1[i].MID);
+            }
+            MessageBox.Show("Закочено");
+
         }
     }
 }
