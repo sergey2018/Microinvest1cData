@@ -114,14 +114,16 @@ namespace Microinvest1cData
             controller.GetPrice();
             controller.SetStore();
             var list = controller.GetSqlitecontroller().GetGoodsAlko();
-            for (int i = 0; i < list.Count; i++)
+            var i = 0;
+           foreach(Goods g in list)
             {
-                controller.GetPrice(list[i].MID);
-                controller.SetStore(list[i].MID);
+                controller.GetPrice(g.MID);
+                controller.SetStore(g.MID);
                 this.Invoke((MethodInvoker)delegate
                 {
                     labelUpdate.Text = "Загружено " + i + " данных из " + list.Count;
                 });
+                i++;
             }
 
             this.Invoke((MethodInvoker)delegate
@@ -232,10 +234,9 @@ namespace Microinvest1cData
                 controller.GetGoods(p.AlcCode, p.UUID);
             }
             var list1 = controller.GetSqlitecontroller().GetGoodsAlko();
-            for (int i = 0; i < list.Count; i++)
-            {
-                controller.GetPrice(list1[i].MID);
-                controller.SetStore(list1[i].MID);
+          foreach(Goods g in list1) { 
+                controller.GetPrice(g.MID);
+                controller.SetStore(g.MID);
             }
             MessageBox.Show("Закочено");
 

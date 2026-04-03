@@ -23,6 +23,7 @@ namespace Microinvest1cData
             var root = new XElement("Документ");
             root.Add(GetAlkoProducer());
             root.Add(GetALkoProduct());
+            root.Add(GETLinkEgais());
             root.Add(GetGroups());
             root.Add(GetGoods());
             root.Add(GetBarcode());
@@ -60,8 +61,21 @@ namespace Microinvest1cData
                     new XElement("КПП",pr.Kpp),new XElement("ССылка",pr.UUID), new XElement("Адрес",pr.Description),new XElement("Страна",pr.Country));
                 element.Add(kont);
             }
-            return null;
+            return element;
         }
+        private XElement GETLinkEgais()
+        {
+            var list = controller.GetEgais();
+            var element = new XElement("СвязьЕгаис");
+            foreach (LinkEgais egais in list)
+            {
+                var eg = new XElement("ЕгаисС");
+                eg.Add(new XElement("ССылкаЕгаис", egais.PUUD), new XElement("ССылкаНоменклатура",egais.GUUID));
+                element.Add(eg);
+            }
+            return element;
+        }
+
         private XElement GetAlkoProducer()
         {
 

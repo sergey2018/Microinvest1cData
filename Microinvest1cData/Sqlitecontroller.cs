@@ -424,12 +424,35 @@ namespace Microinvest1cData
                         Country = reader["Coutry"].ToString(),
                         UUID = reader["uuid"].ToString()
                     };
+                    list.Add(producer);
                 }
             }
             Close();
             return list;
         }
-
+        public List<LinkEgais> GetEgais()
+        {
+            var list = new List<LinkEgais>();
+            Open();
+            var command = new SQLiteCommand
+            {
+                CommandText= "Select * from LinkGoodsProduct"
+            };
+            using(var reader = DataReader(command))
+            {
+                while (reader.Read())
+                {
+                    var LinkEgais = new LinkEgais
+                    {
+                        GUUID = reader["guuid"].ToString(),
+                       PUUD = reader["puuid"].ToString()
+                    };
+                    list.Add(LinkEgais);
+                }
+            }
+            Close();
+            return list;
+        }
         public List<Goods> GetDoubleCode()
         {
             var list = new List<Goods>();
