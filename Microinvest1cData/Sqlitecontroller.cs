@@ -767,6 +767,35 @@ namespace Microinvest1cData
             SqlNotQuery(command);
             Close();
         }
+        public String GEtProudceruuid(String ClientRegid)
+        {
+            Open();
+
+            var uuid = "";
+            var command = new SQLiteCommand
+            {
+                CommandText = "Select uuid from Producer where ClientRegID=@client"
+            };
+            command.Parameters.AddWithValue("@client", ClientRegid);
+            using(var reader = DataReader(command))
+            {
+                if (!reader.HasRows)
+                {
+                    Close();
+                    return uuid;
+                }
+                while (reader.Read())
+                {
+                    uuid = reader["uuid"].ToString();
+                }
+
+
+            }
+            Close();
+            return uuid;
+        }
+
+
         public void SetFormAB(FormAB formAB)
         {
             Open();

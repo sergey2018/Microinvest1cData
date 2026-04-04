@@ -35,7 +35,7 @@ namespace Microinvest1cData
         {
             var element = new XElement("Группы");
             var list = controller.GetGroups();
-            var cod = controller.GetMaxCode() + 1; 
+            var cod = controller.GetMaxCode() + 2; 
             foreach(Groups g in list)
             {
                 var egroup = new XElement("Группа");
@@ -58,7 +58,7 @@ namespace Microinvest1cData
             {
                 var kont = new XElement("КонтрагентЕ");
                 kont.Add(new XElement("ПолноеНаименование", pr.FullName),new XElement("КраткоеНаименование",pr.ShortName),new XElement("ИНН",pr.Inn),
-                    new XElement("КПП",pr.Kpp),new XElement("ССылка",pr.UUID), new XElement("Адрес",pr.Description),new XElement("Страна",pr.Country));
+                    new XElement("КПП",pr.Kpp),new XElement("ССылка",pr.UUID), new XElement("Адрес",pr.Description),new XElement("Страна",pr.Country),new XElement("КодЕгаис",pr.ClientRegid));
                 element.Add(kont);
             }
             return element;
@@ -89,9 +89,10 @@ namespace Microinvest1cData
                 var uuid = new XElement("ССылка", p.UUID);
                 var capasity = new XElement("Емкость", p.Capacity);
                 var alkVolemu = new XElement("Спирт", p.AlcVolume);
+                var unittype = new XElement("Фасовка", p.UnitType);
                 var ProductVCode = new XElement("КодПродукции", p.ProductVCode);
                 var Client = new XElement("Производитель", controller.GetUUidProducer(p.ClientRegid));
-                product.Add(uuid, name, code, capasity, alkVolemu, ProductVCode, Client);
+                product.Add(uuid, name, code, capasity, alkVolemu, ProductVCode, Client, unittype);
                 element.Add(product);
             }
             return element;

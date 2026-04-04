@@ -48,9 +48,13 @@ namespace Microinvest1cData
                 producer1.Description = producer.Element("Description").Value;
                 producer1.ClientRegid = producer.Element("clientRegid").Value;
                 product.ClientRegid = producer.Element("clientRegid").Value;
-                producer1.UUID = Guid.NewGuid().ToString();
+                if (controller.GEtProudceruuid(producer1.ClientRegid) == "")
+                {
+                    producer1.UUID = Guid.NewGuid().ToString();
+                    controller.SetProducer(producer1);
+                }
                 controller.SetProduct(product);
-                controller.SetProducer(producer1);
+                
                 var formAB = elem.Element("Forms");
                  foreach (XElement formAd in formAB.Elements("Form"))
                  {
