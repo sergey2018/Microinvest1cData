@@ -241,5 +241,12 @@ namespace Microinvest1cData
             MessageBox.Show("Закочено");
 
         }
+
+        private void buttonVig_Click(object sender, EventArgs e)
+        {
+            var list = controller.GetAlcocode();
+            var write = new XMLWrite(controller.GetSqlitecontroller());
+            write.CreateAlkoFile(list);
+        }
     }
 }

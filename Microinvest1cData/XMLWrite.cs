@@ -17,6 +17,18 @@ namespace Microinvest1cData
             controller = cont;
         }
 
+        public void CreateAlkoFile(List<String> vs)
+        {
+            var document = new XDocument();
+            var root = new XElement("Alkocodes");
+            foreach(string str in vs)
+            {
+                root.Add(new XElement("Alkocode", str));
+            }
+            document.Add(root);
+            document.Save("Alkocode.xml");
+        }
+
         public void CreateDocument(String path)
         {
             var document = new XDocument();

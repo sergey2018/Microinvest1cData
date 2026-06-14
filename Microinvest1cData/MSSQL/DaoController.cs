@@ -157,6 +157,27 @@ namespace Microinvest1cData.MSSQL
             server.Disconnect();
 
         }
+        public List<String> GetAlcocode()
+        {
+            server.Connect();
+            var list = new List<String>();
+            var command = new SqlCommand
+            {
+                CommandText = "Select catalog2 from Goods where catalog2<>'' and deleted=0 and id>1 and barcode1<>''"
+            };
+
+            using (var reader = server.DataReader(command))
+            {
+                while (reader.Read())
+                {
+                    var str = reader["catalog2"].ToString();
+                    list.Add(str);
+                }
+            }
+            server.Disconnect();
+            return list;
+
+        }
         public void SetPartners()
         {
             server.Connect();
