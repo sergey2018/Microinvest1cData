@@ -17,7 +17,7 @@ namespace Microinvest1cData.Egais
         public double Capacity { get; set; } = 0;
         public String ClientRegid { get; set; }
         public String UUID { get; set; }
-
+        public String ClientRegidP { get; set; }
 
     }
 }

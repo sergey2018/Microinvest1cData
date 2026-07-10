@@ -14,6 +14,7 @@ namespace Microinvest1cData
     {
         //private String ConnectionString = "";
         private SQLiteConnection sqliteConnection;
+        private SettingsUtm settingsUTM;
         //private bool flag;
         public Sqlitecontroller()
         {
@@ -26,6 +27,10 @@ namespace Microinvest1cData
                 sqliteConnection = new SQLiteConnection("Data Source=microinvest.db;Version=3;");
                 CreateTable();
             }
+        }
+        public SettingsUtm SettingsUtm()
+        {
+            return settingsUTM;
         }
         private void CreateBase()
         {
@@ -164,6 +169,77 @@ namespace Microinvest1cData
             }
             Close();
             return uuid;
+        }
+
+        private int IsAkcocode(String alkocode)
+        {
+            
+            var comand = new SQLiteCommand { CommandText = "Select id as 'alko' from Product where AlcoCode=@alco" };
+            comand.Parameters.AddWithValue("@alco", alkocode);
+            var count = 0;
+            using (var reader = DataReader(comand))
+            {
+                
+                while (reader.Read())
+                {
+                    if (reader["alko"].ToString() != "")
+                    {
+                        count = int.Parse(reader["alko"].ToString());
+                    }
+                    else
+                    {
+                        count = 0;
+                    }
+                }
+            }
+            return count;
+        }
+
+
+        public void UpdateSettings(SettingsUtm utm)
+        {
+            Open();
+            var command = new SQLiteCommand { CommandText = "UPDATE Settings set URL=@url, Port=@port, FSRAR=@fsrar where id=@id" };
+            command.Parameters.AddWithValue("@url", utm.Url);
+            command.Parameters.AddWithValue("@port", utm.Port);
+            command.Parameters.AddWithValue("@fsrar", utm.Fsrar);
+            command.Parameters.AddWithValue("@id", utm.Id);
+            SqlNotQuery(command);
+            Close();
+        }
+
+        public void CreateSettingsUTM()
+        {
+            Open();
+            SqlNotQuery(new SQLiteCommand { CommandText = "INSERT INTO Settings (URL,Port,FSRAR) VALUES('localhost','8080','000000000000')" });
+            Close();
+            
+        }
+
+        public void initSettigs()
+        {
+            if (isSettingsUTM() == 0)
+            {
+                CreateSettingsUTM();
+            }
+            UpdateSettings();
+        }
+
+
+        public void UpdateSettings()
+        {
+            Open();
+            var reader = DataReader(new SQLiteCommand { CommandText = "Select * from Settings" });
+            while (reader.Read())
+            {
+
+                settingsUTM = new SettingsUtm();
+                settingsUTM.Url = reader["URL"].ToString();
+                settingsUTM.Port = reader["Port"].ToString();
+                settingsUTM.Fsrar = reader["FSRAR"].ToString();
+                settingsUTM.Id = int.Parse(reader["id"].ToString());
+            }
+           Close();
         }
         public void SetStore(Store store)
         {
@@ -731,22 +807,101 @@ namespace Microinvest1cData
         public void SetProduct(Product product)
         {
             Open();
-            var command = new SQLiteCommand
+            if (IsAkcocode(product.AlcCode) == 0)
             {
-                CommandText = "INSERT into Product(uuid,name,Capacity,UntiType,AlcoCode,AlcVolume,ProductVCode,ClientRegIdP) VALUES(@uuid,@name,@Capacity,@UntiType," +
-                "@AlcoCode,@AlcVolume," +
-                "@ProductVCode,@ClientRegIdP)"
-            };
-            command.Parameters.AddWithValue("@uuid", product.UUID);
-            command.Parameters.AddWithValue("@name", product.Name);
-            command.Parameters.AddWithValue("@Capacity", product.Capacity);
-            command.Parameters.AddWithValue("@UntiType", product.UnitType);
-            command.Parameters.AddWithValue("@AlcoCode", product.AlcCode);
-            command.Parameters.AddWithValue("@AlcVolume", product.AlcVolume);
-            command.Parameters.AddWithValue("@ProductVCode", product.ProductVCode);
-            command.Parameters.AddWithValue("@ClientRegIdP", product.ClientRegid);
+                var command = new SQLiteCommand
+                {
+                    CommandText = "INSERT into Product(uuid,name,Capacity,UntiType,AlcoCode,AlcVolume,ProductVCode,ClientRegIdP) VALUES(@uuid,@name,@Capacity,@UntiType," +
+                    "@AlcoCode,@AlcVolume," +
+                    "@ProductVCode,@ClientRegIdP)"
+                };
+                command.Parameters.AddWithValue("@uuid", product.UUID);
+                command.Parameters.AddWithValue("@name", product.Name);
+                command.Parameters.AddWithValue("@Capacity", product.Capacity);
+                command.Parameters.AddWithValue("@UntiType", product.UnitType);
+                command.Parameters.AddWithValue("@AlcoCode", product.AlcCode);
+                command.Parameters.AddWithValue("@AlcVolume", product.AlcVolume);
+                command.Parameters.AddWithValue("@ProductVCode", product.ProductVCode);
+                command.Parameters.AddWithValue("@ClientRegIdP", product.ClientRegid);
+                SqlNotQuery(command);
+            }
+            Close();
+        }
+        public List<Product> GetRestShopsQuery()
+        {
+            var list = new List<Product>();
+            Open();
+            var reader = DataReader(new SQLiteCommand { CommandText = "Select * from Product where ClientRegIDP like '0500%' and ClientRegIDI=''" });
+            while (reader.Read())
+            {
+                list.Add(new Product
+                {
+                    Name = reader["name"].ToString(),
+                    AlcCode = reader["AlcoCode"].ToString(),
+                    //Code = int.Parse(reader["Code"].ToString()),
+                    UnitType = reader["UntiType"].ToString(),
+                    AlcVolume = double.Parse(reader["AlcVolume"].ToString()),
+                    ProductVCode = int.Parse(reader["ProductVCode"].ToString()),
+                    Capacity = double.Parse(reader["Capacity"].ToString()),
+                    //ClientRefid = reader["ClientRegIdP"].ToString()
+
+                });
+            }
+           Close();
+            return list;
+        }
+        public void UpdateImporter(String alcokod, String clientImp)
+        {
+            var command = new SQLiteCommand { CommandText = "Update Product set ClientRegIdP=@client where AlcoCode=@alco" };
+            command.Parameters.AddWithValue("@client", clientImp);
+            command.Parameters.AddWithValue("@alco", alcokod);
+            Open();
             SqlNotQuery(command);
             Close();
+        }
+        public void UpdateImporter(Product rest, String clientImp)
+        {
+            var command = new SQLiteCommand
+            {
+                CommandText = "Update Product set name=@name,Capacity=@capas,UntiType=@unti,AlcVolume=@aclVol," +
+                    "ProductVCode=@product,ClientRegIdP=@clientP where AlcoCode=@alco"
+            };
+
+            //command.Parameters.AddWithValue("@code", cont);
+            command.Parameters.AddWithValue("@name", rest.Name);
+            command.Parameters.AddWithValue("@alco", rest.AlcCode);
+            command.Parameters.AddWithValue("@capas", rest.Capacity);
+            command.Parameters.AddWithValue("@unti", rest.UnitType);
+            command.Parameters.AddWithValue("@aclVol", rest.AlcVolume);
+            command.Parameters.AddWithValue("@product", rest.ProductVCode);
+            command.Parameters.AddWithValue("@clientP", clientImp);
+            //command.Parameters.AddWithValue("@clientI", clientImp);
+            Open();
+            SqlNotQuery(command);
+            Close();
+        }
+        public List<Product> GetRestShopsQuery1()
+        {
+            var list = new List<Product>();
+            Open();
+            var reader = DataReader(new SQLiteCommand { CommandText = "Select * from Product" });
+            while (reader.Read())
+            {
+                list.Add(new Product
+                {
+                    Name = reader["name"].ToString(),
+                    AlcCode = reader["AlcoCode"].ToString(),
+                    //Code = int.Parse(reader["Code"].ToString()),
+                    UnitType = reader["UntiType"].ToString(),
+                    AlcVolume = double.Parse(reader["AlcVolume"].ToString()),
+                    ProductVCode = int.Parse(reader["ProductVCode"].ToString()),
+                    Capacity = double.Parse(reader["Capacity"].ToString()),
+                    ClientRegidP = reader["ClientRegIdP"].ToString()
+
+                });
+            }
+            Close();
+            return list;
         }
         public void SetProducer(Producer producer)
         {
@@ -810,6 +965,16 @@ namespace Microinvest1cData
             SqlNotQuery(command);
             Close();
         }
+        public void InsertRefid(String query, String refid)
+        {
+            Open();
+            var command = new SQLiteCommand { CommandText = "INSERT INTO refidTable(TypeQuerty,refid) VALUES(@Param,@refid)" };
+            command.Parameters.AddWithValue("@Param", query);
+            command.Parameters.AddWithValue("@refid", refid);
+            SqlNotQuery(command);
+            Close();
+        }
+
         public int ReportsBigLengCode()
         {
             Open();
@@ -875,7 +1040,21 @@ namespace Microinvest1cData
             SqlNotQuery(command);
             Close();
         }
-
+        public List<String> GetRefid(String parametr)
+        {
+            var list = new List<String>();
+            Open();
+            var readrer = DataReader(new SQLiteCommand { CommandText = "Select refid from refidTable where TypeQuerty='" + parametr + "'" });
+            while (readrer.Read())
+            {
+                if (readrer["refid"].ToString() != "")
+                {
+                    list.Add(readrer["refid"].ToString());
+                }
+            }
+            Close();
+            return list;
+        }
 
         public int CountDoubleCode()
         {
@@ -912,6 +1091,38 @@ namespace Microinvest1cData
             Close();
             return count;
         }
+        public void DeleteRefid(String refid)
+        {
+            Open();
+            var commend = new SQLiteCommand { CommandText = "Delete from refidTable where refid=@ref" };
+            commend.Parameters.AddWithValue("@ref", refid);
+            SqlNotQuery(commend);
+            Close();
+        }
+        public void DeleteRefid()
+        {
+            Open();
+            var commend = new SQLiteCommand { CommandText = "Delete from refidTable" };
+            SqlNotQuery(commend);
+            Close();
+        }
+        public int isSettingsUTM()
+        {
+            Open();
+            var count = 0;
+            var command = new SQLiteCommand { CommandText = "select count(*) as'countt' from Settings" };
+            using (var reader = DataReader(command))
+            {
+
+                reader.Read();
+                count = int.Parse(reader["countt"].ToString());
+            
+            }
+            
+             Close();
+            return count;
+        }
+
         public int CountWeightBarocde()
         {
             Open();
@@ -1008,8 +1219,8 @@ namespace Microinvest1cData
             {
                 CommandText= "CREATE TABLE  IF NOT EXISTS 'LinkGoodsProduct' ('puuid' TEXT, 'guuid' TEXT)"
             });
-
-
+            SqlNotQuery(new SQLiteCommand { CommandText = "CREATE TABLE IF NOT EXISTS 'refidTable' ('id'	INTEGER,'TypeQuerty'	TEXT,'refid'	TEXT,PRIMARY KEY('id' AUTOINCREMENT))" });
+            SqlNotQuery(new SQLiteCommand { CommandText = "CREATE TABLE IF NOT EXISTS 'Settings' ('id'	INTEGER,'URL'	TEXT DEFAULT 'localhost','Port'	TEXT(4) DEFAULT 8080,'FSRAR'	TEXT DEFAULT 000000000000,PRIMARY KEY('id' AUTOINCREMENT))" });
             Close();
         }
         public void UpdateBase()

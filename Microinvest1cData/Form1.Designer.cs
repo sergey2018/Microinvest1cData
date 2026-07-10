@@ -47,11 +47,12 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.buttonVig = new System.Windows.Forms.Button();
             this.buttonLinksButton = new System.Windows.Forms.Button();
             this.buttonEgais = new System.Windows.Forms.Button();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.openFileXMl = new System.Windows.Forms.OpenFileDialog();
-            this.buttonVig = new System.Windows.Forms.Button();
+            this.buttonSettingsUITM = new System.Windows.Forms.Button();
             this.menuStrip2.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -227,6 +228,7 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.buttonSettingsUITM);
             this.tabPage2.Controls.Add(this.buttonVig);
             this.tabPage2.Controls.Add(this.buttonLinksButton);
             this.tabPage2.Controls.Add(this.buttonEgais);
@@ -238,11 +240,21 @@
             this.tabPage2.Text = "Егаис";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
+            // buttonVig
+            // 
+            this.buttonVig.Location = new System.Drawing.Point(176, 52);
+            this.buttonVig.Name = "buttonVig";
+            this.buttonVig.Size = new System.Drawing.Size(93, 49);
+            this.buttonVig.TabIndex = 2;
+            this.buttonVig.Text = "Выгрузка алкокодов из Микроинвеста";
+            this.buttonVig.UseVisualStyleBackColor = true;
+            this.buttonVig.Click += new System.EventHandler(this.buttonVig_Click);
+            // 
             // buttonLinksButton
             // 
-            this.buttonLinksButton.Location = new System.Drawing.Point(63, 146);
+            this.buttonLinksButton.Location = new System.Drawing.Point(154, 188);
             this.buttonLinksButton.Name = "buttonLinksButton";
-            this.buttonLinksButton.Size = new System.Drawing.Size(149, 58);
+            this.buttonLinksButton.Size = new System.Drawing.Size(142, 58);
             this.buttonLinksButton.TabIndex = 1;
             this.buttonLinksButton.Text = "Выполнить первоначальное сопоставление";
             this.buttonLinksButton.UseVisualStyleBackColor = true;
@@ -250,11 +262,11 @@
             // 
             // buttonEgais
             // 
-            this.buttonEgais.Location = new System.Drawing.Point(75, 51);
+            this.buttonEgais.Location = new System.Drawing.Point(168, 117);
             this.buttonEgais.Name = "buttonEgais";
             this.buttonEgais.Size = new System.Drawing.Size(111, 40);
             this.buttonEgais.TabIndex = 0;
-            this.buttonEgais.Text = "Загрузить Файл";
+            this.buttonEgais.Text = "ЗапросДанных в Егаис";
             this.buttonEgais.UseVisualStyleBackColor = true;
             this.buttonEgais.Click += new System.EventHandler(this.buttonEgais_Click);
             // 
@@ -273,15 +285,15 @@
             // 
             this.openFileXMl.Filter = "XML файл|*.xml";
             // 
-            // buttonVig
+            // buttonSettingsUITM
             // 
-            this.buttonVig.Location = new System.Drawing.Point(302, 51);
-            this.buttonVig.Name = "buttonVig";
-            this.buttonVig.Size = new System.Drawing.Size(93, 49);
-            this.buttonVig.TabIndex = 2;
-            this.buttonVig.Text = "Выгрузка алкогодов в файл";
-            this.buttonVig.UseVisualStyleBackColor = true;
-            this.buttonVig.Click += new System.EventHandler(this.buttonVig_Click);
+            this.buttonSettingsUITM.Location = new System.Drawing.Point(176, 6);
+            this.buttonSettingsUITM.Name = "buttonSettingsUITM";
+            this.buttonSettingsUITM.Size = new System.Drawing.Size(103, 40);
+            this.buttonSettingsUITM.TabIndex = 3;
+            this.buttonSettingsUITM.Text = "настройкиУТМ";
+            this.buttonSettingsUITM.UseVisualStyleBackColor = true;
+            this.buttonSettingsUITM.Click += new System.EventHandler(this.buttonSettingsUITM_Click);
             // 
             // Form1
             // 
@@ -333,6 +345,7 @@
         private System.Windows.Forms.OpenFileDialog openFileXMl;
         private System.Windows.Forms.Button buttonLinksButton;
         private System.Windows.Forms.Button buttonVig;
+        private System.Windows.Forms.Button buttonSettingsUITM;
     }
 }
 

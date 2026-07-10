@@ -217,13 +217,15 @@ namespace Microinvest1cData
 
         private void buttonEgais_Click(object sender, EventArgs e)
         {
-            if (openFileXMl.ShowDialog() == DialogResult.OK)
+            /*if (openFileXMl.ShowDialog() == DialogResult.OK)
             {
                 var ReadXML = new ReadXML(controller.GetSqlitecontroller());
                 ReadXML.ReadXMLFile(openFileXMl.FileName);
                 MessageBox.Show("Загрузка завешина");
 
-            }
+            }*/
+            var forms = new FormQueryRest(controller.GetSqlitecontroller());
+            forms.ShowDialog();
         }
 
         private void buttonLinksButton_Click(object sender, EventArgs e)
@@ -245,8 +247,25 @@ namespace Microinvest1cData
         private void buttonVig_Click(object sender, EventArgs e)
         {
             var list = controller.GetAlcocode();
-            var write = new XMLWrite(controller.GetSqlitecontroller());
-            write.CreateAlkoFile(list);
+            foreach (String s in list)
+            {
+                var product = new Product
+                {
+                    AlcCode = s,
+                    UUID = Guid.NewGuid().ToString()
+                };
+                controller.GetSqlitecontroller().SetProduct(product);
+            }
+
+
+           // var write = new XMLWrite(controller.GetSqlitecontroller());
+            //write.CreateAlkoFile(list);
+        }
+
+        private void buttonSettingsUITM_Click(object sender, EventArgs e)
+        {
+            var forms = new SettingsUtmForm(controller.GetSqlitecontroller());
+            forms.ShowDialog();
         }
     }
 }
