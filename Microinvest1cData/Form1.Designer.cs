@@ -47,12 +47,13 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.buttonSettingsUITM = new System.Windows.Forms.Button();
             this.buttonVig = new System.Windows.Forms.Button();
             this.buttonLinksButton = new System.Windows.Forms.Button();
             this.buttonEgais = new System.Windows.Forms.Button();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.openFileXMl = new System.Windows.Forms.OpenFileDialog();
-            this.buttonSettingsUITM = new System.Windows.Forms.Button();
+            this.buttonSendForm2 = new System.Windows.Forms.Button();
             this.menuStrip2.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -228,6 +229,7 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.buttonSendForm2);
             this.tabPage2.Controls.Add(this.buttonSettingsUITM);
             this.tabPage2.Controls.Add(this.buttonVig);
             this.tabPage2.Controls.Add(this.buttonLinksButton);
@@ -239,6 +241,16 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Егаис";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // buttonSettingsUITM
+            // 
+            this.buttonSettingsUITM.Location = new System.Drawing.Point(176, 6);
+            this.buttonSettingsUITM.Name = "buttonSettingsUITM";
+            this.buttonSettingsUITM.Size = new System.Drawing.Size(103, 40);
+            this.buttonSettingsUITM.TabIndex = 3;
+            this.buttonSettingsUITM.Text = "настройкиУТМ";
+            this.buttonSettingsUITM.UseVisualStyleBackColor = true;
+            this.buttonSettingsUITM.Click += new System.EventHandler(this.buttonSettingsUITM_Click);
             // 
             // buttonVig
             // 
@@ -285,15 +297,15 @@
             // 
             this.openFileXMl.Filter = "XML файл|*.xml";
             // 
-            // buttonSettingsUITM
+            // buttonSendForm2
             // 
-            this.buttonSettingsUITM.Location = new System.Drawing.Point(176, 6);
-            this.buttonSettingsUITM.Name = "buttonSettingsUITM";
-            this.buttonSettingsUITM.Size = new System.Drawing.Size(103, 40);
-            this.buttonSettingsUITM.TabIndex = 3;
-            this.buttonSettingsUITM.Text = "настройкиУТМ";
-            this.buttonSettingsUITM.UseVisualStyleBackColor = true;
-            this.buttonSettingsUITM.Click += new System.EventHandler(this.buttonSettingsUITM_Click);
+            this.buttonSendForm2.Location = new System.Drawing.Point(369, 77);
+            this.buttonSendForm2.Name = "buttonSendForm2";
+            this.buttonSendForm2.Size = new System.Drawing.Size(89, 43);
+            this.buttonSendForm2.TabIndex = 4;
+            this.buttonSendForm2.Text = "ЗапросСправок Б";
+            this.buttonSendForm2.UseVisualStyleBackColor = true;
+            this.buttonSendForm2.Click += new System.EventHandler(this.buttonSendForm2_Click);
             // 
             // Form1
             // 
@@ -346,6 +358,7 @@
         private System.Windows.Forms.Button buttonLinksButton;
         private System.Windows.Forms.Button buttonVig;
         private System.Windows.Forms.Button buttonSettingsUITM;
+        private System.Windows.Forms.Button buttonSendForm2;
     }
 }
 

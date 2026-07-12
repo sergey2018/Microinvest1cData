@@ -41,7 +41,7 @@ namespace Microinvest1cData.Query
             return Parser("ReplyFormB.xml");
         }
 
-        private Form2 Parser(String path)
+        public Form2 Parser(String path)
         {
             var doc = XDocument.Load(path);
             var form2 = new Form2();
@@ -66,6 +66,7 @@ namespace Microinvest1cData.Query
             var productElement = ReplyForm2.Element(rfb + "Product");
             if (productElement != null)
                 form2.Product = ParseProductInfo(productElement, this.pref, this.oref);
+            form2.Product.Setproduct();
             return form2;
         }
 

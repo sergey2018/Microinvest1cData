@@ -19,5 +19,10 @@ namespace Microinvest1cData.Egais
         public String UUID { get; set; }
         public String ClientRegidP { get; set; }
         public Producer  producer { get; set; }
+
+        public void Setproduct()
+        {
+            ClientRegid = producer.ClientRegid;
+        }
     }
 }

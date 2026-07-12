@@ -1100,6 +1100,19 @@ namespace Microinvest1cData
             SqlNotQuery(commend);
             Close();
         }
+        public void InsertExcise(String formB, String formA, String excise, int objid)
+        {
+            Open();
+            var command = new SQLiteCommand { CommandText = "INSERT into EgaisExcise(FormB,FormA,exicise,Objectid) VALUES(@formB,@formA,@exicise,@Objectid)" };
+            command.Parameters.AddWithValue("@formB", formB);
+            command.Parameters.AddWithValue("@formA", formA);
+            command.Parameters.AddWithValue("@exicise", excise);
+            command.Parameters.AddWithValue("@Objectid", objid);
+            SqlNotQuery(command);
+            Close();
+        }
+
+
         public void DeleteRefid()
         {
             Open();
@@ -1222,6 +1235,8 @@ namespace Microinvest1cData
             });
             SqlNotQuery(new SQLiteCommand { CommandText = "CREATE TABLE IF NOT EXISTS 'refidTable' ('id'	INTEGER,'TypeQuerty'	TEXT,'refid'	TEXT,PRIMARY KEY('id' AUTOINCREMENT))" });
             SqlNotQuery(new SQLiteCommand { CommandText = "CREATE TABLE IF NOT EXISTS 'Settings' ('id'	INTEGER,'URL'	TEXT DEFAULT 'localhost','Port'	TEXT(4) DEFAULT 8080,'FSRAR'	TEXT DEFAULT 000000000000,PRIMARY KEY('id' AUTOINCREMENT))" });
+            SqlNotQuery(new SQLiteCommand { CommandText = "CREATE TABLE IF NOT EXISTS 'ReplyForm2Data' ('id'	INTEGER,'uuid'	TEXT,'Form2'	TEXT,'TTNNumber '	TEXT,'TTNDate '	INTEGER,'ShippingDate '	INTEGER,'Shipper '	TEXT,'Consignee '	TEXT,'Product '	TEXT,'Quantity '	REAL,PRIMARY KEY('id' AUTOINCREMENT));" });
+            SqlNotQuery(new SQLiteCommand { CommandText = "CREATE TABLE IF NOT EXISTS 'EgaisExcise' ('id'	INTEGER,'FormB'	TEXT,'FormA'	TEXT,'exicise'	TEXT,'Objectid'	INTEGER,PRIMARY KEY('id' AUTOINCREMENT));" });
             Close();
         }
         public void UpdateBase()
