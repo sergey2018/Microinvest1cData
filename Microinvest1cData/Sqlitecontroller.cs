@@ -496,10 +496,11 @@ namespace Microinvest1cData
                         Inn = reader["INN"].ToString(),
                         Kpp = reader["KPP"].ToString(),
                         ClientRegid = reader["ClientRegID"].ToString(),
-                        Description = reader["Address"].ToString(),
-                        Country = reader["Coutry"].ToString(),
                         UUID = reader["uuid"].ToString()
                     };
+
+                    producer.Address.Description = reader["Address"].ToString();
+                    producer.Address.Country = reader["Coutry"].ToString();
                     list.Add(producer);
                 }
             }
@@ -917,8 +918,8 @@ namespace Microinvest1cData
             command.Parameters.AddWithValue("@inn", producer.Inn);
             command.Parameters.AddWithValue("@Kpp", producer.Kpp);
             command.Parameters.AddWithValue("@ClientRegID", producer.ClientRegid);
-            command.Parameters.AddWithValue("@Address", producer.Description);
-            command.Parameters.AddWithValue("@Coutry", producer.Country);
+            command.Parameters.AddWithValue("@Address", producer.Address.Description);
+            command.Parameters.AddWithValue("@Coutry", producer.Address.Country);
             SqlNotQuery(command);
             Close();
         }

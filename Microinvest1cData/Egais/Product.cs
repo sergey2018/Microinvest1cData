@@ -18,6 +18,6 @@ namespace Microinvest1cData.Egais
         public String ClientRegid { get; set; }
         public String UUID { get; set; }
         public String ClientRegidP { get; set; }
-
+        public Producer  producer { get; set; }
     }
 }

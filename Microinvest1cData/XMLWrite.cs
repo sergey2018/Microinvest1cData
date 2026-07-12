@@ -70,7 +70,7 @@ namespace Microinvest1cData
             {
                 var kont = new XElement("КонтрагентЕ");
                 kont.Add(new XElement("ПолноеНаименование", pr.FullName),new XElement("КраткоеНаименование",pr.ShortName),new XElement("ИНН",pr.Inn),
-                    new XElement("КПП",pr.Kpp),new XElement("ССылка",pr.UUID), new XElement("Адрес",pr.Description),new XElement("Страна",pr.Country),new XElement("КодЕгаис",pr.ClientRegid));
+                    new XElement("КПП",pr.Kpp),new XElement("ССылка",pr.UUID), new XElement("Адрес",pr.Address.Description),new XElement("Страна",pr.Address.Country),new XElement("КодЕгаис",pr.ClientRegid));
                 element.Add(kont);
             }
             return element;

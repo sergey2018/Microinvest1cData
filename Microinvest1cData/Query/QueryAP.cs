@@ -57,11 +57,11 @@ namespace Microinvest1cData.Query
             {
                 producer.Inn = Producer.Element(oref + "INN").Value;
                 producer.Kpp = Producer.Element(oref + "KPP").Value;
-                producer.Region = Producer.Element(oref + "address").Element(oref + "RegionCode").Value;
+                producer.Address.RegionCode = Producer.Element(oref + "address").Element(oref + "RegionCode").Value;
             }
-            producer.Country = Producer.Element(oref + "address").Element(oref + "Country").Value;
+            producer.Address.Country = Producer.Element(oref + "address").Element(oref + "Country").Value;
 
-            producer.Description = Producer.Element(oref + "address").Element(oref + "description").Value;
+            producer.Address.Description = Producer.Element(oref + "address").Element(oref + "description").Value;
             shop.Producer = producer;
             if(Product.Element(pref+ "Importer") != null)
             {
@@ -76,9 +76,9 @@ namespace Microinvest1cData.Query
                     importer.Kpp = Importer.Element(oref + "KPP").Value;
                     //importer.Region = Importer.Element(oref + "address").Element(oref + "RegionCode").Value;
                 }
-                importer.Country = Importer.Element(oref + "address").Element(oref + "Country").Value;
+                importer.Address.Country = Importer.Element(oref + "address").Element(oref + "Country").Value;
 
-                importer.Description = Importer.Element(oref + "address").Element(oref + "description").Value;
+                importer.Address.Description = Importer.Element(oref + "address").Element(oref + "description").Value;
                 shop.Importer = importer;
             }
           

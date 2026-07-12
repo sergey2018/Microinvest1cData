@@ -14,9 +14,12 @@ namespace Microinvest1cData.Egais
         private String shortName; //краткое имя
         private String inn=""; //инн
         private String kpp=""; //кпп
-        private String country;
-        private String region="";
-        private String description;
+        public AddressInfo Address { get; set; }
+        public Producer()
+        {
+            Address = new AddressInfo();
+        }
+
         public String UUID { get; set; }
 
         public string ClientRegid { get => clientRegid; set => clientRegid = value; }
@@ -24,9 +27,7 @@ namespace Microinvest1cData.Egais
         public string ShortName { get => shortName; set => shortName = value; }
         public string Inn { get => inn; set => inn = value; }
         public string Kpp { get => kpp; set => kpp = value; }
-        public string Country { get => country; set => country = value; }
-        public string Region { get => region; set => region = value; }
-        public string Description { get => description; set => description = value; }
         public int ID { get => Id; set => Id = value; }
+
     }
 }

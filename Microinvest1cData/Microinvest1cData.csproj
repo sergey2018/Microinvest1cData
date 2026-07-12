@@ -79,6 +79,8 @@
     <Compile Include="Data\AktPrice.cs" />
     <Compile Include="Data\Barcodes3.cs" />
     <Compile Include="Data\ExelNSI.cs" />
+    <Compile Include="Egais\AddressInfo.cs" />
+    <Compile Include="Egais\Form2.cs" />
     <Compile Include="Egais\FormAB.cs" />
     <Compile Include="Egais\LinkEgais.cs" />
     <Compile Include="Egais\Producer.cs" />
@@ -153,7 +155,9 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Query\QueryAP.cs" />
+    <Compile Include="Query\QueryFormF2.cs" />
     <Compile Include="Query\QveryAbstract.cs" />
+    <Compile Include="Query\XmlGetValue.cs" />
     <Compile Include="Query\XNetQuery.cs" />
     <Compile Include="ReadXML.cs" />
     <Compile Include="Sqlitecontroller.cs" />

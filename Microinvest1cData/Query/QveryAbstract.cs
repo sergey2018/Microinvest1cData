@@ -24,6 +24,7 @@ namespace Microinvest1cData.Query
         protected XNamespace tc = "http://fsrar.ru/WEGAIS/Ticket";
         protected XElement element;
         protected String FileName;
+        protected XmlGetValue xmlGet;
         private String Director="Direct";
         protected List<XAttribute> atributs = new List<XAttribute>();
 

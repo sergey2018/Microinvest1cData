@@ -44,8 +44,8 @@ namespace Microinvest1cData
                 }
                 producer1.FullName = producer.Element("FullName").Value;
                 producer1.ShortName = producer.Element("ShortName").Value;
-                producer1.Country = producer.Element("Country").Value;
-                producer1.Description = producer.Element("Description").Value;
+                producer1.Address.Country = producer.Element("Country").Value;
+                producer1.Address.Description = producer.Element("Description").Value;
                 producer1.ClientRegid = producer.Element("clientRegid").Value;
                 product.ClientRegid = producer.Element("clientRegid").Value;
                 if (controller.GEtProudceruuid(producer1.ClientRegid) == "")
