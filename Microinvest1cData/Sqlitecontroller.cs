@@ -807,6 +807,7 @@ namespace Microinvest1cData
         }
         public void SetProduct(Product product)
         {
+            if (product.UUID == "") product.UUID = Guid.NewGuid().ToString();
             Open();
             if (IsAkcocode(product.AlcCode) == 0)
             {
@@ -823,10 +824,12 @@ namespace Microinvest1cData
                 command.Parameters.AddWithValue("@AlcoCode", product.AlcCode);
                 command.Parameters.AddWithValue("@AlcVolume", product.AlcVolume);
                 command.Parameters.AddWithValue("@ProductVCode", product.ProductVCode);
-                command.Parameters.AddWithValue("@ClientRegIdP", product.ClientRegid);
+                command.Parameters.AddWithValue("@ClientRegIdP", product.producer.ClientRegid);
                 SqlNotQuery(command);
+                
             }
             Close();
+            //SetProducer(product.producer);
         }
         public List<Product> GetRestShopsQuery()
         {
@@ -907,19 +910,58 @@ namespace Microinvest1cData
         public void SetProducer(Producer producer)
         {
             Open();
-            var command = new SQLiteCommand
+            if (IsProducer(producer.ClientRegid) == 0)
             {
-                CommandText = "INSERT Into Producer (FullName,uuid,ShortName,inn,Kpp,ClientRegID,Address,Coutry) VALUES(@FullName,@uuid,@ShortName," +
-                "@inn,@Kpp,@ClientRegID,@Address,@Coutry)"
+                var command = new SQLiteCommand
+                {
+                    CommandText = "INSERT Into Producer (FullName,uuid,ShortName,inn,Kpp,ClientRegID,Address,Coutry) VALUES(@FullName,@uuid,@ShortName," +
+    "@inn,@Kpp,@ClientRegID,@Address,@Coutry)"
+                };
+                command.Parameters.AddWithValue("@FullName", producer.FullName);
+                command.Parameters.AddWithValue("@uuid", producer.UUID);
+                command.Parameters.AddWithValue("@ShortName", producer.ShortName);
+                command.Parameters.AddWithValue("@inn", producer.Inn);
+                command.Parameters.AddWithValue("@Kpp", producer.Kpp);
+                command.Parameters.AddWithValue("@ClientRegID", producer.ClientRegid);
+                command.Parameters.AddWithValue("@Address", producer.Address.Description);
+                command.Parameters.AddWithValue("@Coutry", producer.Address.Country);
+                SqlNotQuery(command);
+            }
+            Close();
+        }
+        private int IsProducer(String clientRefid)
+        {
+            var reader = DataReader(new SQLiteCommand { CommandText = "Select id from Producer where ClientRegID='" + clientRefid + "'" });
+            var id = 0;
+            while (reader.Read())
+            {
+                if (reader["id"].ToString() != "")
+                {
+                    id = int.Parse(reader["id"].ToString());
+                }
+                else
+                {
+                    id = 0;
+                }
+            }
+            return id;
+        }
+
+        public void insertForm2(Form2 form)
+        {
+            Open();
+            var command = new SQLiteCommand { CommandText = "INSERT INTO ReplyForm2Data (uuid,form2,TTNNumber,TTNDate,ShippingDate,Shipper,Consignee," +
+                "Product,Quantity)VALUES(@uuid,@form2,@ttnN,strftime('%s',@TTNdate),strftime('%s',@Shipping),@shipper,@consignee,@product,@quantity)"
             };
-            command.Parameters.AddWithValue("@FullName", producer.FullName);
-            command.Parameters.AddWithValue("@uuid", producer.UUID);
-            command.Parameters.AddWithValue("@ShortName", producer.ShortName);
-            command.Parameters.AddWithValue("@inn", producer.Inn);
-            command.Parameters.AddWithValue("@Kpp", producer.Kpp);
-            command.Parameters.AddWithValue("@ClientRegID", producer.ClientRegid);
-            command.Parameters.AddWithValue("@Address", producer.Address.Description);
-            command.Parameters.AddWithValue("@Coutry", producer.Address.Country);
+            command.Parameters.AddWithValue("@uuid", Guid.NewGuid().ToString());
+            command.Parameters.AddWithValue("@form2", form.FormB);
+            command.Parameters.AddWithValue("@ttnN", form.TTNNumber);
+            command.Parameters.AddWithValue("@TTNdate", form.TTNDate);
+            command.Parameters.AddWithValue("@Shipping", form.ShippingDate);
+            command.Parameters.AddWithValue("@shipper", form.Shipper.ClientRegid);
+            command.Parameters.AddWithValue("@consignee", form.Consignee.ClientRegid);
+            command.Parameters.AddWithValue("@product", form.Product.AlcCode);
+            command.Parameters.AddWithValue("@quantity", form.Quantity);
             SqlNotQuery(command);
             Close();
         }
@@ -1103,15 +1145,31 @@ namespace Microinvest1cData
         public void InsertExcise(String formB, String formA, String excise, int objid)
         {
             Open();
-            var command = new SQLiteCommand { CommandText = "INSERT into EgaisExcise(FormB,FormA,exicise,Objectid) VALUES(@formB,@formA,@exicise,@Objectid)" };
+            var command = new SQLiteCommand { CommandText = "INSERT into EgaisExcise(FormB,FormA,exicise,Objectid,uuid) VALUES(@formB,@formA,@exicise,@Objectid,@uuid)" };
             command.Parameters.AddWithValue("@formB", formB);
             command.Parameters.AddWithValue("@formA", formA);
             command.Parameters.AddWithValue("@exicise", excise);
             command.Parameters.AddWithValue("@Objectid", objid);
+            command.Parameters.AddWithValue("@uuid", Guid.NewGuid().ToString());
             SqlNotQuery(command);
             Close();
         }
-
+        public List<String> GetFormB()
+        {
+            Open();
+            var list = new List<String>();
+            var command = new SQLiteCommand { CommandText = "Select DISTINCT  FormB from EgaisExcise" };
+            using(var reader = DataReader(command))
+            {
+                while (reader.Read())
+                {
+                    var formB = reader["FormB"].ToString();
+                    list.Add(formB);
+                }
+            }
+            Close();
+            return list;
+        }
 
         public void DeleteRefid()
         {
@@ -1235,8 +1293,8 @@ namespace Microinvest1cData
             });
             SqlNotQuery(new SQLiteCommand { CommandText = "CREATE TABLE IF NOT EXISTS 'refidTable' ('id'	INTEGER,'TypeQuerty'	TEXT,'refid'	TEXT,PRIMARY KEY('id' AUTOINCREMENT))" });
             SqlNotQuery(new SQLiteCommand { CommandText = "CREATE TABLE IF NOT EXISTS 'Settings' ('id'	INTEGER,'URL'	TEXT DEFAULT 'localhost','Port'	TEXT(4) DEFAULT 8080,'FSRAR'	TEXT DEFAULT 000000000000,PRIMARY KEY('id' AUTOINCREMENT))" });
-            SqlNotQuery(new SQLiteCommand { CommandText = "CREATE TABLE IF NOT EXISTS 'ReplyForm2Data' ('id'	INTEGER,'uuid'	TEXT,'Form2'	TEXT,'TTNNumber '	TEXT,'TTNDate '	INTEGER,'ShippingDate '	INTEGER,'Shipper '	TEXT,'Consignee '	TEXT,'Product '	TEXT,'Quantity '	REAL,PRIMARY KEY('id' AUTOINCREMENT));" });
-            SqlNotQuery(new SQLiteCommand { CommandText = "CREATE TABLE IF NOT EXISTS 'EgaisExcise' ('id'	INTEGER,'FormB'	TEXT,'FormA'	TEXT,'exicise'	TEXT,'Objectid'	INTEGER,PRIMARY KEY('id' AUTOINCREMENT));" });
+            SqlNotQuery(new SQLiteCommand { CommandText = "CREATE TABLE IF NOT EXISTS 'ReplyForm2Data' ('id'	INTEGER,'uuid'	TEXT,'Form2'	TEXT,'TTNNumber'	TEXT,'TTNDate'	INTEGER,'ShippingDate'	INTEGER,'Shipper'	TEXT,'Consignee'	TEXT,'Product'	TEXT,'Quantity'	REAL,PRIMARY KEY('id' AUTOINCREMENT));" });
+            SqlNotQuery(new SQLiteCommand { CommandText = "CREATE TABLE IF NOT EXISTS 'EgaisExcise' ('id'	INTEGER,'uuid'	TEXT,'FormB'	TEXT,'FormA'	TEXT,'exicise'	TEXT,'Objectid'	INTEGER,PRIMARY KEY('id' AUTOINCREMENT));" });
             Close();
         }
         public void UpdateBase()

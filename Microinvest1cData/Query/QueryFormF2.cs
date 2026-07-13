@@ -56,23 +56,24 @@ namespace Microinvest1cData.Query
 
             var shipperElement = ReplyForm2.Element(rfb + "Shipper");
             if (shipperElement != null)
-                form2.Shipper = ParseClientInfo(shipperElement, this.oref);
+                form2.Shipper = ParseClientInfo(shipperElement.Element(oref+"UL"), oref);
 
             var consigneeElement = ReplyForm2.Element(rfb + "Consignee");
             if (consigneeElement != null)
-                form2.Consignee = ParseClientInfo(consigneeElement, this.oref);
+                form2.Consignee = ParseClientInfo(consigneeElement.Element(oref + "UL"), oref);
 
             // Продукт
             var productElement = ReplyForm2.Element(rfb + "Product");
             if (productElement != null)
-                form2.Product = ParseProductInfo(productElement, this.pref, this.oref);
-            form2.Product.Setproduct();
+                form2.Product = ParseProductInfo(productElement, pref, oref);
+            //form2.Product.Setproduct();
             return form2;
         }
 
 
         private Producer ParseClientInfo(XElement element, XNamespace oref)
         {
+            var s =  this.xmlGet.GetElementValue(element, oref + "ClientRegId");
             return new Producer
             {
                 ClientRegid = this.xmlGet.GetElementValue(element, oref + "ClientRegId"),

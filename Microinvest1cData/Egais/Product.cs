@@ -8,6 +8,11 @@ namespace Microinvest1cData.Egais
 {
    public class Product
     {
+        public Product()
+        {
+            this.producer = new Producer();
+        }
+
         public int ID { get; set; }
         public String Name { get; set; } = "";
         public String AlcCode { get; set; }
@@ -16,7 +21,7 @@ namespace Microinvest1cData.Egais
         public int ProductVCode { get; set; } = 0;
         public double Capacity { get; set; } = 0;
         public String ClientRegid { get; set; }
-        public String UUID { get; set; }
+        public String UUID { get; set; } = "";
         public String ClientRegidP { get; set; }
         public Producer  producer { get; set; }
 

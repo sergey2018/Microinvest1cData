@@ -273,5 +273,11 @@ namespace Microinvest1cData
             var forms = new FormForm2(controller.GetSqlitecontroller());
             forms.ShowDialog();
         }
+
+        private void buttSendExiseMicroinves_Click(object sender, EventArgs e)
+        {
+            controller.GetEgaisExcise();
+            MessageBox.Show("Выполнено");
+        }
     }
 }

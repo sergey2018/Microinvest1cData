@@ -47,13 +47,14 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.buttonSendForm2 = new System.Windows.Forms.Button();
             this.buttonSettingsUITM = new System.Windows.Forms.Button();
             this.buttonVig = new System.Windows.Forms.Button();
             this.buttonLinksButton = new System.Windows.Forms.Button();
             this.buttonEgais = new System.Windows.Forms.Button();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.openFileXMl = new System.Windows.Forms.OpenFileDialog();
-            this.buttonSendForm2 = new System.Windows.Forms.Button();
+            this.buttSendExiseMicroinves = new System.Windows.Forms.Button();
             this.menuStrip2.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -229,6 +230,7 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.buttSendExiseMicroinves);
             this.tabPage2.Controls.Add(this.buttonSendForm2);
             this.tabPage2.Controls.Add(this.buttonSettingsUITM);
             this.tabPage2.Controls.Add(this.buttonVig);
@@ -242,9 +244,19 @@
             this.tabPage2.Text = "Егаис";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
+            // buttonSendForm2
+            // 
+            this.buttonSendForm2.Location = new System.Drawing.Point(233, 68);
+            this.buttonSendForm2.Name = "buttonSendForm2";
+            this.buttonSendForm2.Size = new System.Drawing.Size(126, 43);
+            this.buttonSendForm2.TabIndex = 4;
+            this.buttonSendForm2.Text = "ЗапросСправок Б";
+            this.buttonSendForm2.UseVisualStyleBackColor = true;
+            this.buttonSendForm2.Click += new System.EventHandler(this.buttonSendForm2_Click);
+            // 
             // buttonSettingsUITM
             // 
-            this.buttonSettingsUITM.Location = new System.Drawing.Point(176, 6);
+            this.buttonSettingsUITM.Location = new System.Drawing.Point(15, 6);
             this.buttonSettingsUITM.Name = "buttonSettingsUITM";
             this.buttonSettingsUITM.Size = new System.Drawing.Size(103, 40);
             this.buttonSettingsUITM.TabIndex = 3;
@@ -254,7 +266,7 @@
             // 
             // buttonVig
             // 
-            this.buttonVig.Location = new System.Drawing.Point(176, 52);
+            this.buttonVig.Location = new System.Drawing.Point(25, 52);
             this.buttonVig.Name = "buttonVig";
             this.buttonVig.Size = new System.Drawing.Size(93, 49);
             this.buttonVig.TabIndex = 2;
@@ -264,7 +276,7 @@
             // 
             // buttonLinksButton
             // 
-            this.buttonLinksButton.Location = new System.Drawing.Point(154, 188);
+            this.buttonLinksButton.Location = new System.Drawing.Point(25, 183);
             this.buttonLinksButton.Name = "buttonLinksButton";
             this.buttonLinksButton.Size = new System.Drawing.Size(142, 58);
             this.buttonLinksButton.TabIndex = 1;
@@ -274,7 +286,7 @@
             // 
             // buttonEgais
             // 
-            this.buttonEgais.Location = new System.Drawing.Point(168, 117);
+            this.buttonEgais.Location = new System.Drawing.Point(25, 107);
             this.buttonEgais.Name = "buttonEgais";
             this.buttonEgais.Size = new System.Drawing.Size(111, 40);
             this.buttonEgais.TabIndex = 0;
@@ -297,15 +309,15 @@
             // 
             this.openFileXMl.Filter = "XML файл|*.xml";
             // 
-            // buttonSendForm2
+            // buttSendExiseMicroinves
             // 
-            this.buttonSendForm2.Location = new System.Drawing.Point(369, 77);
-            this.buttonSendForm2.Name = "buttonSendForm2";
-            this.buttonSendForm2.Size = new System.Drawing.Size(89, 43);
-            this.buttonSendForm2.TabIndex = 4;
-            this.buttonSendForm2.Text = "ЗапросСправок Б";
-            this.buttonSendForm2.UseVisualStyleBackColor = true;
-            this.buttonSendForm2.Click += new System.EventHandler(this.buttonSendForm2_Click);
+            this.buttSendExiseMicroinves.Location = new System.Drawing.Point(233, 7);
+            this.buttSendExiseMicroinves.Name = "buttSendExiseMicroinves";
+            this.buttSendExiseMicroinves.Size = new System.Drawing.Size(131, 39);
+            this.buttSendExiseMicroinves.TabIndex = 5;
+            this.buttSendExiseMicroinves.Text = "Запрос Марок из микроинвеста";
+            this.buttSendExiseMicroinves.UseVisualStyleBackColor = true;
+            this.buttSendExiseMicroinves.Click += new System.EventHandler(this.buttSendExiseMicroinves_Click);
             // 
             // Form1
             // 
@@ -359,6 +371,7 @@
         private System.Windows.Forms.Button buttonVig;
         private System.Windows.Forms.Button buttonSettingsUITM;
         private System.Windows.Forms.Button buttonSendForm2;
+        private System.Windows.Forms.Button buttSendExiseMicroinves;
     }
 }
 

@@ -395,6 +395,39 @@ namespace Microinvest1cData.MSSQL
                 i = i + 3;
             }
         }
+
+
+        public void GetEgaisExcise()
+        {
+            server.Connect();
+            var command = new SqlCommand { CommandText = "Select * from EgaisExcise where status=0" };
+            using(var reader = server.DataReader(command))
+            {
+                while (reader.Read())
+                {
+                    var formb = reader["formB"].ToString();
+                    var formA = reader["formA"].ToString();
+                    var excise = reader["excise"].ToString();
+                    var objid = int.Parse(reader["objectid"].ToString());
+
+                    sqlitecontroller.InsertExcise(RemoveTrailingCaretOne(formb), RemoveTrailingCaretOne(formA), excise, objid);
+                }
+            }
+            server.Disconnect();
+        }
+
+        public  String RemoveTrailingCaretOne(String input)
+        {
+            if (string.IsNullOrEmpty(input))
+                return input;
+
+            while (input.EndsWith("^1"))
+            {
+                input = input.Remove(input.Length - 2);
+            }
+
+            return input;
+        }
         public List<Groups> getSearchCode(String code, int count)
         {
             server.Connect();
