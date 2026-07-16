@@ -45,13 +45,15 @@ namespace Microinvest1cData.Query
         {
             var doc = XDocument.Load(path);
             var form2 = new Form2();
+
             var document = doc.Root.Element(this.ns + "Document");
+            if (document.Element(this.ns + "Ticket") != null) return null;
             var ReplyForm2 = document.Element(this.ns + "ReplyForm2");
-            Form2 = ReplyForm2.Element(rfb + "InformF2RegId").Value;
+            Form2 = this.xmlGet.GetElementValue(ReplyForm2, rfb + "InformF2RegId");
             form2.FormB = Form2;
-            form2.TTNNumber = ReplyForm2.Element(rfb + "TTNNumber").Value;
-            form2.TTNDate = DateTime.Parse(ReplyForm2.Element(rfb + "TTNDate").Value);
-            form2.Quantity = double.Parse(ReplyForm2.Element(rfb + "Quantity").Value);
+            form2.TTNNumber = this.xmlGet.GetElementValue(ReplyForm2, rfb + "TTNNumber");
+            form2.TTNDate = this.xmlGet.ParseDate(ReplyForm2, rfb + "TTNDate");
+            form2.Quantity = this.xmlGet.ParseDecimal(ReplyForm2, rfb + "Quantity");
             form2.ShippingDate = this.xmlGet.ParseDate(ReplyForm2, rfb + "ShippingDate");
 
             var shipperElement = ReplyForm2.Element(rfb + "Shipper");

@@ -95,6 +95,13 @@ namespace Microinvest1cData.Forms
                     if (url != "")
                     {
                         var form2 = query.GetForm2(url);
+                        if (form2 == null)
+                        {
+                            query.DeleteDocument(url);
+                            controller.DeleteRefid(refid);
+                            continue;
+                        }
+
                         controller.insertForm2(form2);
                         controller.SetProducer(form2.Shipper);
                         controller.SetProducer(form2.Consignee);
