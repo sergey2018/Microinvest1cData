@@ -330,7 +330,8 @@ namespace Microinvest1cData
             var list = new List<StoreExel>();
             var command = new SQLiteCommand
             {
-                CommandText = "Select g.name,g.code,(Select s.qtty from Store s where s.mid=g.mid and objid=@obj) as 'qtty',(select p.Price from Prices p where p.mid=g.mid and type=@typ)as 'priceOut',(select p.Price from Prices p where p.mid=g.mid and type=0)as 'pricein' from Goods g where qtty<>0"
+                CommandText = "Select g.name,g.code,(Select s.qtty from Store s where s.mid=g.mid and objid=@obj) as 'qtty',(select p.Price from Prices p where p.mid=g.mid " +
+                "and type=@typ)as 'priceOut',(select p.Price from Prices p where p.mid=g.mid and type=0)as 'pricein' from Goods g where qtty<>0"
             };
             command.Parameters.AddWithValue("@obj", id);
             command.Parameters.AddWithValue("@typ", type+1);
@@ -1266,7 +1267,8 @@ namespace Microinvest1cData
             });
             SqlNotQuery(new SQLiteCommand
             {
-                CommandText = "CREATE VIEW IF NOT EXISTS ExelNSI as Select g.code,g.name,g.Name2,g.Measure,(SELECT gg.name from GoodsGroups gg where gg.mid=g.Groupid) as 'Groups',(Select b.Barcode from Barcodes b where b.mid=g.mid limit 1) as 'Barcode' from Goods g"
+                CommandText = "CREATE VIEW IF NOT EXISTS ExelNSI as Select g.code,g.name,g.Name2,g.Measure,(SELECT gg.name from GoodsGroups gg where gg.mid=g.Groupid) as 'Groups'," +
+                "(Select b.Barcode from Barcodes b where b.mid=g.mid limit 1) as 'Barcode' from Goods g"
             });
 
             SqlNotQuery(new SQLiteCommand
@@ -1278,7 +1280,8 @@ namespace Microinvest1cData
                 CommandText = "Create view IF NOT EXISTS IsDoubleCode as SELECT * From Goods where code in (Select code From Goods where code<>'' GROUP by code HAVING count(code)>1)"
             });
            
-            SqlNotQuery(new SQLiteCommand { CommandText = "CREATE TABLE  IF NOT EXISTS 'Product' ('id'	INTEGER,'uuid' TEXT,'Name'	TEXT,'Capacity'	REAL,'UntiType'	TEXT,'AlcoCode'	TEXT,'AlcVolume'	REAL,'ProductVCode'	INTEGER,'ClientRegIdP'	TEXT,PRIMARY KEY('id' AUTOINCREMENT));" });
+            SqlNotQuery(new SQLiteCommand { CommandText = "CREATE TABLE  IF NOT EXISTS 'Product' ('id'	INTEGER,'uuid' TEXT,'Name'	TEXT,'Capacity'	REAL,'UntiType'	" +
+                "TEXT,'AlcoCode'	TEXT,'AlcVolume'	REAL,'ProductVCode'	INTEGER,'ClientRegIdP'	TEXT,PRIMARY KEY('id' AUTOINCREMENT));" });
             SqlNotQuery(new SQLiteCommand {
                 CommandText = "CREATE TABLE IF NOT EXISTS 'FormAB' ('id'INTEGER,'AlcCode' TEXT,'uuid' TEXT,'FormA' TEXT,'FormB' TEXT, PRIMARY KEY('id' AUTOINCREMENT))"
             });
@@ -1292,9 +1295,18 @@ namespace Microinvest1cData
                 CommandText= "CREATE TABLE  IF NOT EXISTS 'LinkGoodsProduct' ('puuid' TEXT, 'guuid' TEXT)"
             });
             SqlNotQuery(new SQLiteCommand { CommandText = "CREATE TABLE IF NOT EXISTS 'refidTable' ('id'	INTEGER,'TypeQuerty'	TEXT,'refid'	TEXT,PRIMARY KEY('id' AUTOINCREMENT))" });
-            SqlNotQuery(new SQLiteCommand { CommandText = "CREATE TABLE IF NOT EXISTS 'Settings' ('id'	INTEGER,'URL'	TEXT DEFAULT 'localhost','Port'	TEXT(4) DEFAULT 8080,'FSRAR'	TEXT DEFAULT 000000000000,PRIMARY KEY('id' AUTOINCREMENT))" });
-            SqlNotQuery(new SQLiteCommand { CommandText = "CREATE TABLE IF NOT EXISTS 'ReplyForm2Data' ('id'	INTEGER,'uuid'	TEXT,'Form2'	TEXT,'TTNNumber'	TEXT,'TTNDate'	INTEGER,'ShippingDate'	INTEGER,'Shipper'	TEXT,'Consignee'	TEXT,'Product'	TEXT,'Quantity'	REAL,PRIMARY KEY('id' AUTOINCREMENT));" });
-            SqlNotQuery(new SQLiteCommand { CommandText = "CREATE TABLE IF NOT EXISTS 'EgaisExcise' ('id'	INTEGER,'uuid'	TEXT,'FormB'	TEXT,'FormA'	TEXT,'exicise'	TEXT,'Objectid'	INTEGER,PRIMARY KEY('id' AUTOINCREMENT));" });
+            SqlNotQuery(new SQLiteCommand { CommandText = "CREATE TABLE IF NOT EXISTS 'Settings' ('id'	INTEGER,'URL'	TEXT DEFAULT 'localhost'," +
+                "'Port'	TEXT(4) DEFAULT 8080,'FSRAR'	TEXT DEFAULT 000000000000,PRIMARY KEY('id' AUTOINCREMENT))" });
+            SqlNotQuery(new SQLiteCommand { CommandText = "CREATE TABLE IF NOT EXISTS 'ReplyForm2Data' ('id'	INTEGER,'uuid'	TEXT,'Form2'	TEXT,'TTNNumber'	" +
+                "TEXT,'TTNDate'	INTEGER,'ShippingDate'	INTEGER,'Shipper'	TEXT,'Consignee'	TEXT,'Product'	TEXT,'Quantity'	REAL,PRIMARY KEY('id' AUTOINCREMENT));" });
+            SqlNotQuery(new SQLiteCommand { CommandText = "CREATE TABLE IF NOT EXISTS 'EgaisExcise' ('id'	INTEGER,'uuid'	TEXT,'FormB'	TEXT,'FormA'	" +
+                "TEXT,'exicise'	TEXT,'Objectid'	INTEGER,PRIMARY KEY('id' AUTOINCREMENT));" });
+            SqlNotQuery(new SQLiteCommand
+            {
+                CommandText= "CREATE TABLE IF NOT EXISTS 'ReplyForm1Data' ('id'	INTEGER,'uuid'	TEXT,'FormA'	TEXT,'OriginalDocNumber'	TEXT,'OriginalDocDate'	INTEGER,'Product'	TEXT," +
+                "'BottlingDate'	INTEGER,'Quantity'	REAL,'EGAISNumber'	TEXT,'EGAISDate'	INTEGER,PRIMARY KEY('id' AUTOINCREMENT))"
+            }
+            );
             Close();
         }
         public void UpdateBase()

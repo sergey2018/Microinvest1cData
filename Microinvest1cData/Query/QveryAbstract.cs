@@ -114,6 +114,11 @@ namespace Microinvest1cData.Query
         {
             set = utm;
         }
+
+        private void DeleteDocumentXml(String path)
+        {
+            File.Delete(path);
+        }
         public String QueryEgaisSend(String refid)
         {
             XNetQuery query = new XNetQuery();
@@ -132,30 +137,9 @@ namespace Microinvest1cData.Query
                     }
                 }
             }
-            Thread.Sleep(5000);
+            Thread.Sleep(500);
             return "";
         }
-        protected String GenerateFileName()
-        {
-            return Guid.NewGuid().ToString().Replace('-', '_') + ".xml";
-        }
-        public List<String> QueryEgaisWail()
-        {
-            var list = new List<String>();
-            XNetQuery query = new XNetQuery();
-            query.outQuery("http://" + set.Url + ":" + set.Port + "/opt/out");
-            String otvet = query.getOtvet();
-            if (otvet == null) return null;
-            XDocument doc = XDocument.Parse(otvet);
-            // XElement element = doc.Root.Element("A");
-            foreach (XElement e in doc.Root.Elements("url"))
-            {
-                if (e.Value.IndexOf("WayBill_v4") != -1)
-                {
-                    list.Add(e.Value);
-                }
-            }
-            return list;
-        }
+       
     }
 }
