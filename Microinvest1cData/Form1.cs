@@ -279,5 +279,18 @@ namespace Microinvest1cData
             controller.GetEgaisExcise();
             MessageBox.Show("Выполнено");
         }
+
+        private void buttonLInk_Click(object sender, EventArgs e)
+        {
+            var product = controller.GetSqlitecontroller().GetProduct2();
+            foreach(Product pr in product)
+            {
+                var barcode = controller.GetBarocdeAlkocod(pr.AlcCode);
+                var uuidg = controller.GetSqlitecontroller().GetUUidBarcode(barcode);
+                controller.GetSqlitecontroller().DeleteGoods(pr.UUID);
+                controller.GetSqlitecontroller().UpdateLinkAlko(uuidg, pr.UUID);
+            }
+            MessageBox.Show("Выполнено");
+        }
     }
 }

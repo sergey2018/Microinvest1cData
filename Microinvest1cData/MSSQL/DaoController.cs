@@ -370,7 +370,20 @@ namespace Microinvest1cData.MSSQL
             UpdateFlag = false;
             server.Disconnect();
         }
-
+        public String GetBarocdeAlkocod(String alkokode)
+        {
+            var barcode = "";
+            server.Connect();
+            var command = new SqlCommand { CommandText = "Select Barcode1 from Goods where catalog2=@catalog" };
+            command.Parameters.AddWithValue("@catalog", alkokode);
+            using(var reader = server.DataReader(command))
+            {
+                reader.Read();
+                barcode = reader["Barcode1"].ToString();
+            }
+            server.Disconnect();
+            return barcode;
+        }
         public void SetGroups()
         {
             var leht = LenCount();

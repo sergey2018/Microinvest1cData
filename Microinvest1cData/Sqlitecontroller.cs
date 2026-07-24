@@ -621,6 +621,78 @@ namespace Microinvest1cData
             Close();
             return list;
         }
+        public List<Product> GetProduct2()
+        {
+            Open();
+            var command = new SQLiteCommand
+            {
+                CommandText = "Select * from Product where uuid in (SELECT puuid from LinkGoodsProduct where guuid in (SELECT uuid from Goods where mid not in (Select mid from Barcodes)))"
+            };
+            var list = new List<Product>();
+            using (var reader = DataReader(command))
+            {
+                while (reader.Read())
+                {
+                    var product = new Product
+                    {
+                        ID = int.Parse(reader["ID"].ToString()),
+                        UUID = reader["UUID"].ToString(),
+                        Name = reader["Name"].ToString(),
+                        AlcCode = reader["AlcoCode"].ToString(),
+                        Capacity = double.Parse(reader["Capacity"].ToString()),
+                        UnitType = reader["UntiType"].ToString(),
+                        AlcVolume = double.Parse(reader["AlcVolume"].ToString()),
+                        ProductVCode = int.Parse(reader["ProductVCode"].ToString()),
+                        ClientRegid = reader["ClientRegIdP"].ToString()
+
+                    };
+                    list.Add(product);
+                }
+            }
+            Close();
+            return list;
+        }
+        public String GetUUidBarcode(String barcode)
+        {
+            Open();
+            var uuid = "";
+            var command = new SQLiteCommand
+            {
+                CommandText = "Select uuid from Goods where mid in (Select mid from Barcodes where barcode=@barcode)"
+            };
+            command.Parameters.AddWithValue("@barcode", barcode);
+            using(var reader = DataReader(command))
+            {
+                reader.Read();
+                uuid = reader["uuid"].ToString();
+            }
+            Close();
+            return uuid;
+        }
+
+        public void DeleteGoods(String uuid)
+        {
+            Open();
+            SqlNotQuery(new SQLiteCommand { CommandText = "Delete From Prices where mid in (Select mid From Goods where uuid in (Select guuid From LinkGoodsProduct where puuid='" + uuid + "'))" });
+            SqlNotQuery(new SQLiteCommand { CommandText = "Delete From Store where mid in (Select mid From Goods where uuid in (Select guuid From LinkGoodsProduct where puuid='" + uuid + "'))" });
+            SqlNotQuery(new SQLiteCommand { CommandText = "Delete From Goods where uuid in (Select guuid From LinkGoodsProduct where puuid='" + uuid + "')" });
+            Close();
+        }
+
+        public void UpdateLinkAlko(String guuid,String puuid)
+        {
+            Open();
+            var command = new SQLiteCommand
+            {
+                CommandText = "Update LinkGoodsProduct set guuid=@guuid where puuid=@puuid"
+            };
+            command.Parameters.AddWithValue("@guuid", guuid);
+            command.Parameters.AddWithValue("@puuid", puuid);
+            SqlNotQuery(command);
+
+            Close();
+        }
+
         public List<ExelNSI>GetExelNSIs(String Groups)
         {
             var list = new List<ExelNSI>();
