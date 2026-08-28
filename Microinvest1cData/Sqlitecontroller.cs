@@ -1379,6 +1379,10 @@ namespace Microinvest1cData
                 "'BottlingDate'	INTEGER,'Quantity'	REAL,'EGAISNumber'	TEXT,'EGAISDate'	INTEGER,PRIMARY KEY('id' AUTOINCREMENT))"
             }
             );
+            SqlNotQuery(new SQLiteCommand
+            {
+                CommandText= "CREATE VIEW IF NOT EXISTS barcodeAlk as Select * from LinkGoodsProduct where puuid in (Select puuid From LinkGoodsProduct where puuid<>'' group by puuid HAVING count(puuid)>1)"
+            });
             Close();
         }
         public void UpdateBase()

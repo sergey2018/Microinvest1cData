@@ -47,6 +47,7 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.buttonLInk = new System.Windows.Forms.Button();
             this.buttSendExiseMicroinves = new System.Windows.Forms.Button();
             this.buttonSendForm2 = new System.Windows.Forms.Button();
             this.buttonSettingsUITM = new System.Windows.Forms.Button();
@@ -55,7 +56,6 @@
             this.buttonEgais = new System.Windows.Forms.Button();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.openFileXMl = new System.Windows.Forms.OpenFileDialog();
-            this.buttonLInk = new System.Windows.Forms.Button();
             this.menuStrip2.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -246,6 +246,16 @@
             this.tabPage2.Text = "Егаис";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
+            // buttonLInk
+            // 
+            this.buttonLInk.Location = new System.Drawing.Point(202, 173);
+            this.buttonLInk.Name = "buttonLInk";
+            this.buttonLInk.Size = new System.Drawing.Size(99, 49);
+            this.buttonLInk.TabIndex = 6;
+            this.buttonLInk.Text = "Удалить дубли Алкоголя";
+            this.buttonLInk.UseVisualStyleBackColor = true;
+            this.buttonLInk.Click += new System.EventHandler(this.buttonLInk_Click);
+            // 
             // buttSendExiseMicroinves
             // 
             this.buttSendExiseMicroinves.Location = new System.Drawing.Point(233, 7);
@@ -320,16 +330,6 @@
             // openFileXMl
             // 
             this.openFileXMl.Filter = "XML файл|*.xml";
-            // 
-            // buttonLInk
-            // 
-            this.buttonLInk.Location = new System.Drawing.Point(202, 173);
-            this.buttonLInk.Name = "buttonLInk";
-            this.buttonLInk.Size = new System.Drawing.Size(99, 49);
-            this.buttonLInk.TabIndex = 6;
-            this.buttonLInk.Text = "Удалить дубли Алкоголя";
-            this.buttonLInk.UseVisualStyleBackColor = true;
-            this.buttonLInk.Click += new System.EventHandler(this.buttonLInk_Click);
             // 
             // Form1
             // 
