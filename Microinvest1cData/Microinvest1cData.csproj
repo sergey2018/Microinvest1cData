@@ -88,6 +88,8 @@
     <Compile Include="Egais\Product.cs" />
     <Compile Include="Egais\RestShop.cs" />
     <Compile Include="Egais\SettingsUtm.cs" />
+    <Compile Include="Egais\StoreSklad.cs" />
+    <Compile Include="Egais\StoreSkladMini.cs" />
     <Compile Include="Forms\FormAnaliz.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -144,6 +146,12 @@
     <Compile Include="Forms\FormQueryRest.designer.cs">
       <DependentUpon>FormQueryRest.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\FormR1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormR1.designer.cs">
+      <DependentUpon>FormR1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\FormUpdateBarocdes.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -164,6 +172,7 @@
     <Compile Include="Query\QueryAP.cs" />
     <Compile Include="Query\QueryFormF1.cs" />
     <Compile Include="Query\QueryFormF2.cs" />
+    <Compile Include="Query\QueryParametr.cs" />
     <Compile Include="Query\QveryAbstract.cs" />
     <Compile Include="Query\XmlGetValue.cs" />
     <Compile Include="Query\XNetQuery.cs" />
@@ -193,6 +202,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormQueryRest.resx">
       <DependentUpon>FormQueryRest.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormR1.resx">
+      <DependentUpon>FormR1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormUpdateBarocdes.resx">
       <DependentUpon>FormUpdateBarocdes.cs</DependentUpon>
