@@ -292,5 +292,11 @@ namespace Microinvest1cData
             }
             MessageBox.Show("Выполнено");
         }
+
+        private void единицыИзмеренийToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = new FormMeasure(controller.GetSqlitecontroller());
+            form.ShowDialog();
+        }
     }
 }

@@ -140,6 +140,12 @@
     <Compile Include="Forms\FormGoods.Designer.cs">
       <DependentUpon>FormGoods.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\FormMeasure.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormMeasure.Designer.cs">
+      <DependentUpon>FormMeasure.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\FormQueryRest.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -199,6 +205,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormGoods.resx">
       <DependentUpon>FormGoods.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormMeasure.resx">
+      <DependentUpon>FormMeasure.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormQueryRest.resx">
       <DependentUpon>FormQueryRest.cs</DependentUpon>

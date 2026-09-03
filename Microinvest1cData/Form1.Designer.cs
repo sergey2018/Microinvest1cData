@@ -56,6 +56,7 @@
             this.buttonEgais = new System.Windows.Forms.Button();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.openFileXMl = new System.Windows.Forms.OpenFileDialog();
+            this.единицыИзмеренийToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip2.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -96,7 +97,8 @@
             this.справочникиToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.пробШтрихкодыToolStripMenuItem,
             this.товарыToolStripMenuItem,
-            this.дублирующиеКодыToolStripMenuItem});
+            this.дублирующиеКодыToolStripMenuItem,
+            this.единицыИзмеренийToolStripMenuItem});
             this.справочникиToolStripMenuItem.Name = "справочникиToolStripMenuItem";
             this.справочникиToolStripMenuItem.Size = new System.Drawing.Size(94, 20);
             this.справочникиToolStripMenuItem.Text = "Справочники";
@@ -331,6 +333,13 @@
             // 
             this.openFileXMl.Filter = "XML файл|*.xml";
             // 
+            // единицыИзмеренийToolStripMenuItem
+            // 
+            this.единицыИзмеренийToolStripMenuItem.Name = "единицыИзмеренийToolStripMenuItem";
+            this.единицыИзмеренийToolStripMenuItem.Size = new System.Drawing.Size(189, 22);
+            this.единицыИзмеренийToolStripMenuItem.Text = "Единицы Измерений";
+            this.единицыИзмеренийToolStripMenuItem.Click += new System.EventHandler(this.единицыИзмеренийToolStripMenuItem_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -385,6 +394,7 @@
         private System.Windows.Forms.Button buttonSendForm2;
         private System.Windows.Forms.Button buttSendExiseMicroinves;
         private System.Windows.Forms.Button buttonLInk;
+        private System.Windows.Forms.ToolStripMenuItem единицыИзмеренийToolStripMenuItem;
     }
 }
 

@@ -1286,7 +1286,25 @@ namespace Microinvest1cData
             return count;
         }
 
-
+        public List<String> GetMeasure()
+        {
+            var list = new List<String>();
+            Open();
+            var command = new SQLiteCommand
+            {
+                CommandText = "Select DISTINCT Measure from Goods"
+            };
+            using(var reader = DataReader(command))
+            {
+                while (reader.Read())
+                {
+                    var measure = reader["Measure"].ToString();
+                    list.Add(measure);
+                }
+            }
+            Close();
+            return list;
+        }
 
 
         private void SqlNotQuery(SQLiteCommand command)
