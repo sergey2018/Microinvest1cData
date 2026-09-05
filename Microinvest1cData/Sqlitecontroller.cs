@@ -112,6 +112,13 @@ namespace Microinvest1cData
 
             return list;
         }
+        public void DeleteFormAB()
+        {
+            Open();
+            var command = new SQLiteCommand { CommandText = "Delete From FormAB" };
+            SqlNotQuery(command);
+            Close();
+        }
 
         public void UpdateCodeFirst(long code)
         {

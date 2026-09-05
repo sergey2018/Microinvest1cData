@@ -35,6 +35,7 @@
             this.пробШтрихкодыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.товарыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.дублирующиеКодыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.единицыИзмеренийToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.исправлениеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.нечисловыеКодыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.удалениеВесовыхШтрихкодовToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -56,7 +57,7 @@
             this.buttonEgais = new System.Windows.Forms.Button();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.openFileXMl = new System.Windows.Forms.OpenFileDialog();
-            this.единицыИзмеренийToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.buttonSendR1 = new System.Windows.Forms.Button();
             this.menuStrip2.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -106,23 +107,30 @@
             // пробШтрихкодыToolStripMenuItem
             // 
             this.пробШтрихкодыToolStripMenuItem.Name = "пробШтрихкодыToolStripMenuItem";
-            this.пробШтрихкодыToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
+            this.пробШтрихкодыToolStripMenuItem.Size = new System.Drawing.Size(189, 22);
             this.пробШтрихкодыToolStripMenuItem.Text = "Проб.Штрихкоды";
             this.пробШтрихкодыToolStripMenuItem.Click += new System.EventHandler(this.пробШтрихкодыToolStripMenuItem_Click);
             // 
             // товарыToolStripMenuItem
             // 
             this.товарыToolStripMenuItem.Name = "товарыToolStripMenuItem";
-            this.товарыToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
+            this.товарыToolStripMenuItem.Size = new System.Drawing.Size(189, 22);
             this.товарыToolStripMenuItem.Text = "Товары";
             this.товарыToolStripMenuItem.Click += new System.EventHandler(this.товарыToolStripMenuItem_Click);
             // 
             // дублирующиеКодыToolStripMenuItem
             // 
             this.дублирующиеКодыToolStripMenuItem.Name = "дублирующиеКодыToolStripMenuItem";
-            this.дублирующиеКодыToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
+            this.дублирующиеКодыToolStripMenuItem.Size = new System.Drawing.Size(189, 22);
             this.дублирующиеКодыToolStripMenuItem.Text = "Дублирующие коды";
             this.дублирующиеКодыToolStripMenuItem.Click += new System.EventHandler(this.дублирующиеКодыToolStripMenuItem_Click);
+            // 
+            // единицыИзмеренийToolStripMenuItem
+            // 
+            this.единицыИзмеренийToolStripMenuItem.Name = "единицыИзмеренийToolStripMenuItem";
+            this.единицыИзмеренийToolStripMenuItem.Size = new System.Drawing.Size(189, 22);
+            this.единицыИзмеренийToolStripMenuItem.Text = "Единицы Измерений";
+            this.единицыИзмеренийToolStripMenuItem.Click += new System.EventHandler(this.единицыИзмеренийToolStripMenuItem_Click);
             // 
             // исправлениеToolStripMenuItem
             // 
@@ -233,6 +241,7 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.buttonSendR1);
             this.tabPage2.Controls.Add(this.buttonLInk);
             this.tabPage2.Controls.Add(this.buttSendExiseMicroinves);
             this.tabPage2.Controls.Add(this.buttonSendForm2);
@@ -250,7 +259,7 @@
             // 
             // buttonLInk
             // 
-            this.buttonLInk.Location = new System.Drawing.Point(202, 173);
+            this.buttonLInk.Location = new System.Drawing.Point(314, 206);
             this.buttonLInk.Name = "buttonLInk";
             this.buttonLInk.Size = new System.Drawing.Size(99, 49);
             this.buttonLInk.TabIndex = 6;
@@ -300,7 +309,7 @@
             // 
             // buttonLinksButton
             // 
-            this.buttonLinksButton.Location = new System.Drawing.Point(25, 173);
+            this.buttonLinksButton.Location = new System.Drawing.Point(109, 206);
             this.buttonLinksButton.Name = "buttonLinksButton";
             this.buttonLinksButton.Size = new System.Drawing.Size(142, 49);
             this.buttonLinksButton.TabIndex = 1;
@@ -333,12 +342,15 @@
             // 
             this.openFileXMl.Filter = "XML файл|*.xml";
             // 
-            // единицыИзмеренийToolStripMenuItem
+            // buttonSendR1
             // 
-            this.единицыИзмеренийToolStripMenuItem.Name = "единицыИзмеренийToolStripMenuItem";
-            this.единицыИзмеренийToolStripMenuItem.Size = new System.Drawing.Size(189, 22);
-            this.единицыИзмеренийToolStripMenuItem.Text = "Единицы Измерений";
-            this.единицыИзмеренийToolStripMenuItem.Click += new System.EventHandler(this.единицыИзмеренийToolStripMenuItem_Click);
+            this.buttonSendR1.Location = new System.Drawing.Point(278, 138);
+            this.buttonSendR1.Name = "buttonSendR1";
+            this.buttonSendR1.Size = new System.Drawing.Size(135, 62);
+            this.buttonSendR1.TabIndex = 7;
+            this.buttonSendR1.Text = "Остатки ЕГАИС";
+            this.buttonSendR1.UseVisualStyleBackColor = true;
+            this.buttonSendR1.Click += new System.EventHandler(this.buttonSendR1_Click);
             // 
             // Form1
             // 
@@ -395,6 +407,7 @@
         private System.Windows.Forms.Button buttSendExiseMicroinves;
         private System.Windows.Forms.Button buttonLInk;
         private System.Windows.Forms.ToolStripMenuItem единицыИзмеренийToolStripMenuItem;
+        private System.Windows.Forms.Button buttonSendR1;
     }
 }
 

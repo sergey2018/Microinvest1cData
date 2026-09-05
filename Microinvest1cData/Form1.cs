@@ -298,5 +298,11 @@ namespace Microinvest1cData
             var form = new FormMeasure(controller.GetSqlitecontroller());
             form.ShowDialog();
         }
+
+        private void buttonSendR1_Click(object sender, EventArgs e)
+        {
+            var form = new FormR1(controller.GetSqlitecontroller());
+            form.ShowDialog();
+        }
     }
 }

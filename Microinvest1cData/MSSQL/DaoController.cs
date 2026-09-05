@@ -374,12 +374,13 @@ namespace Microinvest1cData.MSSQL
         {
             var barcode = "";
             server.Connect();
-            var command = new SqlCommand { CommandText = "Select Barcode1 from Goods where catalog2=@catalog" };
+            var command = new SqlCommand { CommandText = "Select BarCode1 from Goods where catalog2=@catalog" };
             command.Parameters.AddWithValue("@catalog", alkokode);
             using(var reader = server.DataReader(command))
             {
+                //if (!reader.HasRows) return "";
                 reader.Read();
-                barcode = reader["Barcode1"].ToString();
+                barcode = reader["BarCode1"].ToString();
             }
             server.Disconnect();
             return barcode;

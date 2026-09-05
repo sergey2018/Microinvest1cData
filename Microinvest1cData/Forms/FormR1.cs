@@ -26,6 +26,7 @@ namespace Microinvest1cData.Forms
         {
             InitializeComponent();
             controller = utm;
+            controller.initSettigs();
             parametr.SetSettings(controller.SettingsUtm());
             var refid = controller.GetRefid("QureyR1");
             if (refid.Count > 0)
@@ -130,8 +131,8 @@ namespace Microinvest1cData.Forms
         }
         private void InsertSklad()
         {
-            /*controller.DeleteFormAB();
-            foreach (StoreSklad sklad in sklads)
+            controller.DeleteFormAB();
+          /*  foreach (StoreSklad sklad in sklads)
             {
 
                 controller.InsertProduct(sklad);
