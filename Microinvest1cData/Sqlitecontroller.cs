@@ -904,7 +904,7 @@ namespace Microinvest1cData
                 command.Parameters.AddWithValue("@AlcoCode", product.AlcCode);
                 command.Parameters.AddWithValue("@AlcVolume", product.AlcVolume);
                 command.Parameters.AddWithValue("@ProductVCode", product.ProductVCode);
-                command.Parameters.AddWithValue("@ClientRegIdP", product.producer.ClientRegid);
+                command.Parameters.AddWithValue("@ClientRegIdP", product.ClientRegid);
                 SqlNotQuery(command);
                 
             }

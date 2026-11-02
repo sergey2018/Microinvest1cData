@@ -48,6 +48,7 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.buttonSendR1 = new System.Windows.Forms.Button();
             this.buttonLInk = new System.Windows.Forms.Button();
             this.buttSendExiseMicroinves = new System.Windows.Forms.Button();
             this.buttonSendForm2 = new System.Windows.Forms.Button();
@@ -57,7 +58,7 @@
             this.buttonEgais = new System.Windows.Forms.Button();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.openFileXMl = new System.Windows.Forms.OpenFileDialog();
-            this.buttonSendR1 = new System.Windows.Forms.Button();
+            this.buttonFille = new System.Windows.Forms.Button();
             this.menuStrip2.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -241,6 +242,7 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.buttonFille);
             this.tabPage2.Controls.Add(this.buttonSendR1);
             this.tabPage2.Controls.Add(this.buttonLInk);
             this.tabPage2.Controls.Add(this.buttSendExiseMicroinves);
@@ -257,9 +259,19 @@
             this.tabPage2.Text = "Егаис";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
+            // buttonSendR1
+            // 
+            this.buttonSendR1.Location = new System.Drawing.Point(381, 138);
+            this.buttonSendR1.Name = "buttonSendR1";
+            this.buttonSendR1.Size = new System.Drawing.Size(135, 62);
+            this.buttonSendR1.TabIndex = 7;
+            this.buttonSendR1.Text = "Остатки ЕГАИС";
+            this.buttonSendR1.UseVisualStyleBackColor = true;
+            this.buttonSendR1.Click += new System.EventHandler(this.buttonSendR1_Click);
+            // 
             // buttonLInk
             // 
-            this.buttonLInk.Location = new System.Drawing.Point(314, 206);
+            this.buttonLInk.Location = new System.Drawing.Point(422, 216);
             this.buttonLInk.Name = "buttonLInk";
             this.buttonLInk.Size = new System.Drawing.Size(99, 49);
             this.buttonLInk.TabIndex = 6;
@@ -269,7 +281,7 @@
             // 
             // buttSendExiseMicroinves
             // 
-            this.buttSendExiseMicroinves.Location = new System.Drawing.Point(233, 7);
+            this.buttSendExiseMicroinves.Location = new System.Drawing.Point(390, 6);
             this.buttSendExiseMicroinves.Name = "buttSendExiseMicroinves";
             this.buttSendExiseMicroinves.Size = new System.Drawing.Size(131, 39);
             this.buttSendExiseMicroinves.TabIndex = 5;
@@ -279,7 +291,7 @@
             // 
             // buttonSendForm2
             // 
-            this.buttonSendForm2.Location = new System.Drawing.Point(233, 68);
+            this.buttonSendForm2.Location = new System.Drawing.Point(390, 58);
             this.buttonSendForm2.Name = "buttonSendForm2";
             this.buttonSendForm2.Size = new System.Drawing.Size(126, 43);
             this.buttonSendForm2.TabIndex = 4;
@@ -309,7 +321,7 @@
             // 
             // buttonLinksButton
             // 
-            this.buttonLinksButton.Location = new System.Drawing.Point(109, 206);
+            this.buttonLinksButton.Location = new System.Drawing.Point(0, 197);
             this.buttonLinksButton.Name = "buttonLinksButton";
             this.buttonLinksButton.Size = new System.Drawing.Size(142, 49);
             this.buttonLinksButton.TabIndex = 1;
@@ -319,7 +331,7 @@
             // 
             // buttonEgais
             // 
-            this.buttonEgais.Location = new System.Drawing.Point(25, 107);
+            this.buttonEgais.Location = new System.Drawing.Point(7, 107);
             this.buttonEgais.Name = "buttonEgais";
             this.buttonEgais.Size = new System.Drawing.Size(111, 40);
             this.buttonEgais.TabIndex = 0;
@@ -342,15 +354,15 @@
             // 
             this.openFileXMl.Filter = "XML файл|*.xml";
             // 
-            // buttonSendR1
+            // buttonFille
             // 
-            this.buttonSendR1.Location = new System.Drawing.Point(278, 138);
-            this.buttonSendR1.Name = "buttonSendR1";
-            this.buttonSendR1.Size = new System.Drawing.Size(135, 62);
-            this.buttonSendR1.TabIndex = 7;
-            this.buttonSendR1.Text = "Остатки ЕГАИС";
-            this.buttonSendR1.UseVisualStyleBackColor = true;
-            this.buttonSendR1.Click += new System.EventHandler(this.buttonSendR1_Click);
+            this.buttonFille.Location = new System.Drawing.Point(192, 22);
+            this.buttonFille.Name = "buttonFille";
+            this.buttonFille.Size = new System.Drawing.Size(109, 56);
+            this.buttonFille.TabIndex = 8;
+            this.buttonFille.Text = "Загрузка алкоголя из файла";
+            this.buttonFille.UseVisualStyleBackColor = true;
+            this.buttonFille.Click += new System.EventHandler(this.buttonFille_Click);
             // 
             // Form1
             // 
@@ -408,6 +420,7 @@
         private System.Windows.Forms.Button buttonLInk;
         private System.Windows.Forms.ToolStripMenuItem единицыИзмеренийToolStripMenuItem;
         private System.Windows.Forms.Button buttonSendR1;
+        private System.Windows.Forms.Button buttonFille;
     }
 }
 

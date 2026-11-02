@@ -132,11 +132,36 @@ namespace Microinvest1cData
             });
             controller.SetFlag();
         }
+        private void LoadStore1()
+        {
+            controller.DeleteOldDate();
+        
+            /*controller.GetPrice();
+            controller.SetStore();*/
+            var list = controller.GetSqlitecontroller().GetGoods();
+            var i = 0;
+            foreach (Goods g in list)
+            {
+                controller.GetPrice(g.MID);
+                controller.SetStore(g.MID);
+                this.Invoke((MethodInvoker)delegate
+                {
+                    labelUpdate.Text = "Загружено " + i + " данных из " + list.Count;
+                });
+                i++;
+            }
+
+            this.Invoke((MethodInvoker)delegate
+            {
+                MessageBox.Show("Загрузка завершена");
+            });
+            controller.SetFlag();
+        }
 
         private  void button1_Click(object sender, EventArgs e)
         {
             controller.GetLengthZCount();
-             var thread1 = new Thread(LoadStore);
+             var thread1 = new Thread(LoadStore1);
              var thread2 = new Thread(UpdateLabel);
              thread1.Start();
              thread2.Start();
@@ -303,6 +328,17 @@ namespace Microinvest1cData
         {
             var form = new FormR1(controller.GetSqlitecontroller());
             form.ShowDialog();
+        }
+
+        private void buttonFille_Click(object sender, EventArgs e)
+        {
+           if (openFileXMl.ShowDialog() == DialogResult.OK)
+           {
+               var ReadXML = new ReadXML(controller.GetSqlitecontroller());
+               ReadXML.ReadXMLFile(openFileXMl.FileName);
+               MessageBox.Show("Загрузка завешина");
+
+           }
         }
     }
 }
