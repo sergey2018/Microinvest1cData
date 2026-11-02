@@ -403,6 +403,17 @@ namespace Microinvest1cData
             SqlNotQuery(command);
             Close();
         }
+        public void UpdateMeasure(String measure)
+        {
+            Open();
+            var command = new SQLiteCommand
+            {
+                CommandText = "Update Goods set measure='шт' where measure=@measure"
+            };
+            command.Parameters.AddWithValue("@measure", measure);
+            SqlNotQuery(command);
+            Close();
+        }
         public string getGroupUUID(int id)
         {
             Open();
@@ -1104,7 +1115,7 @@ namespace Microinvest1cData
             var count = 0;
             var command = new SQLiteCommand
             {
-                CommandText = "Select count(*) as 'count' from Goods where length(code)>7"
+                CommandText = "Select count(*) as 'count' from Goods where length(code)>13"
             };
            
             using(var reader = DataReader(command))
@@ -1313,6 +1324,22 @@ namespace Microinvest1cData
             return list;
         }
 
+        public int GetCountGoodsNoGroups()
+        {
+            Open();
+            var count = 0;
+            var command = new SQLiteCommand
+            {
+                CommandText = "Select count(*) as 'count' from Goods where Groupid=-1"
+            };
+            using(var reader = DataReader(command))
+            {
+                reader.Read();
+                count = int.Parse(reader["count"].ToString());
+            }
+            Close();
+            return count;
+        }
 
         private void SqlNotQuery(SQLiteCommand command)
         {

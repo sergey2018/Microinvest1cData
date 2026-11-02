@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.listBoxMeasure = new System.Windows.Forms.ListBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // listBoxMeasure
@@ -41,11 +42,22 @@
             this.listBoxMeasure.Size = new System.Drawing.Size(260, 420);
             this.listBoxMeasure.TabIndex = 0;
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(270, 22);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 37);
+            this.button1.TabIndex = 1;
+            this.button1.Text = "Изменить на шт";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // FormMeasure
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(357, 424);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.listBoxMeasure);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "FormMeasure";
@@ -58,5 +70,6 @@
         #endregion
 
         private System.Windows.Forms.ListBox listBoxMeasure;
+        private System.Windows.Forms.Button button1;
     }
 }

@@ -32,6 +32,15 @@ namespace Microinvest1cData.Forms
             }
         }
 
-
+        private void button1_Click(object sender, EventArgs e)
+        {
+            int rows = listBoxMeasure.SelectedIndex;
+            if (rows != -1)
+            {
+                var measure = listBoxMeasure.Items[rows].ToString();
+                controller.UpdateMeasure(measure);
+                update();
+            }
+        }
     }
 }
